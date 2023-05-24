@@ -42,7 +42,8 @@ export default function Singup() {
           <input className="bg-slate-300 w-full p-3 rounded-md outline-1" />
           <p className="mt-5 text-lg text-gray-600">Strong password </p>
           <input type="password" className="bg-slate-300 w-full p-3 rounded-md outline-1" /> <br/>
-          <button className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-40 ">Singup</button>
+          <button className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 ">Singup</button><br/>
+          <p className="mt-5 text-lg">Already have an account?<a href="Login " className="text-blue-800 ml-2">Login Now</a></p>
         </div>
       </div>
     </React.Fragment>
