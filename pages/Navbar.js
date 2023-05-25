@@ -9,6 +9,7 @@ export default function Navbar() {
           <div className="container flex  items-right justify-between mx-auto ">
             <span className="">
               {/* <Image className="w-12 rounded-lg" src={Logo} alt="logo" /> */}
+              <h1 className="uppercase font-bold text-lg bg-green-500 p-2 rounded-lg">Logo </h1>
             </span>
 
             <div

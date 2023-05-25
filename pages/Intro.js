@@ -3,6 +3,8 @@ import React from "react";
 import Img from "../public/p.webp";
 
 export default function Intro() {
+   
+
     return (
         <React.Fragment>
             <div className="grid grid-cols-2 bg-gray-800 rounded-lg mt-20 h-3/4		max-sm:grid-cols-1 max-sm:mt-10">
