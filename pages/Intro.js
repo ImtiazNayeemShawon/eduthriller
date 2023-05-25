@@ -12,11 +12,11 @@ export default function Intro() {
                 <div className="mx-10 max-sm:mx-4 mt-20">
                     <h1 className="mt-20 text-5xl font-bold bangfont leading-relaxed	text-gray-200 max-sm:text-4xl">নিজের শেখা নিজেই গুছিয়ে নেয়ার যাত্রা শুরু হোক</h1>
                     <br/>
-                    <p className="mainfont text-lg text-red-400 font-semibold  text-left	uppercase max-sm:text-sm max-sm:text-center">স্বপ্নের কলেজে সফল হোন, একটি চমৎকার Eduthriller সঙ্গে যেখানে আপনি নতুন ও স্বাদমত শিক্ষা অর্জন করবেন সম্পূর্ণ আনন্দের সাথে।</p><br/>
+                    <p className="mainfont text-lg text-green-400 font-semibold  text-left	uppercase max-sm:text-sm max-sm:text-center">স্বপ্নের কলেজে সফল হোন, একটি চমৎকার Eduthriller সঙ্গে যেখানে আপনি নতুন ও স্বাদমত শিক্ষা অর্জন করবেন সম্পূর্ণ আনন্দের সাথে।</p><br/>
                     <div className="flex justify-between mt-20 mb-20 max-sm:justify-around max-sm:mt-5">
-                    <button className=" rounded-lg uppercase font-bold text-gray-200 bg-red-500 w-60 max-sm:text-sm py-3 max-sm:w-40">Singup</button>
+                    <button className=" rounded-lg uppercase font-bold text-gray-200 bg-green-500 w-60 max-sm:text-sm py-3 max-sm:w-40">Singup</button>
 
-                    <button className="  rounded-lg uppercase font-bold text-gray-200 bg-red-500  w-60 max-sm:text-sm max-sm:w-40">Watch now</button>
+                    <button className="  rounded-lg uppercase font-bold text-gray-200 bg-green-500  w-60 max-sm:text-sm max-sm:w-40">Watch now</button>
                     </div>
                 </div>
                 <div>

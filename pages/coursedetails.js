@@ -13,10 +13,10 @@ export default function Coursedetails() {
   return (
     <React.Fragment>
       <div className="gred mt-80 p-5 rounded-xl pb-40 pt-20">
-        <h1 className="text-4xl text-gray-800 font-bold bangfont text-center">
+        <h1 className="text-4xl text-gray-100 font-bold bangfont text-center">
           ২০২৩ সালের অনলাইন ব্যাচে ভর্তি চলছে!
         </h1>
-        <p className="mt-5 bangfont font-bold text-gray-700 text-center">
+        <p className="mt-5 bangfont font-bold text-gray-100 text-center">
           শ্রেনি অনুযায়ী সপ্তাহে ৬-১০টি লাইভ ক্লাস, সাথে লেকচার শিট এবং নিয়মিত
           পরীক্ষার সুবিধা
         </p>
@@ -29,13 +29,13 @@ export default function Coursedetails() {
             className="bg-card rounded-lg p-2 "
           >
             <Image src={Medical} width={70} className="m-auto" />
-            <h1 className="bangfont text-xl text-center font-bold text-pink-900 max-sm:text-lg ">
+            <h1 className="bangfont text-xl text-center font-bold  text-black max-sm:text-lg ">
               মেডিকেল এডমিশন
             </h1>
-            <p className="text-gray-700 bangfont max-sm:text-sm">
+            <p className=" text-black bangfont max-sm:text-sm">
               মেডিকেল ভর্তির সকল সলিউশন একসাথেই
             </p>
-            <p className="text-red-600 mainfont text-center m-auto block font-bold text-lg mt-6 bg-white rounded-xl w-fit p-2 px-7 max-sm:mt-2">
+            <p className="text-slate-100 mainfont text-center m-auto block font-bold text-lg mt-6 bg-green-500 rounded-xl w-fit p-2 px-7 max-sm:mt-2">
               Enroll Now
             </p>
           </button>
@@ -46,13 +46,13 @@ export default function Coursedetails() {
             className="bg-card rounded-lg p-2 "
           >
             <Image src={Engineering} width={70} className="m-auto" />
-            <h1 className="bangfont text-xl text-center font-bold text-pink-900 max-sm:text-lg ">
+            <h1 className="bangfont text-xl text-center font-bold  text-black max-sm:text-lg ">
               ইঞ্জিনিয়ারিং এডমিশন
             </h1>
-            <p className="text-gray-700 bangfont max-sm:text-sm">
+            <p className=" text-black bangfont max-sm:text-sm">
               ইঞ্জিনিয়ারিং ভর্তির সকল সলিউশন একসাথেই
             </p>
-            <p className="text-red-600 mainfont text-center m-auto block font-bold text-lg mt-6 bg-white rounded-xl w-fit p-2 px-7 max-sm:mt-2">
+            <p className="text-slate-100 mainfont text-center m-auto block font-bold text-lg mt-6 bg-green-500 rounded-xl w-fit p-2 px-7 max-sm:mt-2">
               Enroll Now
             </p>
           </button>
@@ -64,13 +64,13 @@ export default function Coursedetails() {
             className="bg-card rounded-lg p-2 "
           >
             <Image src={University} width={70} className="m-auto" />
-            <h1 className="bangfont text-xl text-center font-bold text-pink-900 max-sm:text-lg ">
-              ভার্সিটি+গুচ্ছ এডমিশন
+            <h1 className="bangfont text-xl text-center font-bold  text-black max-sm:text-lg ">
+              ভার্সিটি এডমিশন
             </h1>
-            <p className="text-gray-700 bangfont max-sm:text-sm">
-              ভার্সিটি+গুচ্ছ ভর্তির সকল সলিউশন একসাথেই
+            <p className=" text-black bangfont max-sm:text-sm">
+              ভার্সিটি ভর্তির সকল সলিউশন একসাথেই
             </p>
-            <p className="text-red-600 mainfont text-center m-auto block font-bold text-lg mt-6 bg-white rounded-xl w-fit p-2 px-7 max-sm:mt-2">
+            <p className="text-slate-100 mainfont text-center m-auto block font-bold text-lg mt-6 bg-green-500 rounded-xl w-fit p-2 px-7 max-sm:mt-2">
               Enroll Now
             </p>
           </button>
@@ -81,23 +81,23 @@ export default function Coursedetails() {
             className="bg-card rounded-lg p-2"
           >
             <Image src={University} width={70} className="m-auto" />
-            <h1 className="bangfont text-xl text-center font-bold text-pink-900 max-sm:text-lg ">
+            <h1 className="bangfont text-xl text-center font-bold text-black  max-sm:text-lg ">
               SSC/HSC
             </h1>
-            <p className="text-gray-700 bangfont max-sm:text-sm">
+            <p className="text-gray-900 bangfont max-sm:text-sm">
               SSC/HSC সকল সলিউশন একসাথেই
             </p>
-            <p className="text-red-600 mainfont text-center m-auto block font-bold text-lg mt-6 bg-white rounded-xl w-fit p-2 px-7 max-sm:mt-2">
+            <p className="text-slate-100 mainfont text-center m-auto block font-bold text-lg mt-6 bg-green-500 rounded-xl w-fit p-2 px-7 max-sm:mt-2">
               Enroll Now
             </p>
           </button>
         </div>
         <div className="mt-20">
-          <h1 className="text-center mainfont text-xl font-bold text-gray-600">
+          <h1 className="text-center mainfont text-xl font-bold text-gray-100">
             Embark on your journey with us promptly. Why delay any longer?
             Let's get started!
           </h1>
-          <button className="m-auto text-xl font-semibold mainfont text-gray-100 bg-green-600 py-4 px-20 rounded-xl mt-5 block">
+          <button className="m-auto text-xl font-semibold mainfont text-gray-100 bg-green-500 py-4 px-20 rounded-xl mt-5 block">
             Viws all courses
           </button>
         </div>

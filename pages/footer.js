@@ -14,8 +14,8 @@ export default function footer() {
                 placeholder="email"
                 className="outline-0 p-2 w-full bg-pink-200 rounded-lg mt-4"
               />
-              <button className="text-lg p-2 max-sm:m-auto block max-sm:mt-4 bg-red-400 mt-2 rounded-lg px-20 text-white font-bold uppercase">
-                send
+              <button className="text-lg p-2 max-sm:m-auto block max-sm:mt-4 bg-green-500 mt-2 rounded-lg px-20 text-white font-bold uppercase">
+                Subscribe!
               </button>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
