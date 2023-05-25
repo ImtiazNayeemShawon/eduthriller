@@ -1,6 +1,26 @@
 import React from "react";
+import { useState } from "react";
 
 export default function Singup() {
+  // set state for form handleing
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+
+  // functions for handling form data
+
+  // name handeling event
+  const NameHandler = (event) => {
+    setName(event.target.value);
+  };
+  // email handeling event
+  const EmailHandler = (event) => {
+    setEmail(event.target.value);
+  };
+  // password handleing event
+  const PasswordHandler = (event) => {
+    setPassword(event.target.value);
+  };
   return (
     <React.Fragment>
       {/* singup form  */}
@@ -27,23 +47,47 @@ export default function Singup() {
 
         {/* form side */}
         <div className="ml-20 max-sm:m-4">
-         {/* dot */}
-         <div className="mainbg h-10 w-10 rounded-xl  flex  md:hidden">
+          {/* dot */}
+          <div className="mainbg h-10 w-10 rounded-xl  flex  md:hidden">
             <div className="h-3 bg-white w-3 m-auto rounded-2xl "></div>
           </div>
           <h1 className="text-left text-black text-4xl font-semibold">
             Get started
           </h1>
           <p className="text-gray-600 text-lg">Create your account now </p>
-
           <p className="mt-20 text-lg text-gray-600">Full name</p>
-          <input className="bg-slate-300 w-full p-3 rounded-md outline-1" />
+          <input
+            className="bg-slate-300 w-full p-3 rounded-md outline-1"
+            placeholder="Enter your name"
+            onChange={NameHandler}
+            value={Name}
+          />
           <p className="mt-5 text-lg text-gray-600">Email Adress</p>
-          <input className="bg-slate-300 w-full p-3 rounded-md outline-1" />
-          <p className="mt-5 text-lg text-gray-600">Strong password </p>
-          <input type="password" className="bg-slate-300 w-full p-3 rounded-md outline-1" /> <br/>
-          <button className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 ">Singup</button><br/>
-          <p className="mt-5 text-lg">Already have an account?<a href="Login " className="text-blue-800 ml-2">Login Now</a></p>
+          <input
+            className="bg-slate-300 w-full p-3 rounded-md outline-1"
+            placeholder="Enter your Email"
+            onChange={EmailHandler}
+            value={Email}
+          />
+          <p className="mt-5 text-lg text-gray-600">Set password </p>
+          <input
+            type="password"
+            className="bg-slate-300 w-full p-3 rounded-md outline-1"
+            placeholder="Set your Password "
+            onChange={PasswordHandler}
+            value={Password}
+          />{" "}
+          <br />
+          <button className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 ">
+            Singup
+          </button>
+          <br />
+          <p className="mt-5 text-lg">
+            Already have an account?
+            <a href="login" className="text-blue-800 ml-2">
+              Login Now
+            </a>
+          </p>
         </div>
       </div>
     </React.Fragment>
