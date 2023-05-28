@@ -1,12 +1,15 @@
+import { useRouter } from "next/router";
+import Api from "./api/apiCaller"; // Import the Axios instance
 import React from "react";
 import { useState } from "react";
 
 export default function Singup() {
   // set state for form handleing
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
 
+  const router = useRouter();
   // functions for handling form data
 
   // name handeling event
@@ -14,13 +17,29 @@ export default function Singup() {
     setName(event.target.value);
   };
   // email handeling event
-  const EmailHandler = (event) => {
-    setEmail(event.target.value);
+  const PhoneHandler = (event) => {
+    setPhone(event.target.value);
   };
   // password handleing event
   const PasswordHandler = (event) => {
     setPassword(event.target.value);
   };
+  // handle signup submit
+  async function handleSubmit(ev) {
+    ev.preventDefault();
+    try {
+      const response = await Api.post("user/signup", {
+        name,
+        phone,
+        password,
+      });
+      console.log(response.data.message);
+      router.push("/login");
+    } catch (e) {
+      // router.push("MicroComponents/error");
+      router.push("/signup");
+    }
+  }
   return (
     <React.Fragment>
       {/* singup form  */}
@@ -60,14 +79,14 @@ export default function Singup() {
             className="bg-slate-300 w-full p-3 rounded-md outline-1"
             placeholder="Enter your name"
             onChange={NameHandler}
-            value={Name}
+            value={name}
           />
-          <p className="mt-5 text-lg text-gray-600">Email Adress</p>
+          <p className="mt-5 text-lg text-gray-600">Enter your phone number</p>
           <input
             className="bg-slate-300 w-full p-3 rounded-md outline-1"
-            placeholder="Enter your Email"
-            onChange={EmailHandler}
-            value={Email}
+            placeholder="Enter your phone +880"
+            onChange={PhoneHandler}
+            value={phone}
           />
           <p className="mt-5 text-lg text-gray-600">Set password </p>
           <input
@@ -75,10 +94,13 @@ export default function Singup() {
             className="bg-slate-300 w-full p-3 rounded-md outline-1"
             placeholder="Set your Password "
             onChange={PasswordHandler}
-            value={Password}
+            value={password}
           />{" "}
           <br />
-          <button className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 ">
+          <button
+            onClick={handleSubmit}
+            className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 "
+          >
             Singup
           </button>
           <br />

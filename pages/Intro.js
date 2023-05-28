@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import Img from "../public/p.webp";
+import Img from "../public/side.png";
+import Link from "next/link";
 
 export default function Intro() {
    
@@ -14,13 +15,13 @@ export default function Intro() {
                     <br/>
                     <p className="mainfont text-lg text-green-400 font-semibold  text-left	uppercase max-sm:text-sm max-sm:text-center">স্বপ্নের কলেজে সফল হোন, একটি চমৎকার Eduthriller সঙ্গে যেখানে আপনি নতুন ও স্বাদমত শিক্ষা অর্জন করবেন সম্পূর্ণ আনন্দের সাথে।</p><br/>
                     <div className="flex justify-between mt-20 mb-20 max-sm:justify-around max-sm:mt-5">
-                    <button className=" rounded-lg uppercase font-bold text-gray-200 bg-green-500 w-60 max-sm:text-sm py-3 max-sm:w-40">Singup</button>
+                    <Link href="/signup" className="text-center rounded-lg uppercase font-bold text-gray-200 bg-green-500 w-60 max-sm:text-sm py-3 max-sm:w-40">Singup</Link>
 
                     <button className="  rounded-lg uppercase font-bold text-gray-200 bg-green-500  w-60 max-sm:text-sm max-sm:w-40">Watch now</button>
                     </div>
                 </div>
                 <div>
-                    <Image src={Img}/>
+                    <Image src={Img} />
                 </div>
             </div>
         </React.Fragment>
