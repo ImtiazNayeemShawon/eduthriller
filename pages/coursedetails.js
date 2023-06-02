@@ -28,7 +28,7 @@ export default function Coursedetails() {
             onClick={() => router.push("/medicaladmission")}
             className="bg-card rounded-lg p-2 "
           >
-            <Image src={Medical} width={70} className="m-auto" />
+            <Image src={Medical} width={70} className="m-auto" alt="def"/>
             <h1 className="bangfont text-xl text-center font-bold  text-black max-sm:text-lg ">
               মেডিকেল এডমিশন
             </h1>
@@ -45,7 +45,7 @@ export default function Coursedetails() {
             onClick={() => router.push("/egineeringadmission")}
             className="bg-card rounded-lg p-2 "
           >
-            <Image src={Engineering} width={70} className="m-auto" />
+            <Image src={Engineering} width={70} className="m-auto" alt="def" />
             <h1 className="bangfont text-xl text-center font-bold  text-black max-sm:text-lg ">
               ইঞ্জিনিয়ারিং এডমিশন
             </h1>
@@ -63,7 +63,7 @@ export default function Coursedetails() {
             onClick={() => router.push("/versityadmission")}
             className="bg-card rounded-lg p-2 "
           >
-            <Image src={University} width={70} className="m-auto" />
+            <Image src={University} width={70} className="m-auto" alt="def"/>
             <h1 className="bangfont text-xl text-center font-bold  text-black max-sm:text-lg ">
               ভার্সিটি এডমিশন
             </h1>
@@ -80,7 +80,7 @@ export default function Coursedetails() {
             onClick={() => router.push("/sschsc")}
             className="bg-card rounded-lg p-2"
           >
-            <Image src={University} width={70} className="m-auto" />
+            <Image src={University} width={70} className="m-auto" alt="def"/>
             <h1 className="bangfont text-xl text-center font-bold text-black  max-sm:text-lg ">
               SSC/HSC
             </h1>

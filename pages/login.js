@@ -1,27 +1,37 @@
-import React from "react";
-import { useState, useContext } from "react";
-import Api from "./api/apiCaller"; // Import the Axios instance
+import React, { useState,useEffect } from "react";
+import Api from "./api/apiCaller";
 import { useRouter } from "next/router";
-import axios from "axios";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
+import { UseGlobalContext } from "./Context";
+import toast, { Toaster } from "react-hot-toast";
+import Link from "next/link";
 
 export default function Login() {
-  // statae for manage data
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  // const { handleLogin } = useContext(AuthContext);
-
   const router = useRouter();
 
-  // email handeling event
   const PhoneHandler = (event) => {
     setPhone(event.target.value);
   };
-  // password handleing event
+
   const PasswordHandler = (event) => {
     setPassword(event.target.value);
   };
+// check logged in
+// useEffect(() => {
+//   // Check if user is already authenticated
+//   const token = Cookies.get("token");
+//   if (token) {
+//     const decodedToken = jwtDecode(token);
+//     const currentTime = Date.now() / 1000;
+//     if (decodedToken.exp > currentTime) {
+//       setIsLoggedIn(true);
+//     }
+//   }
+// }, []);
 
-  // login tirgger
   async function handleSubmit(ev) {
     ev.preventDefault();
     try {
@@ -29,56 +39,63 @@ export default function Login() {
         phone,
         password,
       });
-      router.push("MicroComponents/success");
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${response.data.accessToken}`;
-
-      console.log(response.data.accessToken);
-    } catch (e) {
-      alert(e);
-      router.push("MicroComponents/error");
-      
+      toast.success(response.data.message);
+      setTimeout(() => {
+        router.push("./MicroComponents/success");
+      }, 2000); // Delay of 2 seconds (2000 milliseconds)
+      const token = response.data.accessToken;
+      Cookies.set("token", token); // Set the 'token' cookie
+    } catch (error) {
+      toast.error(error.message);
     }
   }
-
+ 
   return (
     <React.Fragment>
-      <div className="mt-40 grid place-content-around max-sm:mt-20">
-        <h1 className="text-3xl mainfont font-bold">Login</h1>
-        <p className="text-lg mainfont text-gray-600">
-          Don't have an account?
-          <a href="signup" className="text-blue-800 ml-2">
-            Register
-          </a>
-        </p>
+      <Toaster />
+      <div className="grid ">
+        <div className="mt-20 grid place-content-center max-sm:mt-20 col-span-2">
+          <h1 className="text-3xl mainfont font-bold">Login</h1>
+          <p className="text-lg mainfont text-gray-600">
+            Don't have an account?
+            <a href="signup" className="text-blue-800 ml-2 hover:underline">
+              Register
+            </a>
+          </p>
 
-        <div className="mt-10">
-          <p className="mt-5 text-lg text-gray-600 mainfont">Phone number</p>
-          <input
-            className="bg-slate-300 w-full p-3 rounded-md outline-1 "
-            placeholder="Enter your phone number"
-            onChange={PhoneHandler}
-            value={phone}
-          />
-          <p className="mt-5 text-lg text-gray-600  mainfont">Set password </p>
-          <input
-            type="password"
-            className="bg-slate-300 w-full p-3 rounded-md outline-1"
-            placeholder="Enter your Password "
-            onChange={PasswordHandler}
-            value={password}
-          />{" "}
-          <br />
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 "
-          >
-            Login
-          </button>
-          <br />
+          <div className="mt-10">
+            <p className="mt-5 text-lg text-gray-600 mainfont font-semibold">
+              Phone number
+            </p>
+            <input
+              className="bg-slate-300 w-full p-3 rounded-md outline-1 "
+              placeholder="Enter your phone number"
+              onChange={PhoneHandler}
+              value={phone}
+            />
+            <p className="mt-5 text-lg text-gray-600  mainfont font-semibold">
+              Set password{" "}
+            </p>
+            <input
+              type="password"
+              className="bg-slate-300 w-full p-3 rounded-md outline-1"
+              placeholder="Enter your Password "
+              onChange={PasswordHandler}
+              value={password}
+            />{" "}
+            <Link href="reset" className="text-blue-700 hover:underline">Forgot password?</Link>
+            <br />
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 "
+            >
+              Login
+            </button>
+            <br />
+          </div>
         </div>
+        <div className="sideimage  mt-20"></div>
       </div>
     </React.Fragment>
   );

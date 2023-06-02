@@ -40,4 +40,8 @@ background-color: #c8ffde;
   appearance: none; /* Hide default dropdown arrow (for non-WebKit browsers) */
 }
 
+.profile{
+border-radius: 50%;
+}
+
 

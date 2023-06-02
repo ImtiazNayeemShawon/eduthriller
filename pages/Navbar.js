@@ -1,5 +1,5 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
 
 export default function Navbar() {
   return (
@@ -7,12 +7,12 @@ export default function Navbar() {
       <div className="fixed">
         <nav className="bg-white px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0">
           <div className="container flex  items-right justify-between mx-auto ">
-            
-              {/* <Image className="w-12 rounded-lg" src={Logo} alt="logo" /> */}
-              <Link href="/" className="uppercase font-bold text-lg py-3 bg-green-500 p-2 rounded-lg">
-                Logo{" "}
-              </Link>
-            
+            <Link
+              href="/"
+              className="uppercase font-bold text-lg py-3 bg-green-500 p-2 rounded-lg"
+            >
+              Logo{" "}
+            </Link>
 
             <div
               className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
@@ -62,14 +62,7 @@ export default function Navbar() {
                   Login
                 </Link>
               </ul>
-             
             </div>
-            <Link
-                  href="/login"
-                  className="md:hidden text-slate-100 hover:text-white bg-green-500 font-medium rounded-lg text-sm px-10 py-3 text-center duration-300"
-                >
-                  Login
-                </Link>
           </div>
         </nav>
       </div>

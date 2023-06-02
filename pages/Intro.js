@@ -21,7 +21,7 @@ export default function Intro() {
                     </div>
                 </div>
                 <div>
-                    <Image src={Img} />
+                    <Image src={Img} alt="def"/>
                 </div>
             </div>
         </React.Fragment>
