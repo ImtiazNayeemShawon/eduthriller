@@ -8,7 +8,7 @@ export default function Intro() {
 
     return (
         <React.Fragment>
-            <div className="grid grid-cols-2 bg-gray-800 rounded-lg mt-20 h-3/4		max-sm:grid-cols-1 max-sm:mt-10">
+            <div className="grid grid-cols-2 bg-gray-900 rounded-lg mt-20 h-3/4		max-sm:grid-cols-1 max-sm:mt-10">
                 {/* intor section  */}
                 <div className="mx-10 max-sm:mx-4 mt-20">
                     <h1 className="mt-20 text-5xl font-bold bangfont leading-relaxed	text-gray-200 max-sm:text-4xl">নিজের শেখা নিজেই গুছিয়ে নেয়ার যাত্রা শুরু হোক</h1>

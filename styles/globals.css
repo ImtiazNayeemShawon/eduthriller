@@ -43,5 +43,7 @@ background-color: #c8ffde;
 .profile{
 border-radius: 50%;
 }
-
+.bg-gred{
+  background-image: linear-gradient( 270.3deg,  rgba(84,212,228,1) 0.2%, rgba(68,36,164,1) 100% );
+}
 

@@ -1,17 +1,19 @@
 import React from "react";
 import Intro from "./Intro";
 import Coursedetails from "./coursedetails";
-import Footer from "./footer";
 import Navbar from "./Navbar";
+import Counter from "./counter";
+import Emergency from "./Emergency";
 
 export default function Home() {
   return (
     <React.Fragment>
-      <Navbar/>
+      <Navbar />
       <main>
         <Intro />
+        <Counter />
         <Coursedetails />
-        <Footer />
+        <Emergency/>
       </main>
     </React.Fragment>
   );
