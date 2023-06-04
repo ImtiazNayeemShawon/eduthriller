@@ -3,7 +3,6 @@ import Api from "./api/apiCaller";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
-import { UseGlobalContext } from "./Context";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 
