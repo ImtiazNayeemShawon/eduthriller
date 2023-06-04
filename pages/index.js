@@ -4,6 +4,7 @@ import Coursedetails from "./coursedetails";
 import Navbar from "./Navbar";
 import Counter from "./counter";
 import Emergency from "./Emergency";
+import Footer from "./footer";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Counter />
         <Coursedetails />
         <Emergency/>
+        <Footer/>
       </main>
     </React.Fragment>
   );
