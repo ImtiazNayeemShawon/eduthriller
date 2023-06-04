@@ -18,4 +18,4 @@ const UseGlobalContext = () => {
   return useContext(AppContext);
 };
 
-export { AppContext, AppProvider, UseGlobalContext };
+export default { AppContext, AppProvider, UseGlobalContext };
