@@ -28,8 +28,8 @@ export default function coursedetails() {
               <Image src={SSC} alt="def" width={90} />
             </div>
             <div className="col-span-3">
-              <h1 className="bangfont text-2xl font-bold">ক্লাস ৫ -১২</h1>
-              <p className="text-xl mt-2 text-gray-600">
+              <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>
             </div>
@@ -45,8 +45,8 @@ export default function coursedetails() {
               <Image src={University} alt="def" width={90} />
             </div>
             <div className="col-span-3">
-              <h1 className="bangfont text-2xl font-bold">ক্লাস ৫ -১২</h1>
-              <p className="text-xl mt-2 text-gray-600">
+            <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>
             </div>
@@ -62,8 +62,8 @@ export default function coursedetails() {
               <Image src={Doctor} alt="def" width={90} />
             </div>
             <div className="col-span-3">
-              <h1 className="bangfont text-2xl font-bold">ক্লাস ৫ -১২</h1>
-              <p className="text-xl mt-2 text-gray-600">
+            <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>
             </div>
@@ -79,8 +79,8 @@ export default function coursedetails() {
               <Image src={Engineer} alt="def" width={90} />
             </div>
             <div className="col-span-3">
-              <h1 className="bangfont text-2xl font-bold">ক্লাস ৫ -১২</h1>
-              <p className="text-xl mt-2 text-gray-600">
+            <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>
             </div>
