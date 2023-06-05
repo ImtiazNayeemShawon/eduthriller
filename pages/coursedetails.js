@@ -9,9 +9,9 @@ import Engineer from "../public/engineer.png";
 export default function coursedetails() {
   return (
     <React.Fragment>
-      <div className="mt-40">
+      <div className="mt-40 max-sm:mx-5">
         {/* header text  */}
-        <h1 className="text-5xl bangfont font-bold text-center">
+        <h1 className="text-5xl bangfont font-bold text-center max-sm:text-2xl">
           নিজের শেখা নিজেই গুছিয়ে <br />
           নেয়ার যাত্রা শুরু হোক
         </h1>
@@ -23,7 +23,7 @@ export default function coursedetails() {
 
 
           {/* first section */}
-          <div className="grid grid-cols-5 bg-gray-200 shadow-lg  py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100">
+          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-8 max-sm:p-4">
             <div>
               <Image src={SSC} alt="def" width={90} />
             </div>
@@ -40,7 +40,7 @@ export default function coursedetails() {
 
 
           {/* second section */}
-          <div className="grid grid-cols-5 bg-gray-200 shadow-lg  py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100">
+          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-8 max-sm:p-4">
             <div>
               <Image src={University} alt="def" width={90} />
             </div>
@@ -57,7 +57,7 @@ export default function coursedetails() {
 
 
           {/* third section */}
-          <div className="grid grid-cols-5 bg-gray-200 shadow-lg  py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100">
+          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-8 max-sm:p-4">
             <div>
               <Image src={Doctor} alt="def" width={90} />
             </div>
@@ -74,7 +74,7 @@ export default function coursedetails() {
 
 
           {/* fourth section */}
-          <div className="grid grid-cols-5 bg-gray-200 shadow-lg  py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100">
+          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-8 max-sm:p-4">
             <div>
               <Image src={Engineer} alt="def" width={90} />
             </div>

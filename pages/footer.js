@@ -24,7 +24,7 @@ export default function footer() {
                 <a href="#" className="mr-4 hover:underline md:mr-6">Privacy Policy</a>
               </li>
               <li>
-                <a href="#" className="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                <a href="/AdminPage" className="mr-4 hover:underline md:mr-6 ">Admin pannel</a>
               </li>
               <li>
                 <a href="#" className="hover:underline">Contact</a>

@@ -19,7 +19,7 @@ export default function Profile() {
   const fetchData = async () => {
     try {
       const response = await Api.get("user/userData");
-      const responseData = response.data; // Use a different variable name here
+      const responseData = response.data;
       setUserData(responseData);
       setLoading(false);
     } catch (error) {
