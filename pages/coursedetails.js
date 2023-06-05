@@ -9,7 +9,7 @@ import Engineer from "../public/engineer.png";
 export default function coursedetails() {
   return (
     <React.Fragment>
-      <div className="mt-40 max-sm:mx-5">
+      <div className="mt-40 max-sm:mx-6">
         {/* header text  */}
         <h1 className="text-5xl bangfont font-bold text-center max-sm:text-2xl">
           নিজের শেখা নিজেই গুছিয়ে <br />
@@ -23,9 +23,9 @@ export default function coursedetails() {
 
 
           {/* first section */}
-          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
+          <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
             <div>
-              <Image src={SSC} alt="def" width={90} />
+              <Image src={SSC} alt="def"  className="max-sm:w-20 w-20"/>
             </div>
             <div className="col-span-3">
               <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
@@ -40,9 +40,9 @@ export default function coursedetails() {
 
 
           {/* second section */}
-          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
+          <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
             <div>
-              <Image src={University} alt="def" width={90} />
+              <Image src={University} alt="def"  className="max-sm:w-20 w-20"/>
             </div>
             <div className="col-span-3">
             <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
@@ -57,9 +57,9 @@ export default function coursedetails() {
 
 
           {/* third section */}
-          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
+          <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4 ">
             <div>
-              <Image src={Doctor} alt="def" width={90} />
+              <Image src={Doctor} alt="def"  className="max-sm:w-20 w-20"/>
             </div>
             <div className="col-span-3">
             <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
@@ -74,9 +74,9 @@ export default function coursedetails() {
 
 
           {/* fourth section */}
-          <div className="grid grid-cols-5 bg-gray-200 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
+          <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
             <div>
-              <Image src={Engineer} alt="def" width={90} />
+              <Image src={Engineer} alt="def"  className="max-sm:w-20 w-20"/>
             </div>
             <div className="col-span-3">
             <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
