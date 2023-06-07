@@ -2,23 +2,28 @@ import { useState } from "react";
 import Api from "./api/apiCaller";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
+import Cookies from "js-cookie";
 
 const AdminLoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  async function handleSubmit(ev) {
+    ev.preventDefault();
     try {
-      const response = await Api.post("/admin/login", { email, password });
-      toast.success("Login succesful!");
-      router.push("/private/AdminPage");
-      console.log(response.data.accessToken);
+      const response = await Api.post("user/login", {
+        email,
+        password,
+      });
+      toast.success(response.data.message);
+
+      const token = response.data.accessToken;
+      Cookies.set("token", token); // Set the 'token' cookie
     } catch (error) {
       toast.error(error.message);
     }
-  };
+  }
 
   return (
     <div>
@@ -35,10 +40,10 @@ const AdminLoginPage = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 "
                 >
-                  Your email
+                  Your Email
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -61,7 +66,7 @@ const AdminLoginPage = () => {
 
               <button
                 type="submit"
-                onClick={handleLogin}
+                onClick={handleSubmit}
                 className="text-lg text-gray-200 mainbg p-3 rounded-lg w-full mt-20 "
               >
                 Login

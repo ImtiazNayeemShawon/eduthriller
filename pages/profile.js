@@ -23,7 +23,9 @@ export default function Profile() {
       setUserData(responseData);
       setLoading(false);
     } catch (error) {
+      toast.error("Please referesh the page");
       toast.error(error.message);
+
     }
   };
   return (

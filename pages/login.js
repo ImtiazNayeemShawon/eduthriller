@@ -2,7 +2,6 @@ import React, { useState,useEffect } from "react";
 import Api from "./api/apiCaller";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 
@@ -18,18 +17,7 @@ export default function Login() {
   const PasswordHandler = (event) => {
     setPassword(event.target.value);
   };
-// check logged in
-// useEffect(() => {
-//   // Check if user is already authenticated
-//   const token = Cookies.get("token");
-//   if (token) {
-//     const decodedToken = jwtDecode(token);
-//     const currentTime = Date.now() / 1000;
-//     if (decodedToken.exp > currentTime) {
-//       setIsLoggedIn(true);
-//     }
-//   }
-// }, []);
+
 
   async function handleSubmit(ev) {
     ev.preventDefault();
