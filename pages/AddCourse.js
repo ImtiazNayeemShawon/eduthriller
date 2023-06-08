@@ -5,12 +5,22 @@ import Api from "./api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
 
 export default function AddCourse() {
-  // State handleing
-  // course title
+  // ..............................................................................................
+  // Course title handling function
   const [title, setTitle] = useState("");
-  // course description
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  // ..............................................................................................
+  // Course description handling function
   const [description, setDescription] = useState("");
-  // course teachers
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  // ..............................................................................................
+  // multiple teacher adding function for course
   const [teachers, setTeachers] = useState([
     {
       name: "",
@@ -18,9 +28,32 @@ export default function AddCourse() {
       level: "",
     },
   ]);
-  // course thumbnail
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedTeachers = [...teachers];
+    updatedTeachers[index] = { ...updatedTeachers[index], [name]: value };
+    setTeachers(updatedTeachers);
+  };
+  const handleAddTeacher = () => {
+    setTeachers([...teachers, { name: "", institute: "", level: "" }]);
+  };
+  const handleDeleteTeacher = (index) => {
+    const updatedTeachers = [...teachers];
+    updatedTeachers.pop(index, 1);
+    setTeachers(updatedTeachers);
+  };
+
+  // ..............................................................................................
+
+  // ccourse thumbnail uploader
   const [file, setFile] = useState(null);
-  // course short data
+  const handleFileUpload = (event) => {
+    const uploadedFile = event.target.files[0];
+    setFile(uploadedFile);
+  };
+
+  // ..............................................................................................
+  // course summary quiz,exams number data handling function
   const [micro, setMicro] = useState({
     subject: "",
     exams: "",
@@ -28,43 +61,6 @@ export default function AddCourse() {
     modeltest: "",
     lecture: "",
   });
-  // course price
-  const [price, setPrice] = useState("");
-  // course related questions
-  const [InputQue, setInputQue] = useState("");
-  const [QuestionItems, SetQuestionItems] = useState([]);
-
-  // handling function for manage state
-
-  // Course title handling function
-  const handleTitle = (e) => {
-    setTitle(e.target.value);
-  };
-
-  // Course description handling function
-  const handleDescription = (e) => {
-    setDescription(e.target.value);
-  };
-  // multiple teacher adding function for course
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    const updatedTeachers = [...teachers];
-    updatedTeachers[index] = { ...updatedTeachers[index], [name]: value };
-    setTeachers(updatedTeachers);
-  };
-
-  // teacher handling onchange function
-  const handleAddTeacher = () => {
-    setTeachers([...teachers, { name: "", institute: "", level: "" }]);
-  };
-
-  // ccourse thumbnail uploader
-  const handleFileUpload = (event) => {
-    const uploadedFile = event.target.files[0];
-    setFile(uploadedFile);
-  };
-
-  // course summary quiz,exams number data handling function
   const handleMicroChange = (e) => {
     const { name, value } = e.target;
     setMicro((prevMicro) => ({
@@ -73,29 +69,49 @@ export default function AddCourse() {
     }));
   };
 
+  // ..............................................................................................
   // course price data handling function
+  const [price, setPrice] = useState("");
   const handlePrice = (e) => {
     setPrice(e.target.value);
   };
 
-// QuestionItems handling function
-const QuestionList = () => {
-  setInputQue(""),
-  SetQuestionItems((oldItems) => {
-    return [...oldItems, InputQue];
-  });
-};
+  // ..............................................................................................
+  // QuestionItems handling function
+  const [questions, setQuestions] = useState([
+    {
+      title: "",
+      description: "",
+    },
+  ]);
+  const handleque = (e, index) => {
+    const { name, value } = e.target;
+    const updatedQue = [...questions];
+    updatedQue[index] = { ...updatedQue[index], [name]: value };
+    setQuestions(updatedQue);
+  };
+  const handleAddque = () => {
+    setQuestions([...questions, { title: "", description: "" }]);
+  };
+  const handleDeleteque = (index) => {
+    const updatedQue = [...questions];
+    updatedQue.pop(index, 1);
+    setQuestions(updatedQue);
+  };
 
-  // POOST data in backend server
+  // ..............................................................................................
+  // POST data in backend server
   async function handleUploadCourse(ev) {
     ev.preventDefault();
+
     try {
-      const response = await Api.post("/crud/course", {
+      const response = await Api.post("/crud/course",{
         title,
         description,
         price,
         teachers,
         micro,
+        questions,
         file,
       });
       toast.success(response.data.message);
@@ -186,13 +202,22 @@ const QuestionList = () => {
                 </div>
               ))}
             </div>
-            <button
-              type="button"
-              onClick={handleAddTeacher}
-              className="text-md capitalize text-gray-50 bg-green-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
-            >
-              Add more Teacher
-            </button>
+            <div className="flex gap-24">
+              <button
+                type="button"
+                onClick={handleAddTeacher}
+                className="text-md capitalize text-gray-50 bg-green-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Add more Teacher
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteTeacher}
+                className="text-md capitalize text-gray-50 bg-red-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Delete teacher
+              </button>
+            </div>
           </div>
 
           {/* কোর্স সম্পর্কে বিস্তারিত */}
@@ -200,34 +225,44 @@ const QuestionList = () => {
             <h1 className="text-sl bangfont font-bold">
               কোর্স সম্পর্কে বিস্তারিত
             </h1>
-            {QuestionItems.map((questions, index) => {
-              
-              return (
-                  <div>
-                   key={index}
-                    {questions}
-              <input
-                className="p-2 w-full  bg-gray-100 outline-dashed outline-1 "
-                placeholder=" exp: কোর্সটিতে শিক্ষার্থীরা পাবে:"
-                type="text"
-              />
-              <textarea
-                id="message"
-                rows={4}
-                className="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-dashed outline-1 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-2"
-                placeholder="কোর্সটি হবে আমাদের Specially designed Priority Based Learning এর মাধ্যম। অর্থ্যাৎ যে অধ্যায় গুলো শর্ট সিলেবাসে ছিল এবং জরুরি বেশি, সেগুলো আগে পড়ানো হবে এবং বেশি সময় নিয়ে পড়ানো হবে। যা তোমাদের সর্বোচ্চ প্রস্তুতি নিশ্চিত করবে। etc etc........."
-              />
+            {questions.map((que, index) => (
+              <div key={index}>
+                <input
+                  className="p-2 w-full  bg-gray-100 outline-dashed outline-1 mt-4"
+                  placeholder=" exp: কোর্সটিতে শিক্ষার্থীরা পাবে:"
+                  type="text"
+                  name="title"
+                  value={que.title}
+                  onChange={(e) => handleque(e, index)}
+                />
+                <textarea
+                  value={que.description}
+                  onChange={(e) => handleque(e, index)}
+                  id="message"
+                  name="description"
+                  rows={4}
+                  className="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-dashed outline-1 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-2"
+                  placeholder="কোর্সটি হবে আমাদের Specially designed Priority Based Learning এর মাধ্যম। অর্থ্যাৎ যে অধ্যায় গুলো শর্ট সিলেবাসে ছিল এবং জরুরি বেশি, সেগুলো আগে পড়ানো হবে এবং বেশি সময় নিয়ে পড়ানো হবে। যা তোমাদের সর্বোচ্চ প্রস্তুতি নিশ্চিত করবে। etc etc........."
+                />
+              </div>
+            ))}
+
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={handleAddque}
+                className="text-md capitalize text-gray-50 bg-green-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Add more question
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteque}
+                className="text-md capitalize text-gray-50 bg-red-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Delete question
+              </button>
             </div>
-                );
-              })}
-            
-            <button
-              type="button"
-              onClick={QuestionList}
-              className="text-md capitalize text-gray-50 bg-green-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
-            >
-              Add more question
-            </button>
           </div>
         </div>
 
@@ -267,13 +302,14 @@ const QuestionList = () => {
                     drag and drop
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    PNG or JPG
                   </p>
                 </div>
               )}
               <input
                 id="dropzone-file"
                 type="file"
+                name="thumbnail"
                 className="hidden"
                 onChange={handleFileUpload}
               />

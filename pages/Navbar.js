@@ -41,7 +41,7 @@ export default function Navbar() {
             >
               <ul className="flex flex-col p-1 font-bold mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-6 md:mt-0 md:text-sm md:font-medium md:border-0  uppercase text-sm">
                 <Link
-                  href="/courses"
+                  href="/AllCourse"
                   className=" text-gray hover:text-white hover:bg-green-500 font-bold rounded-lg text-sm px-5 py-3 text-center duration-300"
                 >
                   কোর্স সমূহ

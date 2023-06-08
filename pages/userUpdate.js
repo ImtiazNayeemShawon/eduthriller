@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Api from "./api/apiCaller";
 import { useRouter } from "next/router";
 import { toast,Toaster } from "react-hot-toast";
-import Success from "./MicroComponents/success";
 
 export default function userUpdate() {
   const [name, setName] = useState("");

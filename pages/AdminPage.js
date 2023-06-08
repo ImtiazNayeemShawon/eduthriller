@@ -29,7 +29,7 @@ const AdminPage = () => {
 
   return (
     <React.Fragment>
-      <div>
+      <div className="h-screen">
         <AdminNavbar />
         {/* <Toaster /> */}
       </div>
