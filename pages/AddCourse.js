@@ -3,8 +3,10 @@ import AdminNavbar from "./AdminNavbar";
 import { useState } from "react";
 import Api from "./api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function AddCourse() {
+  const router = useRouter();
   // ..............................................................................................
   // Course title handling function
   const [title, setTitle] = useState("");
@@ -46,27 +48,32 @@ export default function AddCourse() {
   // ..............................................................................................
 
   // ccourse thumbnail uploader
-  const [file, setFile] = useState(null);
-  const handleFileUpload = (event) => {
-    const uploadedFile = event.target.files[0];
-    setFile(uploadedFile);
+  const [thumbnail, setThumbnail] = useState("");
+  const handleFileUpload = (e) => {
+    setThumbnail(e.target.value);
   };
 
   // ..............................................................................................
   // course summary quiz,exams number data handling function
-  const [micro, setMicro] = useState({
-    subject: "",
-    exams: "",
-    liveclass: "",
-    modeltest: "",
-    lecture: "",
-  });
-  const handleMicroChange = (e) => {
+  const [micros, setMicro] = useState([
+    {
+      title: "",
+      number: "",
+    },
+  ]);
+  const handleMicroChange = (e, index) => {
     const { name, value } = e.target;
-    setMicro((prevMicro) => ({
-      ...prevMicro,
-      [name]: value,
-    }));
+    const updatedMicro = [...micros];
+    updatedMicro[index] = { ...updatedMicro[index], [name]: value };
+    setMicro(updatedMicro);
+  };
+  const handleAddMicro = () => {
+    setMicro([...micros, { title: "", number: "" }]);
+  };
+  const handleDeleteMicro = (index) => {
+    const updatedMicro = [...micros];
+    updatedMicro.pop(index, 1);
+    setMicro(updatedMicro);
   };
 
   // ..............................................................................................
@@ -105,16 +112,17 @@ export default function AddCourse() {
     ev.preventDefault();
 
     try {
-      const response = await Api.post("/crud/course",{
+      const response = await Api.post("/crud/course", {
         title,
         description,
         price,
         teachers,
-        micro,
+        micros,
         questions,
-        file,
+        thumbnail,
       });
       toast.success(response.data.message);
+      router.push("/AllCourse");
     } catch (error) {
       console.log(error);
     }
@@ -270,50 +278,13 @@ export default function AddCourse() {
         <div className="">
           {/* thumbnail uploader */}
           <div className="flex items-center justify-center w-full">
-            <label
-              htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-300 dark:hover:bg-bray-800 hover:bg-gray-100 dark:border-gray-600"
-            >
-              {file ? (
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt="Uploaded file"
-                  className="w-full h-auto"
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg
-                    aria-hidden="true"
-                    className="w-10 h-10 mb-3 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                    />
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="font-semibold">Click to upload</span> or
-                    drag and drop
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    PNG or JPG
-                  </p>
-                </div>
-              )}
-              <input
-                id="dropzone-file"
-                type="file"
-                name="thumbnail"
-                className="hidden"
-                onChange={handleFileUpload}
-              />
-            </label>
+            <input
+              type="text"
+              name="thumbnail"
+              placeholder="past your thumbnail link"
+              className="w-full  text-whitebg-gray-200 p-2 rounded-md outline-dashed outline-1"
+              onChange={handleFileUpload}
+            />
           </div>
           {/* price input  */}
           <p className="text-left mt-2 mainfont font-semibold ">Course price</p>
@@ -330,71 +301,51 @@ export default function AddCourse() {
               Micro Information
             </h2>
             <div className="grid grid-cols-2 gap-5">
-              <div className="mt-1 bg-white shadow-md px-4 outline-dashed outline-1 p-2">
-                <p>Subject:</p>
-                <label className="text-sm mainfont">
-                  <input
-                    className="p-2 w-full outline-0 bg-gray-100"
-                    type="text"
-                    name="subject"
-                    placeholder="exp: Math, Science"
-                    value={micro.subject}
-                    onChange={handleMicroChange}
-                  />
-                </label>
-              </div>
-              <div className="mt-1 bg-white shadow-md px-4 outline-dashed outline-1 p-2">
-                <p>Exams:</p>
-                <label className="text-sm mainfont">
-                  <input
-                    className="p-2 w-full outline-0 bg-gray-100"
-                    type="text"
-                    name="exams"
-                    placeholder="exp: Midterm, Final"
-                    value={micro.exams}
-                    onChange={handleMicroChange}
-                  />
-                </label>
-              </div>
-              <div className="mt-1 bg-white shadow-md px-4 outline-dashed outline-1 p-2">
-                <p>Live Class:</p>
-                <label className="text-sm mainfont">
-                  <input
-                    className="p-2 w-full outline-0 bg-gray-100"
-                    type="text"
-                    name="liveclass"
-                    placeholder="exp: Online, Offline"
-                    value={micro.liveclass}
-                    onChange={handleMicroChange}
-                  />
-                </label>
-              </div>
-              <div className="mt-1 bg-white shadow-md px-4 outline-dashed outline-1 p-2">
-                <p>Model Test:</p>
-                <label className="text-sm mainfont">
-                  <input
-                    className="p-2 w-full outline-0 bg-gray-100"
-                    type="text"
-                    name="modeltest"
-                    placeholder="exp: Mock Test, Practice Test"
-                    value={micro.modeltest}
-                    onChange={handleMicroChange}
-                  />
-                </label>
-              </div>
-              <div className="mt-1 bg-white shadow-md px-4 outline-dashed outline-1 p-2">
-                <p>Lecture sheet:</p>
-                <label className="text-sm mainfont">
-                  <input
-                    className="p-2 w-full outline-0 bg-gray-100"
-                    type="text"
-                    name="lecture"
-                    placeholder="exp: Mock Test, Practice Test"
-                    value={micro.lecture}
-                    onChange={handleMicroChange}
-                  />
-                </label>
-              </div>
+              {micros.map((microData, index) => (
+                <div
+                  key={index}
+                  className="mt-1 bg-white shadow-md px-4 outline-dashed outline-1 p-2"
+                >
+                  <p> Teacher {index + 1}</p>
+                  <label className="text-sm mainfont ">
+                    <input
+                      className="p-2 w-full outline-0 bg-gray-100"
+                      type="text"
+                      name="title"
+                      placeholder="title"
+                      value={microData.title}
+                      onChange={(e) => handleMicroChange(e, index)}
+                    />
+                  </label>
+                  <br />
+                  <label className="text-sm mainfont ">
+                    <input
+                      className="p-2 w-full outline-0 bg-gray-100"
+                      placeholder="number"
+                      type="text"
+                      name="number"
+                      value={microData.number}
+                      onChange={(e) => handleMicroChange(e, index)}
+                    />
+                  </label>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-24">
+              <button
+                type="button"
+                onClick={handleAddMicro}
+                className="text-md capitalize text-gray-50 bg-green-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Add more Information
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteMicro}
+                className="text-md capitalize text-gray-50 bg-red-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

@@ -21,7 +21,6 @@ export default function userUpdate() {
     try {
       const response = await Api.get("/user/userData");
       const userData = response.data.user;
-
       // Set the state with the fetched user data
       setName(userData.name);
       setAddress(userData.adress);
