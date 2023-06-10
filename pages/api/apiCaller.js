@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const apiCaller = axios.create({
-  baseURL: 'http://localhost:7000', // Replace with your actual base URL
+  baseURL: 'https://myapp-4vz5.onrender.com', // Replace with your actual base URL
 });
 
 const token = Cookies.get("token"); // Get the access token from the 'token' cookie
