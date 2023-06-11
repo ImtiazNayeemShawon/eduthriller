@@ -1,37 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Api from "./api/apiCaller";
-// import { toast, Toaster } from "react-hot-toast";
-// import { useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
 import AdminNavbar from "./AdminNavbar";
 
 const AdminPage = () => {
   const router = useRouter();
-  // const [IsloggedIn, setIsLoggedin] = useState(true);
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
 
-  // useEffect(() => {
-  //   checkLoggedIn();
-  // }, []);
-
-  // const checkLoggedIn = async () => {
-  //   try {
-  //     const response = await Api.get("/admin/checkLoggedIn");
-  //     const { loggedIn } = response.data;
-  //     setIsLoggedin(loggedIn);
-  //     if (IsloggedIn) {
-  //       router.push("/adminPage");
-  //     }
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //     // router.push("/AdminLogin");
-  //   }
-  // };
+  const checkLoggedIn = async () => {
+    try {
+      const response = await Api.get("admin/checkAdmin");
+      const { loggedIn } = response.data;
+      if (!loggedIn) {
+        setTimeout(() => {
+          router.push("/AdminLogin");
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error("Failed to check logged-in status. Please try again.");
+      console.log(error);
+      setTimeout(() => {
+        router.push("/AdminLogin");
+      }, 1000);
+    }
+  };
 
   return (
     <React.Fragment>
       <div className="h-screen">
         <AdminNavbar />
-        {/* <Toaster /> */}
+        <Toaster />
       </div>
     </React.Fragment>
   );

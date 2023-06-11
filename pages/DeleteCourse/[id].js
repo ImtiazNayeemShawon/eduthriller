@@ -6,6 +6,29 @@ import { Toaster, toast } from "react-hot-toast";
 
 export default function AllCourse() {
   const router = useRouter();
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+
+  const checkLoggedIn = async () => {
+    try {
+      const response = await Api.get("admin/checkAdmin");
+      const { loggedIn } = response.data;
+      if (!loggedIn) {
+        setTimeout(() => {
+          router.push("/AdminLogin");
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error("Failed to check logged-in status. Please try again.");
+      console.log(error);
+      setTimeout(() => {
+        router.push("/AdminLogin");
+      }, 1000);
+    }
+  };
+
+
   const { id } = router.query;
 
   const DeleteById = async () => {

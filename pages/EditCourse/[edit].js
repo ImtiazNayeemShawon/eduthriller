@@ -6,6 +6,28 @@ import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 
 export default function EditCourse() {
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+
+  const checkLoggedIn = async () => {
+    try {
+      const response = await Api.get("admin/checkAdmin");
+      const { loggedIn } = response.data;
+      if (!loggedIn) {
+        setTimeout(() => {
+          router.push("/AdminLogin");
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error("Failed to check logged-in status. Please try again.");
+      console.log(error);
+      setTimeout(() => {
+        router.push("/AdminLogin");
+      }, 1000);
+    }
+  };
+
   // ..............................................................................................
   // Course title handling function
   const [title, setTitle] = useState("");
