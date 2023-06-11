@@ -3,13 +3,11 @@ import AdminNavbar from "../AdminNavbar";
 import Api from "../api/apiCaller";
 import { useRouter } from "next/router";
 import { Toaster, toast } from "react-hot-toast";
+import { useEffect } from "react";
 
 export default function AllCourse() {
   const router = useRouter();
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
+  const { id } = router.query;
   const checkLoggedIn = async () => {
     try {
       const response = await Api.get("admin/checkAdmin");
@@ -27,10 +25,6 @@ export default function AllCourse() {
       }, 1000);
     }
   };
-
-
-  const { id } = router.query;
-
   const DeleteById = async () => {
     try {
       await Api.delete(`/crud/course/${id}`);
@@ -41,6 +35,10 @@ export default function AllCourse() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    checkLoggedIn();
+  }, []);
+
   return (
     <React.Fragment>
       <AdminNavbar />

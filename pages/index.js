@@ -14,8 +14,8 @@ export default function Home() {
         <Intro />
         <Counter />
         <Coursedetails />
-        <Emergency/>
-        <Footer/>
+        <Emergency />
+        <Footer />
       </main>
     </React.Fragment>
   );

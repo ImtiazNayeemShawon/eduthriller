@@ -24,7 +24,6 @@ export default function AllCourse() {
       toast.error(error.message);
     }
   }
-
   return (
     <React.Fragment>
       <Toaster />
@@ -33,11 +32,7 @@ export default function AllCourse() {
         <h1 className="text-xl bangfont  capitalize font-semibold ">
           আমাদের সকল কোর্স{" "}
         </h1>
-        <div
-          // type="button"
-          // onClick={alert}
-          className="grid grid-cols-4 gap-3 mt-10 place-items-center max-sm:grid-cols-2"
-        >
+        <div className="grid grid-cols-4 gap-3 mt-10 place-items-center max-sm:grid-cols-2">
           {courses.map((course, index) => (
             <div key={index}>
               {/* course div  */}
@@ -47,8 +42,10 @@ export default function AllCourse() {
               >
                 <Image
                   src={Smp}
+                  width={400}
+                  height={100}
                   alt="def"
-                  className="w-66 rounded-md m-auto block"
+                  className=" rounded-md m-auto block"
                 />
                 <br />
                 <h1 className="text-gray-900 text-xl bangfont font-bold ">

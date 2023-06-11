@@ -17,7 +17,7 @@ export default function EditCourse() {
       if (!loggedIn) {
         setTimeout(() => {
           router.push("/AdminLogin");
-        }, 2000);
+        }, 5000);
       }
     } catch (error) {
       toast.error("Failed to check logged-in status. Please try again.");
@@ -68,10 +68,6 @@ export default function EditCourse() {
 
   // ..............................................................................................
 
-  // course thumbnail cannnot update
-
-  // ..............................................................................................
-  // course summary quiz,exams number data handling function
   // course summary quiz,exams number data handling function
   const [micros, setMicro] = useState([
     {
@@ -448,7 +444,7 @@ export default function EditCourse() {
                       key={index}
                       className="mt-1 bg-white shadow-md px-4 outline-dashed outline-1 p-2"
                     >
-                      <p> Teacher {index + 1}</p>
+                      <p> Information {index + 1}</p>
                       <label className="text-sm mainfont ">
                         <input
                           className="p-2 w-full outline-0 bg-gray-100"

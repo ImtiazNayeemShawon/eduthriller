@@ -77,12 +77,14 @@ export default function AllCourse() {
       toast.error(error.message);
     }
   }
-   
+
   return (
     <React.Fragment>
       <AdminNavbar />
       <div className="mt-40 h-screen">
-        <h1 className="text-xl bangfont  capitalize font-semibold ">সকল কোর্স এডিট এবং ডিলিট করুন  </h1>
+        <h1 className="text-xl bangfont  capitalize font-semibold ">
+          সকল কোর্স এডিট এবং ডিলিট করুন{" "}
+        </h1>
         <div className="grid grid-cols-4 gap-3 mt-10 place-items-center max-sm:grid-cols-2">
           {courses.map((course, index) => (
             <div key={index}>
@@ -108,8 +110,8 @@ export default function AllCourse() {
 
                   <button
                     onClick={() => router.push(`/DeleteCourse/${course._id}`)}
-                  
-                  className="p-2 bg-red-500 text-white px-8 rounded-sm mainfont flex justify-around font-bold">
+                    className="p-2 bg-red-500 text-white px-8 rounded-sm mainfont flex justify-around font-bold"
+                  >
                     {deleting} Delete
                   </button>
                 </div>

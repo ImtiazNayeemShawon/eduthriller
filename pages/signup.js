@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Api from "./api/apiCaller"; // Import the Axios instance
 import React from "react";
 import { useState } from "react";
-import {  Toaster, toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Singup() {
   // set state for form handleing
@@ -35,9 +35,7 @@ export default function Singup() {
         password,
       });
       toast.success(response.data.message);
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
+      router.push("/login");
     } catch (error) {
       toast.error(error.message);
     }

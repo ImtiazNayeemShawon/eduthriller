@@ -24,8 +24,6 @@ export default function Profile() {
       setLoading(false);
     } catch (error) {
       toast.error("Please referesh the page");
-     
-
     }
   };
   return (

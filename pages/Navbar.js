@@ -3,7 +3,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Api from "./api/apiCaller";
 
-
 export default function Navbar() {
   const [IsloggedIn, setIsLoggedin] = useState(false);
   const [username, setUserName] = useState("");
@@ -20,7 +19,7 @@ export default function Navbar() {
       setIsLoggedin(loggedIn);
       setUserName(name);
     } catch (error) {
-       console.log(error.message);
+      console.log(error.message);
     }
   };
   return (
@@ -108,35 +107,35 @@ export default function Navbar() {
               </ul>
             </div>
             <div className="md:hidden">
-            {IsloggedIn ? (
-                  <Link
-                    href="/profile"
-                    className="flex items-center text-slate-800 hover:text-green-500 font-medium rounded-lg text-sm px-10 py-3 text-center duration-300 justify-between capitalize"
+              {IsloggedIn ? (
+                <Link
+                  href="/profile"
+                  className="flex items-center text-slate-800 hover:text-green-500 font-medium rounded-lg text-sm px-10 py-3 text-center duration-300 justify-between capitalize"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    {username.name && username.name.split(" ")[0]}
-                  </Link>
-                ) : (
-                  <Link
-                    href="/login"
-                    className=" text-slate-100 hover:text-white bg-green-500 font-medium rounded-lg text-sm px-10 py-3 text-center duration-300"
-                  >
-                    Login
-                  </Link>
-                )}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  {username.name && username.name.split(" ")[0]}
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className=" text-slate-100 hover:text-white bg-green-500 font-medium rounded-lg text-sm px-10 py-3 text-center duration-300"
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         </nav>

@@ -17,14 +17,14 @@ const AdminPage = () => {
       if (!loggedIn) {
         setTimeout(() => {
           router.push("/AdminLogin");
-        }, 2000);
+        }, 5000);
       }
     } catch (error) {
       toast.error("Failed to check logged-in status. Please try again.");
       console.log(error);
       setTimeout(() => {
         router.push("/AdminLogin");
-      }, 1000);
+      }, 5000);
     }
   };
 

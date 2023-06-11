@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Api from "./api/apiCaller";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
@@ -18,7 +18,6 @@ export default function Login() {
     setPassword(event.target.value);
   };
 
-
   async function handleSubmit(ev) {
     ev.preventDefault();
     try {
@@ -29,14 +28,14 @@ export default function Login() {
       toast.success(response.data.message);
       setTimeout(() => {
         router.push("./MicroComponents/success");
-      }, 2000); // Delay of 2 seconds (2000 milliseconds)
+      }, 2000);
       const token = response.data.accessToken;
-      Cookies.set("token", token); // Set the 'token' cookie
+      Cookies.set("token", token);
     } catch (error) {
       toast.error(error.message);
     }
   }
- 
+
   return (
     <React.Fragment>
       <Toaster />
@@ -70,7 +69,9 @@ export default function Login() {
               onChange={PasswordHandler}
               value={password}
             />{" "}
-            <Link href="reset" className="text-blue-700 hover:underline">Forgot password?</Link>
+            <Link href="reset" className="text-blue-700 hover:underline">
+              Forgot password?
+            </Link>
             <br />
             <button
               type="submit"

@@ -20,15 +20,15 @@ export default function coursedetails() {
         </p>
         {/* 4 section div */}
         <div className="grid grid-cols-2 place-items-center mt-10 gap-4  gap-y-10 max-sm:grid-cols-1">
-
-
           {/* first section */}
           <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
             <div>
-              <Image src={SSC} alt="def"  className="max-sm:w-20 w-20"/>
+              <Image src={SSC} alt="def" className="max-sm:w-20 w-20" />
             </div>
             <div className="col-span-3">
-              <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <h1 className="bangfont text-2xl font-bold max-sm:text-xl">
+                ক্লাস ৫ -১২
+              </h1>
               <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>
@@ -36,16 +36,16 @@ export default function coursedetails() {
 
             <Image src={Arrow} alt="def" width={30} className="block m-auto" />
           </div>
-
-
 
           {/* second section */}
           <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
             <div>
-              <Image src={University} alt="def"  className="max-sm:w-20 w-20"/>
+              <Image src={University} alt="def" className="max-sm:w-20 w-20" />
             </div>
             <div className="col-span-3">
-            <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <h1 className="bangfont text-2xl font-bold max-sm:text-xl">
+                ক্লাস ৫ -১২
+              </h1>
               <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>
@@ -53,16 +53,16 @@ export default function coursedetails() {
 
             <Image src={Arrow} alt="def" width={30} className="block m-auto" />
           </div>
-
-
 
           {/* third section */}
           <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4 ">
             <div>
-              <Image src={Doctor} alt="def"  className="max-sm:w-20 w-20"/>
+              <Image src={Doctor} alt="def" className="max-sm:w-20 w-20" />
             </div>
             <div className="col-span-3">
-            <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <h1 className="bangfont text-2xl font-bold max-sm:text-xl">
+                ক্লাস ৫ -১২
+              </h1>
               <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>
@@ -71,15 +71,15 @@ export default function coursedetails() {
             <Image src={Arrow} alt="def" width={30} className="block m-auto" />
           </div>
 
-
-
           {/* fourth section */}
           <div className="grid grid-cols-5 bg-gray-50 py-10 pl-10 rounded-sm w-full hover:outline outline-offset-1 outline-green-500  duration-100 max-sm:mx-10 max-sm:py-5 max-sm:p-4">
             <div>
-              <Image src={Engineer} alt="def"  className="max-sm:w-20 w-20"/>
+              <Image src={Engineer} alt="def" className="max-sm:w-20 w-20" />
             </div>
             <div className="col-span-3">
-            <h1 className="bangfont text-2xl font-bold max-sm:text-xl">ক্লাস ৫ -১২</h1>
+              <h1 className="bangfont text-2xl font-bold max-sm:text-xl">
+                ক্লাস ৫ -১২
+              </h1>
               <p className="text-xl mt-2 text-gray-600 max-sm:text-md">
                 ফ্রি ভিডিও,লাইভে ক্লাস{" "}
               </p>

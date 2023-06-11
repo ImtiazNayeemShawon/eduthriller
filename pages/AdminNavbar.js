@@ -1,27 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import { useEffect, useState } from "react";
-import Api from "./api/apiCaller";
 
 export default function AdminNavbar() {
-  const [IsloggedIn, setIsLoggedin] = useState(false);
-  const [username, setUserName] = useState("");
-
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
-  const checkLoggedIn = async () => {
-    try {
-      const response = await Api.get("/user/checkLoggedIn");
-      const { loggedIn } = response.data;
-      const name = response.data.user;
-      setIsLoggedin(loggedIn);
-      setUserName(name);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
   return (
     <React.Fragment>
       <div className="fixed">

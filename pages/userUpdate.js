@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Api from "./api/apiCaller";
 import { useRouter } from "next/router";
-import { toast,Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function userUpdate() {
   const [name, setName] = useState("");
@@ -28,7 +28,7 @@ export default function userUpdate() {
       setLevel(userData.level);
       setSchool(userData.school);
     } catch (error) {
-     toast.error(error.message)
+      toast.error(error.message);
     }
   };
   const updateUser = async () => {
@@ -42,18 +42,16 @@ export default function userUpdate() {
       });
       setTimeout(() => {
         router.push("/profile");
-      }, 2000);
-
-
-     toast.success(response.data.message)
+      }, 1000);
+      toast.success(response.data.message);
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 
   return (
-    <React.Fragment >
-      <Toaster/>
+    <React.Fragment>
+      <Toaster />
       <h1 className="text-xl bangfont font-semibold text-green-500 ">
         ব্যক্তিগত তথ্য
       </h1>{" "}
