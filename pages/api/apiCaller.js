@@ -1,13 +1,12 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const apiCaller = axios.create({
-    baseURL: 'https://myapp-4vz5.onrender.com'
-  //  baseURL: 'http://localhost:7000'
-
+  baseURL: "https://myapp-4vz5.onrender.com",
+  // baseURL: 'http://localhost:7000'
 });
 
-const token = Cookies.get("token"); 
+const token = Cookies.get("token");
 const headers = {
   Authorization: `Bearer ${token}`,
 };

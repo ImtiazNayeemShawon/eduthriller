@@ -25,13 +25,11 @@ export default function Login() {
         password,
       });
       toast.success(response.data.message);
-      setTimeout(() => {
-        router.push("./AdminPage");
-      }, 2000);
       const token = response.data.accessToken;
       Cookies.set("token", token);
+      router.push("/");
     } catch (error) {
-      toast.error("Try again");
+      toast.error("Please Try again");
     }
   }
 

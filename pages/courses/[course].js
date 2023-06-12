@@ -139,7 +139,7 @@ export default function Course() {
 
     const timeoutId = setTimeout(() => {
       fetchDataById();
-    }, 2000);
+    }, 500);
 
     return () => {
       clearTimeout(timeoutId);

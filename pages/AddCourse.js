@@ -4,31 +4,16 @@ import { useState, useEffect } from "react";
 import Api from "./api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import  { useContext } from "react";
+import { MyContext } from "./AuthContext";
 
 export default function AddCourse() {
+  const { loggedIn } = useContext(MyContext);
   const router = useRouter();
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
-  const checkLoggedIn = async () => {
-    try {
-      const response = await Api.get("admin/checkAdmin");
-      const { loggedIn } = response.data;
-      if (!loggedIn) {
-        setTimeout(() => {
-          router.push("/AdminLogin");
-        }, 2000);
-      }
-    } catch (error) {
-      toast.error("Failed to check logged-in status. Please try again.");
-      console.log(error);
-      setTimeout(() => {
-        router.push("/AdminLogin");
-      }, 1000);
-    }
-  };
-
+  if (!loggedIn) {
+    router.push("/AdminLogin");
+  }
+console.log(loggedIn)
   // ..............................................................................................
   // Course title handling function
   const [title, setTitle] = useState("");
@@ -140,7 +125,6 @@ export default function AddCourse() {
         questions,
         micros,
         price,
-        thumbnail,
       });
       toast.success(response.data.message);
       router.push("/AllCourse");

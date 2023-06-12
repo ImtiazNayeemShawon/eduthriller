@@ -21,7 +21,6 @@ export default function userUpdate() {
     try {
       const response = await Api.get("/user/userData");
       const userData = response.data.user;
-      // Set the state with the fetched user data
       setName(userData.name);
       setAddress(userData.adress);
       setBirth(userData.birth);
@@ -42,7 +41,7 @@ export default function userUpdate() {
       });
       setTimeout(() => {
         router.push("/profile");
-      }, 1000);
+      }, 500);
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.message);
@@ -55,7 +54,6 @@ export default function userUpdate() {
       <h1 className="text-xl bangfont font-semibold text-green-500 ">
         ব্যক্তিগত তথ্য
       </h1>{" "}
-      <div className="bg-gray-400 w-40  h-40 profile mt-10"></div>
       <div className="grid grid-cols-2 mt-20 max-sm:grid-cols-1">
         <div>
           <p className="bangfont text-md font-semibold text-gray-700 mt-4">

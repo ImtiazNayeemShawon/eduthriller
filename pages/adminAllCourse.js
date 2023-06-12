@@ -1,36 +1,20 @@
-import React from "react";
 import AdminNavbar from "./AdminNavbar";
 import Image from "next/image";
 import Smp from "../public/smp.webp";
 import Api from "./api/apiCaller";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { MyContext } from "./AuthContext";
 
 export default function AllCourse() {
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
-  const checkLoggedIn = async () => {
-    try {
-      const response = await Api.get("admin/checkAdmin");
-      const { loggedIn } = response.data;
-      if (!loggedIn) {
-        setTimeout(() => {
-          router.push("/AdminLogin");
-        }, 2000);
-      }
-    } catch (error) {
-      toast.error("Failed to check logged-in status. Please try again.");
-      console.log(error);
-      setTimeout(() => {
-        router.push("/AdminLogin");
-      }, 1000);
-    }
-  };
+  const { loggedIn } = useContext(MyContext);
+  const router = useRouter();
+  if (!loggedIn) {
+    router.push("/AdminLogin");
+  }
 
   const [courses, setCourses] = useState([]);
-  const router = useRouter();
   const edit = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
