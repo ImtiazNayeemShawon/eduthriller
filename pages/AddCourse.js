@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Api from "./api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-import  { useContext } from "react";
+import { useContext } from "react";
 import { MyContext } from "./AuthContext";
 
 export default function AddCourse() {
@@ -13,7 +13,7 @@ export default function AddCourse() {
   if (!loggedIn) {
     router.push("/AdminLogin");
   }
-console.log(loggedIn)
+
   // ..............................................................................................
   // Course title handling function
   const [title, setTitle] = useState("");
@@ -113,6 +113,12 @@ console.log(loggedIn)
     setQuestions(updatedQue);
   };
 
+  //Handling course catagory
+  const [catagory, setCatagory] = useState("");
+  const handleCatagory = (e) => {
+    setCatagory(e.target.value);
+  };
+
   // ..............................................................................................
   // POST data in backend server
   async function handleUploadCourse(ev) {
@@ -125,6 +131,8 @@ console.log(loggedIn)
         questions,
         micros,
         price,
+        catagory,
+        thumbnail,
       });
       toast.success(response.data.message);
       router.push("/AllCourse");
@@ -143,8 +151,21 @@ console.log(loggedIn)
       <form onSubmit={handleUploadCourse} encType="multipart/form-data">
         <div className="grid grid-cols-3 gap-8">
           <div className="col-span-2 mt-12">
+            <div className="flex">
+              <select
+                className="text-xl  bangfont w-fit bg-gray-100 outline-dashed outline-1 "
+                value={catagory}
+                onChange={handleCatagory}
+              >
+                <option selected="">Choose a catagory</option>
+                <option value="medical">Medical</option>
+                <option value="engineering">Engineering</option>
+                <option value="university">university</option>
+              </select>
+            </div>
+
             {/* course title  */}
-            <div>
+            <div className="mt-10">
               <input
                 value={title}
                 onChange={handleTitle}
@@ -169,7 +190,9 @@ console.log(loggedIn)
 
             {/* teachers section */}
             <div className="">
-              <h2 className="text-left text-xl mainfont mt-3 ">Add Teachers</h2>
+              <h2 className="text-left text-xl mainfont mt-10 ">
+                Add Teachers
+              </h2>
               <div className="grid grid-cols-2 gap-5">
                 {teachers.map((teacher, index) => (
                   <div
@@ -285,10 +308,10 @@ console.log(loggedIn)
             {/* thumbnail uploader */}
             <div className="flex items-center justify-center w-full">
               <input
-                type="file"
+                type="text"
                 name="thumbnail"
                 value={thumbnail}
-                placeholder="past your thumbnail link"
+                placeholder="past your thumbnail link here"
                 className="w-full  text-whitebg-gray-200 p-2 rounded-md outline-dashed outline-1"
                 onChange={handleFileUpload}
               />

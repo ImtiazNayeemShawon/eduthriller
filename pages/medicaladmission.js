@@ -3,11 +3,10 @@ import Navbar from "./Navbar";
 import Image from "next/image";
 import Smp from "../public/smp.webp";
 import Api from "./api/apiCaller";
-import { Toaster, toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-export default function AllCourse() {
+export default function medicaladmission() {
   const [courses, setCourses] = useState([]);
   const router = useRouter();
 
@@ -21,19 +20,29 @@ export default function AllCourse() {
       const coursesData = response.data.result;
       setCourses(coursesData);
     } catch (error) {
-      toast.error(error.message);
+      console.log(error);
     }
   }
+  const filteredData = courses.filter((item) => item.catagory === "medical");
+
   return (
     <React.Fragment>
-      <Toaster />
       <Navbar />
+      <div className="mt-20 w-full h-fit bg-course px-10 rounded-md shadow-md py-10  max-sm:p-4">
+        <h1 className="text-3xl bangfont font-semibold max-sm:text-md max-sm:font-semibold">
+          মেডিকেল এঁর সকল সমাধান এখন{" "}
+          <span className="text-red-500 capitalize">eduthriller</span> এর সাথে{" "}
+        </h1>
+        <p className="mt-2 text-xl bangfont text-gray-600 font-semibold max-sm:text-sm">
+          সম্পূর্ণ সিলেবাসের 💯 তে 💯 প্রস্তুতি
+        </p>
+      </div>
       <div className="mt-40 h-screen">
         <h1 className="text-xl bangfont  capitalize font-semibold ">
           আমাদের সকল কোর্স{" "}
         </h1>
         <div className="grid grid-cols-4 gap-3 mt-10 place-items-center max-sm:grid-cols-1">
-          {courses.map((course, index) => (
+          {filteredData.map((course, index) => (
             <div key={index}>
               {/* course div  */}
               <div

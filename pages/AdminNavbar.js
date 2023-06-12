@@ -5,7 +5,7 @@ export default function AdminNavbar() {
   return (
     <React.Fragment>
       <div className="fixed">
-        <nav className="bg-white px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0">
+        <nav className="bg-white px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0 mainfont">
           <div className="container flex  items-right justify-between mx-auto ">
             <div
               className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
@@ -17,6 +17,12 @@ export default function AdminNavbar() {
                   className=" text-gray hover:text-white hover:bg-green-500 font-bold rounded-lg text-sm px-5 py-3 text-center duration-300"
                 >
                   Home
+                </Link>
+                <Link
+                  href="/AdminPage"
+                  className=" text-gray hover:text-white hover:bg-green-500 font-bold rounded-lg text-sm px-5 py-3 text-center duration-300"
+                >
+                  Control pannel
                 </Link>
                 <Link
                   href="/AddCourse"

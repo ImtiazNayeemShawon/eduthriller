@@ -276,7 +276,7 @@ export default function Course() {
                 </button>
                 <div>
                   {Data.micros.map((micro, index) => (
-                    <ul className="mt-4">
+                    <ul key={index} className="mt-4">
                       <li className="mt-0  text-md flex gap-4">
                         {book}
                         {micro.number}

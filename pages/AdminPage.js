@@ -1,9 +1,7 @@
-// import { useRouter } from "next/router";
 import AdminNavbar from "./AdminNavbar";
 import React from "react";
 
 const AdminPage = () => {
-  // const router = useRouter();
 
   return (
     <React.Fragment>
