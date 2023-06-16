@@ -23,7 +23,7 @@ export default function Intro() {
               href="/signup"
               className="text-center rounded-lg uppercase font-bold text-gray-200 bg-green-500 w-60 max-sm:text-sm py-3 max-sm:w-40"
             >
-              Singup
+              Get started
             </Link>
 
             <button className="  rounded-lg uppercase font-bold text-gray-200 bg-green-500  w-60 max-sm:text-sm max-sm:w-40">

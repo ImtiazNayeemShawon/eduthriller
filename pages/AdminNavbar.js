@@ -36,6 +36,7 @@ export default function AdminNavbar() {
                 >
                   All course
                 </Link>
+                
               </ul>
             </div>
           </div>

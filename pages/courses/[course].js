@@ -11,6 +11,7 @@ import Smp from "./img/smp.webp";
 import Api from "../api/apiCaller";
 
 export default function Course() {
+  const router = useRouter();
   const book = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +121,6 @@ export default function Course() {
       </div>
     </div>
   );
-  const router = useRouter();
 
   const { course } = router.query;
   const [Data, setData] = useState("");
@@ -145,6 +145,10 @@ export default function Course() {
       clearTimeout(timeoutId);
     };
   }, [course]);
+
+  const Coursedashboard = () => {
+    router.push(`/coursedashboard/${Data._id}`);
+  };
 
   return (
     <React.Fragment>
@@ -271,7 +275,10 @@ export default function Course() {
                 <p className="text-gray-900 text-3xl font-bold">
                   ৳ {Data.price} BDT
                 </p>
-                <button className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3">
+                <button
+                  onClick={Coursedashboard}
+                  className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
+                >
                   কোর্সটি কিনুন{" "}
                 </button>
                 <div>

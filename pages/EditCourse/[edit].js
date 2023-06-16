@@ -12,10 +12,9 @@ export default function EditCourse() {
 
   const { loggedIn } = useContext(MyContext);
   if (!loggedIn) {
-    router.push("/AdminLogin");
+    // useRouter().push("/AdminLogin");
   }
 
-console.log(loggedIn)
   // ..............................................................................................
   // Course title handling function
   const [title, setTitle] = useState("");
@@ -52,7 +51,7 @@ console.log(loggedIn)
     const updatedTeachers = [...teachers];
     updatedTeachers.pop(index, 1);
     setTeachers(updatedTeachers);
-  }; 
+  };
 
   // ..............................................................................................
 
@@ -202,6 +201,7 @@ console.log(loggedIn)
       </div>
     </div>
   );
+
   // ..............................................................................................
   // GET data from backend server
   const { edit } = router.query;
@@ -218,6 +218,7 @@ console.log(loggedIn)
         setTeachers(Data.teachers);
         setQuestions(Data.about);
         setMicro(Data.micros);
+        setPrivateGroup(Data.groupLink)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -231,6 +232,10 @@ console.log(loggedIn)
       clearTimeout(timeoutId);
     };
   }, [edit]);
+  const [privateGroup, setPrivateGroup] = useState("");
+  const handlePrivateGroup = (e) => {
+    setPrivateGroup(e.target.value);
+  };
 
   const updateCourse = async () => {
     try {
@@ -241,14 +246,19 @@ console.log(loggedIn)
         teachers,
         micros,
         questions,
+        privateGroup,
       });
       setTimeout(() => {
-        router.push("/");
+        router.push("/adminAllCourse");
       }, 2000);
       toast.success(" Updated succesful ");
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+  const quizHandler = () => {
+    router.push(`/addquiz/${edit}`);
   };
 
   return (
@@ -266,7 +276,21 @@ console.log(loggedIn)
           <div className="grid grid-cols-3 gap-8">
             <div className="col-span-2 mt-12">
               {/* course title  */}
+              <button
+                onClick={quizHandler}
+                className="text-xl bg-green-500 py-3 px-5 rounded-md text-white font-semibold "
+              >
+                Add new quiz
+              </button>
               <div>
+                <input
+                onChange={handlePrivateGroup}
+                value={privateGroup}
+                  className="text-xl mt-5 bangfont w-fit bg-gray-100 outline-dashed outline-1 py-3 px-2 rounded-md"
+                  placeholder="edit private group link here "
+                />
+              </div>
+              <div className="mt-10">
                 <input
                   value={title}
                   onChange={handleTitle}
@@ -476,7 +500,49 @@ console.log(loggedIn)
               </div>
             </div>
           </div>
+          <div className="mt-10">
+            <h1 className="text-sl bangfont font-bold">
+              কোর্স সম্পর্কে বিস্তারিত
+            </h1>
+            {questions.map((que, index) => (
+              <div key={index}>
+                <input
+                  className="p-2 w-full  bg-gray-100 outline-dashed outline-1 mt-4"
+                  placeholder=" exp: কোর্সটিতে শিক্ষার্থীরা পাবে:"
+                  type="text"
+                  name="title"
+                  value={que.title}
+                  onChange={(e) => handleque(e, index)}
+                />
+                <textarea
+                  value={que.description}
+                  onChange={(e) => handleque(e, index)}
+                  id="message"
+                  name="description"
+                  rows={4}
+                  className="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-dashed outline-1 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-2"
+                  placeholder="কোর্সটি হবে আমাদের Specially designed Priority Based Learning এর মাধ্যম। অর্থ্যাৎ যে অধ্যায় গুলো শর্ট সিলেবাসে ছিল এবং জরুরি বেশি, সেগুলো আগে পড়ানো হবে এবং বেশি সময় নিয়ে পড়ানো হবে। যা তোমাদের সর্বোচ্চ প্রস্তুতি নিশ্চিত করবে। etc etc........."
+                />
+              </div>
+            ))}
 
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={handleAddque}
+                className="text-md capitalize text-gray-50 bg-green-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Add more question
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteque}
+                className="text-md capitalize text-gray-50 bg-red-800 px-3 py-2 rounded-sm mainfont mt-4 font-semibold"
+              >
+                Delete question
+              </button>
+            </div>
+          </div>
           {/* course upload on server  */}
           <button
             onClick={updateCourse}

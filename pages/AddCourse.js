@@ -6,13 +6,16 @@ import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { MyContext } from "./AuthContext";
+import Router from 'next/router'
+
 
 export default function AddCourse() {
   const { loggedIn } = useContext(MyContext);
   const router = useRouter();
-  if (!loggedIn) {
-    router.push("/AdminLogin");
-  }
+
+  // if (!loggedIn) {
+  //   Router.push("/AdminLogin");
+  // }
 
   // ..............................................................................................
   // Course title handling function
@@ -118,6 +121,10 @@ export default function AddCourse() {
   const handleCatagory = (e) => {
     setCatagory(e.target.value);
   };
+  const [privateGroup, setPrivateGroup] = useState("");
+  const handlePrivateGroup = (e) => {
+    setPrivateGroup(e.target.value);
+  };
 
   // ..............................................................................................
   // POST data in backend server
@@ -133,9 +140,10 @@ export default function AddCourse() {
         price,
         catagory,
         thumbnail,
+        privateGroup,
       });
       toast.success(response.data.message);
-      router.push("/AllCourse");
+      router.push("/adminAllCourse");
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +159,7 @@ export default function AddCourse() {
       <form onSubmit={handleUploadCourse} encType="multipart/form-data">
         <div className="grid grid-cols-3 gap-8">
           <div className="col-span-2 mt-12">
-            <div className="flex">
+            <div className="flex justify-between">
               <select
                 className="text-xl  bangfont w-fit bg-gray-100 outline-dashed outline-1 "
                 value={catagory}
@@ -162,6 +170,14 @@ export default function AddCourse() {
                 <option value="engineering">Engineering</option>
                 <option value="university">university</option>
               </select>
+              <div>
+                <input
+                onChange={handlePrivateGroup}
+                value={privateGroup}
+                  className="text-xl  bangfont w-fit bg-gray-100 outline-dashed outline-1 py-3 px-2 rounded-md"
+                  placeholder="past private group link here "
+                />
+              </div>
             </div>
 
             {/* course title  */}
@@ -382,6 +398,7 @@ export default function AddCourse() {
             </div>
           </div>
         </div>
+
         <button
           type="submit"
           className="text-lg text-gray-200 mainbg p-3 rounded-lg  m-auto block capitalize mt-10"
