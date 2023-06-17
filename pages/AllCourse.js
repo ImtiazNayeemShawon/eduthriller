@@ -28,7 +28,7 @@ export default function AllCourse() {
     <React.Fragment>
       <Toaster />
       <Navbar />
-      <div className="mt-40 h-screen">
+      <div className="mt-20 ">
         <h1 className="text-xl bangfont  capitalize font-semibold ">
           আমাদের সকল কোর্স{" "}
         </h1>

@@ -5,61 +5,60 @@ import AdminNavbar from "../AdminNavbar";
 import Api from "../api/apiCaller";
 import { toast, Toaster } from "react-hot-toast";
 
-
 export default function quiz() {
   const router = useRouter();
   const { addquiz } = router.query;
   const [courseID, setCourseId] = useState("");
+  const [quiz, setQuiz] = useState([
+    {
+      question: "",
+      options: ["", "", "", "", ""],
+      answer: "",
+      explain: "",
+    },
+  ]);
+  const [time, setTime] = useState("");
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     setCourseId(addquiz);
   }, [addquiz]);
 
-  // quiz item handling function
-  const [quiz, setQuiz] = useState([
-    {
-      question: "",
-      option1: "",
-      option2: "",
-      option3: "",
-      option4: "",
-      option5: "",
-      explain: "",
-      rightOption: "",
-    },
-  ]);
   const handlequiz = (e, index) => {
     const { name, value } = e.target;
     const updatedQuiz = [...quiz];
-    updatedQuiz[index] = { ...updatedQuiz[index], [name]: value };
+    if (name === "options") {
+      const optionIndex = parseInt(e.target.dataset.optionindex);
+      updatedQuiz[index].options[optionIndex] = value;
+    } else {
+      updatedQuiz[index][name] = value;
+    }
     setQuiz(updatedQuiz);
   };
-  
+
   const handleAddquiz = () => {
     setQuiz([
       ...quiz,
       {
         question: "",
-        option1: "",
-        option2: "",
-        option3: "",
-        option4: "",
-        option5: "",
+        options: ["", "", "", "", ""],
+        answer: "",
         explain: "",
-        rightOption: "",
       },
     ]);
   };
 
   const handleDeletequiz = (index) => {
     const updatedQuiz = [...quiz];
-    updatedQuiz.pop(index, 1);
+    updatedQuiz.splice(index, 1);
     setQuiz(updatedQuiz);
   };
 
-  const [time, setTime] = useState();
   const timeHandler = (e) => {
     setTime(e.target.value);
+  };
+  const titleHandler = (e) => {
+    setTitle(e.target.value);
   };
 
   async function handleUploadCourse(ev) {
@@ -69,23 +68,31 @@ export default function quiz() {
         time,
         quiz,
         courseID,
+        title,
       });
       toast.success(response.data.message);
       router.push("/adminAllCourse");
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
   }
 
   return (
     <React.Fragment>
-        <Toaster/>
+      <Toaster />
       <AdminNavbar />
       <div className="pb-20">
         <div className="mt-20">
           <h1 className="text-4xl mainfont capitalize font-semibold text-center">
             Add quiz
           </h1>
+          <p>Add exam title </p>
+          <input
+            type="text"
+            className="bg-gray-200 p-2 rounded-md outline-dotted outline-1 w-full"
+            value={title}
+            onChange={titleHandler}
+          />
         </div>
         <p>Add time as minute </p>
         <input
@@ -96,78 +103,47 @@ export default function quiz() {
         />
 
         <div className="mt-5 grid grid-cols-2 gap-5">
-          {quiz.map((quiz, index) => (
+          {quiz.map((quizItem, index) => (
             <div key={index} className="mt-10">
-              <h1 className="text-xl">Quiz number : {index + 1}</h1>
+              <h1 className="text-xl">Quiz number: {index + 1}</h1>
               <input
-                className="p-2 w-full  bg-gray-300 outline-dotted outline-1 mt-4 rounded-xl"
-                placeholder="Enter the question "
+                className="p-2 w-full bg-gray-300 outline-dotted outline-1 mt-4 rounded-xl"
+                placeholder="Enter the question"
                 type="text"
                 name="question"
-                value={quiz.question}
+                value={quizItem.question}
                 onChange={(e) => handlequiz(e, index)}
               />
-              <p className="mt-2">Option number 1:</p>
+              <p className="mt-2">Options:</p>
+              {quizItem.options.map((option, optionIndex) => (
+                <input
+                  key={optionIndex}
+                  className="p-2 w-full bg-gray-100 outline-dashed outline-1 mt-2"
+                  placeholder={`Option number ${optionIndex + 1}`}
+                  type="text"
+                  name="options"
+                  data-optionindex={optionIndex}
+                  value={option}
+                  onChange={(e) => handlequiz(e, index)}
+                />
+              ))}
+              <p className="mt-2">Add Right option</p>
               <input
-                className="p-2 w-full  bg-gray-100 outline-dashed outline-1 mt-2"
-                placeholder=" exp: what is the defi..........."
+                className="p-2 w-full bg-gray-300 outline-dashed outline-1 mt-2"
+                placeholder="Add the Right option"
                 type="text"
-                name="option1"
-                value={quiz.option1}
+                name="answer"
+                value={quizItem.answer}
                 onChange={(e) => handlequiz(e, index)}
               />
-              <p className="mt-2">Option number 2:</p>
-              <input
-                className="p-2 w-full  bg-gray-100 outline-dashed outline-1 mt-2"
-                placeholder=" exp: what is the defi..........."
-                type="text"
-                name="option2"
-                value={quiz.option2}
-                onChange={(e) => handlequiz(e, index)}
-              />
-              <p className="mt-2">Option number 3:</p>
-              <input
-                className="p-2 w-full  bg-gray-100 outline-dashed outline-1 mt-2"
-                placeholder=" exp: what is the defi..........."
-                type="text"
-                name="option3"
-                value={quiz.option3}
-                onChange={(e) => handlequiz(e, index)}
-              />
-              <p className="mt-2">Option number 4:</p>
-              <input
-                className="p-2 w-full  bg-gray-100 outline-dashed outline-1 mt-2"
-                placeholder=" exp: what is the defi..........."
-                type="text"
-                name="option4"
-                value={quiz.option4}
-                onChange={(e) => handlequiz(e, index)}
-              />
-              <p className="mt-2">Option number 5:</p>
-              <input
-                className="p-2 w-full  bg-gray-100 outline-dashed outline-1 mt-2"
-                placeholder=" exp: what is the defi..........."
-                type="text"
-                name="option5"
-                value={quiz.option5}
-                onChange={(e) => handlequiz(e, index)}
-              />
-              <p className="mt-2">Add Right option </p>
-              <input
-                className="p-2 w-full  bg-gray-400 outline-dashed outline-1 mt-2"
-                placeholder="add the Right option"
-                type="text"
-                name="rightOption"
-                value={quiz.rightOption}
-                onChange={(e) => handlequiz(e, index)}
-              />
-              <p className="mt-2">Add explaination </p>
+
+              <p className="mt-2">explaination</p>
               <textarea
-                className="p-2 w-full  bg-gray-400 outline-dashed outline-1 mt-2"
-                placeholder="add the Right option"
+                className="p-2 w-full bg-gray-300 outline-dashed outline-1 mt-2"
+                placeholder="Add the Right option"
                 type="text"
                 name="explain"
-                value={quiz.explain}
+                value={quizItem.explain}
                 onChange={(e) => handlequiz(e, index)}
               />
             </div>
@@ -190,7 +166,10 @@ export default function quiz() {
           Delete question
         </button>
       </div>
-      <button className="m-auto block py-3 px-4 bg-blue-700 text-white font-semibold rounded-lg" onClick={handleUploadCourse}>
+      <button
+        className="m-auto block py-3 px-4 bg-blue-700 text-white font-semibold rounded-lg"
+        onClick={handleUploadCourse}
+      >
         Upload quiz
       </button>
     </React.Fragment>

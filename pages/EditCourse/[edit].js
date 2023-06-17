@@ -218,7 +218,8 @@ export default function EditCourse() {
         setTeachers(Data.teachers);
         setQuestions(Data.about);
         setMicro(Data.micros);
-        setPrivateGroup(Data.groupLink)
+        setPrivateGroup(Data.groupLink);
+        setRoutine(Data.routine);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -236,7 +237,10 @@ export default function EditCourse() {
   const handlePrivateGroup = (e) => {
     setPrivateGroup(e.target.value);
   };
-
+  const [routine, setRoutine] = useState("");
+  const handleRoutine = (e) => {
+    setRoutine(e.target.value);
+  };
   const updateCourse = async () => {
     try {
       await Api.put(`/crud/course/${edit}`, {
@@ -247,6 +251,7 @@ export default function EditCourse() {
         micros,
         questions,
         privateGroup,
+        routine,
       });
       setTimeout(() => {
         router.push("/adminAllCourse");
@@ -284,8 +289,8 @@ export default function EditCourse() {
               </button>
               <div>
                 <input
-                onChange={handlePrivateGroup}
-                value={privateGroup}
+                  onChange={handlePrivateGroup}
+                  value={privateGroup}
                   className="text-xl mt-5 bangfont w-fit bg-gray-100 outline-dashed outline-1 py-3 px-2 rounded-md"
                   placeholder="edit private group link here "
                 />
@@ -431,7 +436,13 @@ export default function EditCourse() {
             {/* image and price side */}
             <div className="">
               {/* thumbnail uploader */}
-              <div className="flex items-center justify-center w-full"></div>
+             <p> Class routine </p>
+                <input 
+                type="text"
+                value={routine}
+                onChange={handleRoutine}
+                className="bg-gray-200 p-2 rounded-md outline-dashed outline-1"
+                />
               {/* price input  */}
               <p className="text-left mt-2 mainfont font-semibold ">
                 Course price

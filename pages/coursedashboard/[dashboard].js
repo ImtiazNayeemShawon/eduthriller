@@ -139,10 +139,10 @@ export default function dashboard() {
             <div></div>
             <div className="col-span-6 bg-gray-100 rounded-md min-h-60 mt-2 shadow-lg ">
               <div className="flex justify-between mt-5">
-                <button
-                  type="button"
+                <a
+                  href={Data.routine}
                   className="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2"
-                >
+                  download>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -156,7 +156,8 @@ export default function dashboard() {
                     />
                   </svg>
                   Download Routine
-                </button>
+                  
+                </a>
                 <a href={Data?.groupLink} target="blank">
                   <button
                     type="button"
@@ -184,12 +185,13 @@ export default function dashboard() {
               </div>
               {/* quiz data  */}
               {Data.quizes.map((q, index) => (
-                <div className="mt-5 flex justify-between bg-gray-200 py-4 px-5 shadow-sm rounded-md">
+                <div key={index} className="mt-5 flex justify-between bg-gray-200 py-4 px-5 shadow-sm rounded-md">
                   <h1 className="text-xl font-semibold text-black">
-                    {q?.title} quiz
+                    {q.title} quiz
                   </h1>
                   <button
                     type="button"
+                    onClick={()=>router.push(`/quizes/${q?._id}`)}
                     className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 "
                   >
                     Start exam now

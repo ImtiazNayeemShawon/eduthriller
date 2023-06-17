@@ -148,6 +148,10 @@ export default function AddCourse() {
       console.log(error);
     }
   }
+  const [routine, setRoutine] = useState("");
+  const handleRoutine = (e) => {
+    setRoutine(e.target.value);
+  };
 
   return (
     <React.Fragment>
@@ -322,6 +326,14 @@ export default function AddCourse() {
           {/* image and price side */}
           <div className="">
             {/* thumbnail uploader */}
+            <p> Class routine </p>
+                <input 
+                type="text"
+                value={routine}
+                onChange={handleRoutine}
+                placeholder="past routine link here "
+                className="bg-gray-200 p-2 rounded-md outline-dashed outline-1 mb-4"
+                />
             <div className="flex items-center justify-center w-full">
               <input
                 type="text"

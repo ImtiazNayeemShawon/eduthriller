@@ -3,14 +3,17 @@ import Clock from "./clock.gif";
 import Image from "next/image";
 import Api from "../api/apiCaller";
 import { useRouter } from "next/router";
+import { toast, Toaster } from "react-hot-toast";
 
 const Quiz = () => {
   const [Data, setData] = useState("");
   const router = useRouter();
   const { quiz } = router.query;
 
-  const [minute, setMinute] = useState(0);
+  const [minute, setMinute] = useState(1);
   const [seconds, setSeconds] = useState(0);
+  const [title, setTitle] = useState("");
+
 
   useEffect(() => {
     const fetchDataById = async () => {
@@ -19,6 +22,7 @@ const Quiz = () => {
         setData(response.data.result);
         setMinute(response.data.result.time);
         setLoading(false);
+        setTitle(response.data.result.title)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -42,9 +46,12 @@ const Quiz = () => {
       setSeconds(59); // Reset seconds to 59 when it reaches 0
       setMinute((prevMinute) => prevMinute - 1); // Decrease the minute value by 1
     }
+    
   }, [seconds, minute]);
 
-  const width = minute * 25;
+ 
+
+  const width = minute * 100;
   const timeIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +86,7 @@ const Quiz = () => {
       </div>
 
       <button
+        onClick={handleUploadQuiz}
         type="button"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-xl px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
@@ -192,69 +200,94 @@ const Quiz = () => {
     </div>
   );
   const [Loading, setLoading] = useState(true);
-
-  const onSelect = () => {
-    console.log("radio button changed");
+  const [score, setScore] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState(
+    Array(Data.quiz?.length).fill("")
+  );
+  const handleAnswerClick = (questionIndex, selectedAnswer) => {
+    setSelectedAnswers((prevState) => {
+      const updatedAnswers = [...prevState];
+      updatedAnswers[questionIndex] = selectedAnswer;
+      return updatedAnswers;
+    });
   };
+
+  useEffect(() => {
+    calculateScore();
+  });
+
+  const calculateScore = () => {
+    let score = 0;
+    Data.quiz?.forEach((question, index) => {
+      if (selectedAnswers[index] === question.answer) {
+        score++;
+      }
+    });
+    return setScore(score);
+  };
+
+  async function handleUploadQuiz(ev) {
+    try {
+      const response = await Api.post("/crud/submitQuiz", {
+        score,
+      });
+      toast.success(response.data.message);
+       router.push("/done");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   return (
     <React.Fragment>
-      {Loading ? (
-        <div className="h-screen">{LazyLoading}</div>
-      ) : (
-        <div>
-          <h1 className="text-gray-800 text-center text-4xl mainfont font-bold capitalize">
-            Start the quiz now{" "}
-          </h1>
-          {/* <button onClick={fetchDataById}>start exam</button> */}
-          <div className="">{quizTimer}</div>
-          {/* quiz component */}
-          <div className="mt-20">
-            <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2">
-              {Data.quiz?.map((quiz, index) => (
-                <div className="outline p-4 outline-1 rounded-md  mt-5 w-full	h-full">
-                  <h1 className="text-xl mb-4 font-semibold bangfont text-red-900 max-sm:text-md">
-                    Q-<span> </span>
-                    {index + 1} <span>:</span> {quiz.question}
-                  </h1>
-                  <div className="grid grid-cols-2 text-left gap-y-6 text-md capitalize font-semibold">
-                    <p>a){quiz.option1}</p>
-                    <p>b){quiz.option2}</p>
-                    <p>c){quiz.option3}</p>
-                    <p>d){quiz.option4}</p>
-                    <p>e){quiz.option5}</p>
+      <div>
+        {Loading ? (
+          <div className="h-screen">{LazyLoading}</div>
+        ) : (
+          <div>
+            <h1 className="text-gray-800 text-center text-4xl mainfont font-bold capitalize">
+             {
+              title
+             } 
+            </h1>
+            {/* <button onClick={fetchDataById}>start exam</button> */}
+            <div className="">{quizTimer}</div>
+            <Toaster />
+            {/* quiz component */}
+            <div className="mt-20">
+              <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2">
+                {Data.quiz?.map((quiz, index) => (
+                  <div
+                    key={index}
+                    className="outline p-4 outline-1 rounded-md  mt-5 w-full	h-full outline-blue-300 shadow-gray-200 "
+                  >
+                    <h1 className="text-xl mb-4 font-semibold bangfont text-gray-700 max-sm:text-md ">
+                      Q-<span> </span>
+                      {index + 1} <span>:</span> {quiz.question}
+                    </h1>
+
+                    {quiz.options.map((option, optionindex) => (
+                      <div key={optionindex} className="flex gap-10">
+                        <label className="bg-gray-200 py-4 mt-2 w-full text-left px-2 rounded-md font-semibold text-gray-800 hover:outline-1 hover:outline outline-green-500 flex  gap-6">
+                          <input
+                            value={option}
+                            type="radio"
+                            className="ml-1"
+                            name={`option${index}`}
+                            checked={selectedAnswers[index] === option}
+                            onChange={() => handleAnswerClick(index, option)}
+                          />
+                          {option}
+                        </label>
+                      </div>
+                    ))}
                   </div>
-                  <p className="uppercase mt-5 font-semibold mainfont text-green-800">
-                    Select an option
-                  </p>
-                  <div className="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-                    <input
-                      type="radio"
-                      value={true}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-                      onChange={onSelect}
-                    />
-                    <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 ">
-                      {quiz.option1}
-                    </label>
-                  </div>
-                  <div className="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-                    <input
-                      type="radio"
-                      value={true}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-                      onChange={onSelect}
-                    />
-                    <label className="w-full py-4 ml-2 text-sm font-medium text-gray-900 ">
-                      {quiz.option2}
-                    </label>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </React.Fragment>
   );
 };
