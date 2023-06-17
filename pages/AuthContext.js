@@ -29,4 +29,4 @@ const MyContextProvider = ({ children }) => {
   );
 };
 
-export { MyContext, MyContextProvider };
+export default { MyContext, MyContextProvider };
