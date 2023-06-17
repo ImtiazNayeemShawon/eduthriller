@@ -28,14 +28,12 @@ export default function medicaladmission() {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="mt-20 w-full h-fit bg-course px-10 rounded-md shadow-md py-10  max-sm:p-4">
+      <div className="mt-20 w-full h-fit bg-green-100 px-10 rounded-md shadow-md py-10  max-sm:p-4">
         <h1 className="text-3xl bangfont font-semibold max-sm:text-md max-sm:font-semibold">
         ইঞ্জিনিয়ারিং এঁর সকল সমাধান এখন{" "}
           <span className="text-red-500 capitalize">eduthriller</span> এর সাথে{" "}
         </h1>
-        <p className="mt-2 text-xl bangfont text-gray-600 font-semibold max-sm:text-sm">
-          সম্পূর্ণ সিলেবাসের 💯 তে 💯 প্রস্তুতি
-        </p>
+       
       </div>
       <div className="mt-40 h-screen">
         <h1 className="text-xl bangfont  capitalize font-semibold ">

@@ -12,9 +12,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Intro />
-        <Counter />
+        {/* <Counter /> */}
         <Coursedetails />
-        <Emergency />
+        {/* <Emergency /> */}
         <Footer />
       </main>
     </React.Fragment>

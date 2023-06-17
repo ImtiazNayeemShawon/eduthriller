@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Counter() {
   return (
     <React.Fragment>
-      <div className="mt-40 bg-gray-950 py-5 rounded-sm">
+      <div className="mt-40  py-5 rounded-sm">
         <h1 className="text-3xl bangfont font-bold text-center text-white py-6">
           স্কিল ডেভেলপমেন্টের নির্দিষ্ট কোর্সে দারুণ ছাড়!
         </h1>
@@ -52,7 +52,6 @@ export default function Counter() {
               </p>
             </div>
           </div>
-          <Image src={Side} alt="def" />
         </div>
       </div>
     </React.Fragment>
