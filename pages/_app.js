@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import React from "react";
-import { MyContextProvider } from "../AuthContext";
+import { MyContextProvider } from "../auth/AuthContext";
 
 export default function App({ Component, pageProps }) {
   return (

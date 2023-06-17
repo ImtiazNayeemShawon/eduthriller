@@ -1,6 +1,6 @@
 // MyContext.js
 import React, { createContext, useEffect, useState } from "react";
-import Api from "./pages/api/apiCaller"; // Assuming you have an API module for making requests
+import Api from "../pages/api/apiCaller"; // Assuming you have an API module for making requests
 const MyContext = createContext();
 
 const MyContextProvider = ({ children }) => {
@@ -29,4 +29,4 @@ const MyContextProvider = ({ children }) => {
   );
 };
 
-export default { MyContext, MyContextProvider };
+export { MyContext, MyContextProvider };

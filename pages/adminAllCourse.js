@@ -4,15 +4,20 @@ import Smp from "../public/smp.webp";
 import Api from "./api/apiCaller";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import React, { useContext } from "react";
-import { MyContext } from "../AuthContext";
+import { MyContext } from "../auth/AuthContext";
 
 export default function AllCourse() {
   const { loggedIn } = useContext(MyContext);
   const router = useRouter();
-  if (!loggedIn) {
-    router.push("/AdminLogin");
+  
+  if (typeof window !== 'undefined') {
+    if (!loggedIn) {
+      Router.push("/AdminLogin");
+    }
   }
+
 
   const [courses, setCourses] = useState([]);
   const edit = (
