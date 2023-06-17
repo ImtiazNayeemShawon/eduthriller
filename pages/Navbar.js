@@ -107,7 +107,7 @@ export default function Navbar() {
             </div>
             <button
               onClick={handleSidenav}
-              className="bg-gray-800 text-white px-4 rounded-md"
+              className="bg-gray-800 text-white px-4 rounded-md hidden max-sm:block"
             >
               <svg
                 className="w-6 h-6"
