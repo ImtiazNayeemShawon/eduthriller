@@ -5,7 +5,7 @@ import Api from "./api/apiCaller";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
-import { MyContext } from "./AuthContext";
+import { MyContext } from "../AuthContext";
 
 export default function AllCourse() {
   const { loggedIn } = useContext(MyContext);

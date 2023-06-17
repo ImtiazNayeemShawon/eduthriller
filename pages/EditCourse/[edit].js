@@ -5,7 +5,7 @@ import Api from "../api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { MyContext } from "../AuthContext";
+import { MyContext } from "../../AuthContext";
 
 export default function EditCourse() {
   const router = useRouter();
