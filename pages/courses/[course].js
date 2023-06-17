@@ -170,7 +170,9 @@ export default function Course() {
               <p className="text-gray-900 text-3xl font-bold">
                 ৳ {Data.price} BDT
               </p>
-              <button className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3">
+              <button 
+               onClick={Coursedashboard}
+              className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3">
                 কোর্সটি কিনুন{" "}
               </button>
               <div>
