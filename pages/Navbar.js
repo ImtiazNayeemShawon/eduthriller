@@ -33,7 +33,7 @@ export default function Navbar() {
           <div className="container flex  items-right justify-between mx-auto ">
             <Link
               href="/"
-              className="uppercase font-bold text-lg py-3 bg-green-500 p-2 rounded-lg"
+              className="uppercase font-bold text-lg py-3  p-2 rounded-lg"
             >
               Logo{" "}
             </Link>

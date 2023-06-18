@@ -7,7 +7,7 @@ export default function Success() {
   const router = useRouter();
 
   const Next = () => {
-    router.push("/profile");
+    router.push("/");
   };
   return (
     <React.Fragment>

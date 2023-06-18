@@ -139,7 +139,7 @@ export default function Course() {
 
     const timeoutId = setTimeout(() => {
       fetchDataById();
-    }, 500);
+    }, 0);
 
     return () => {
       clearTimeout(timeoutId);
@@ -170,16 +170,16 @@ export default function Course() {
               <p className="text-gray-900 text-3xl font-bold">
                 ৳ {Data.price} BDT
               </p>
-              <button 
-               onClick={Coursedashboard}
-              className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3">
+              <button
+                onClick={Coursedashboard}
+                className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
+              >
                 কোর্সটি কিনুন{" "}
               </button>
               <div>
                 {Data.micros.map((micro, index) => (
                   <ul key={index} className="mt-2">
                     <li className="mt-1  text-md flex gap-4">
-                      {book}
                       {micro.number}
                       {micro.title}
                     </li>
@@ -198,7 +198,7 @@ export default function Course() {
               </p>
               {/* teachers  */}
               <h1 className="mt-20 text-2xl bangfont font-semibold max-sm:mt-10 max-sm:text-xl">
-                ক্লাস নেবেন যারা{" "}
+                কোর্স মেন্টরস{" "}
               </h1>
               <div className="grid grid-cols-2 bg-slate-10 outline outline-1 outline-gray-300 mt-5 rounded-md max-sm:grid-cols-1">
                 {Data.teachers.map((teacher) => (
@@ -254,7 +254,7 @@ export default function Course() {
               </div>
               <div>
                 <h1 className="mt-20 text-2xl bangfont font-semibold max-sm:text-xl max-sm:mt-10">
-                  ক্লাস করার জন্য প্রয়োজন হবে
+                কোর্সটি করতে যেগুলো প্রয়োজন
                 </h1>
                 <div className="mt-4 p-3 outline outline-1 outline-green-400 rounded-md max-sm:text-sm">
                   <li>ইন্টারনেট সংযোগ (ওয়াইফাই বা মোবাইল ইন্টারনেট)</li>
@@ -287,7 +287,6 @@ export default function Course() {
                   {Data.micros.map((micro, index) => (
                     <ul key={index} className="mt-4">
                       <li className="mt-0  text-md flex gap-4">
-                        {book}
                         {micro.number}
                         {micro.title}
                       </li>

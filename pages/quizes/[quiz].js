@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Clock from "./clock.gif";
-import Image from "next/image";
 import Api from "../api/apiCaller";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Quiz = () => {
   const [Data, setData] = useState("");
@@ -13,7 +16,7 @@ const Quiz = () => {
   const [minute, setMinute] = useState(1);
   const [seconds, setSeconds] = useState(0);
   const [title, setTitle] = useState("");
-
+  const [Done, setDone] = useState(false);
 
   useEffect(() => {
     const fetchDataById = async () => {
@@ -21,8 +24,7 @@ const Quiz = () => {
         const response = await Api.get(`/crud/quizes/${quiz}`);
         setData(response.data.result);
         setMinute(response.data.result.time);
-        setLoading(false);
-        setTitle(response.data.result.title)
+        setTitle(response.data.result.title);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -43,163 +45,32 @@ const Quiz = () => {
       }, 1000);
       return () => clearTimeout(timer);
     } else if (seconds === 0 && minute > 0) {
-      setSeconds(59); // Reset seconds to 59 when it reaches 0
-      setMinute((prevMinute) => prevMinute - 1); // Decrease the minute value by 1
+      setSeconds(59);
+      setMinute((prevMinute) => prevMinute - 1);
     }
-    
   }, [seconds, minute]);
 
- 
-
-  const width = minute * 100;
-  const timeIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-10 h-10 max-sm:w-5"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>
-  );
-
   const quizTimer = (
-    <div className="grid grid-cols-6 gap-4 max-sm:grid-cols-2 ">
-      <div className="max-sm:px-2 max-sm:py-2 max-sm:text-md  bg-yellow-400 w-fit px-5 py-5 rounded-2xl text-xl text-white font-bold tracking-widest flex justify-between gap-1 ">
-        {timeIcon}
-        <p className="text-center mt-1">
-          {minute}M:{seconds}S
-        </p>
-      </div>
-      <div className=" bg-gray-300 col-span-4 h-3 rounded-xl mt-7 max-sm:col-span-3 max-sm:hidden">
-        <div
-          className="bg-yellow-400  h-3 rounded-xl max-sm:hidden"
-          style={{ maxWidth: `${width}px` }}
-        ></div>
-        <Image src={Clock} width={100} height={100} className="m-auto mt-1" />
-      </div>
-
-      <button
-        onClick={handleUploadQuiz}
-        type="button"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-xl px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Submit answer
-        <svg
-          aria-hidden="true"
-          className="w-5 h-5 ml-2 -mr-1"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-      </button>
+    <div className="fixed">
+      <nav className="bg-white px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0">
+        <div className="container flex  items-center justify-between mx-auto ">
+          <div className="mt-5 ">
+            <button className="bg-green-400 text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6">
+              {minute}M: {seconds}S
+            </button>
+          </div>
+          <div className="mt-5">
+            <button
+              onClick={handleUploadQuiz}
+              className="bg-green-400 text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </nav>
     </div>
   );
-  const LazyLoading = (
-    <div>
-      <div
-        role="status"
-        className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 md:flex md:items-center mt-40"
-      >
-        <div className="w-full">
-          <div className="h-2.5 bg-gray-300 rounded-full  w-40 mb-4" />
-          <div className="h-2 bg-gray-300 rounded-full  max-w-[480px] mb-2.5" />
-          <div className="h-2 bg-gray-300 rounded-full  mb-2.5 max-w-[780px]" />
-          <div className="h-2 bg-gray-300 rounded-full  max-w-[440px] mb-2.5" />
-          <div className="h-2 bg-gray-300 rounded-full  max-w-[460px] mb-2.5" />
-          <div className="h-2 bg-gray-300 rounded-full  max-w-[360px]" />
-        </div>
-        <div
-          role="status"
-          className="max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
-        >
-          <div className="flex items-center justify-center h-48 mb-4 bg-gray-400 rounded ">
-            <svg
-              className="w-12 h-12 text-gray-200 dark:text-gray-300"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 640 512"
-            >
-              <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
-            </svg>
-          </div>
-          <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-300 w-48 mb-4" />
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-300 mb-2.5" />
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-300 mb-2.5" />
-          <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-300" />
-          <div className="flex items-center mt-4 space-x-3">
-            <svg
-              className="text-gray-200 w-14 h-14 dark:text-gray-400"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <div>
-              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-400 w-32 mb-2" />
-              <div className="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-400" />
-            </div>
-          </div>
-          <span className="sr-only">Loading...</span>
-        </div>
-
-        <span className="sr-only">Loading...</span>
-      </div>
-      <div role="status" className="space-y-2.5 animate-pulse max-w-lg">
-        <div className="flex items-center w-full space-x-2">
-          <div className="h-2.5 bg-gray-400 rounded-full  w-32" />
-          <div className="h-2.5 bg-gray-300 rounded-full  w-24" />
-          <div className="h-2.5 bg-gray-400 rounded-full  w-full" />
-        </div>
-        <div className="flex items-center w-full space-x-2 max-w-[480px]">
-          <div className="h-2.5 bg-gray-400 rounded-full  w-full" />
-          <div className="h-2.5 bg-gray-300 rounded-full  w-full" />
-          <div className="h-2.5 bg-gray-400 rounded-full  w-24" />
-        </div>
-        <div className="flex items-center w-full space-x-2 max-w-[400px]">
-          <div className="h-2.5 bg-gray-300 rounded-full  w-full" />
-          <div className="h-2.5 bg-gray-400 rounded-full  w-80" />
-          <div className="h-2.5 bg-gray-400 rounded-full  w-full" />
-        </div>
-        <div className="flex items-center w-full space-x-2 max-w-[480px]">
-          <div className="h-2.5 bg-gray-300 rounded-full  w-full" />
-          <div className="h-2.5 bg-gray-400 rounded-full  w-full" />
-          <div className="h-2.5 bg-gray-300 rounded-full  w-24" />
-        </div>
-        <div className="flex items-center w-full space-x-2 max-w-[440px]">
-          <div className="h-2.5 bg-gray-300 rounded-full  w-32" />
-          <div className="h-2.5 bg-gray-300 rounded-full  w-24" />
-          <div className="h-2.5 bg-gray-400 rounded-full  w-full" />
-        </div>
-        <div className="flex items-center w-full space-x-2 max-w-[360px]">
-          <div className="h-2.5 bg-gray-300 rounded-full  w-full" />
-          <div className="h-2.5 bg-gray-400 rounded-full  w-80" />
-          <div className="h-2.5 bg-gray-300 rounded-full  w-full" />
-        </div>
-        <span className="sr-only">Loading...</span>
-      </div>
-    </div>
-  );
-  const [Loading, setLoading] = useState(true);
   const [score, setScore] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState(
     Array(Data.quiz?.length).fill("")
@@ -232,26 +103,103 @@ const Quiz = () => {
         score,
       });
       toast.success(response.data.message);
-       router.push("/done");
+      setDone(true);
     } catch (error) {
       toast.error(error.message);
     }
   }
 
+  const ResultComponent = (
+    <div>
+      <div className="mt-20">
+        <h1 className="bg-green-700 text-xl py-3 px-5 text-white font-bold uppercase rounded-md w-fit">
+          Your total score : {score}
+        </h1>
+        <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2">
+          {Data.quiz?.map((quiz, index) => (
+            <div
+              key={index}
+              className="outline p-4 outline-1 rounded-md  mt-5 w-full	h-full outline-blue-300 shadow-gray-200 "
+            >
+              <h1 className="text-xl mb-4 font-semibold bangfont text-gray-700 max-sm:text-md ">
+                <span> </span>
+                {index + 1} <span>.</span> {quiz.question}
+              </h1>
+              <div className="grid grid-cols-2 gap-4 mb-2">
+                {quiz.options.map((option, optionindex) => (
+                  <div key={optionindex} className=" gap-10">
+                    <div className="flex">
+                      <span className="uppercase font-bold text-gray-700">
+                        {String.fromCharCode(97 + optionindex)}
+                      </span>
+                      ) <span className="bangfont ml-2">{option}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5">
+                <p className="font-bold mainfont text-xl  text-gray-900 ">
+                  Right answer:
+                </p>
+                <label className="bg-gray-200 py-4 mt-2 w-full text-left px-2 rounded-md font-semibold text-gray-800 outline-1 outline outline-green-500 flex  gap-6">
+                  {quiz.answer}
+                </label>
+              </div>
+              {quiz.options.map((option, optionindex) => (
+                <div key={optionindex} className="flex gap-10 mt-4">
+                  <label className="bg-gray-200 py-4 mt-2 w-full text-left px-2 rounded-md font-semibold text-gray-800 hover:outline-1 hover:outline outline-green-500 flex  gap-6">
+                    <input
+                      value={option}
+                      type="radio"
+                      className="ml-1"
+                      name={`option${index}`}
+                      checked={selectedAnswers[index] === option}
+                      onChange={() => handleAnswerClick(index, option)}
+                    />
+                    <span className="uppercase">
+                      {String.fromCharCode(97 + optionindex)}
+                    </span>
+                  </label>
+                </div>
+              ))}
+
+              <div className="mt-3">
+                <Accordion className="shadow-sm ">
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
+                      Explain:
+                    </Typography>
+                  </AccordionSummary>
+                    <AccordionDetails key={index}>
+                      <Typography className="max-sm:text-sm">
+                      {quiz.explain}
+                      </Typography>
+                    </AccordionDetails>
+                </Accordion>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <React.Fragment>
       <div>
-        {Loading ? (
-          <div className="h-screen">{LazyLoading}</div>
+        {Done ? (
+          <div>{ResultComponent}</div>
         ) : (
           <div>
-            <h1 className="text-gray-800 text-center text-4xl mainfont font-bold capitalize">
-             {
-              title
-             } 
+            <div className=" bg-gray-200">{quizTimer}</div>
+            <h1 className="text-gray-800 text-center text-4xl mainfont font-bold capitalize max-sm:text-2xl my-5">
+              {title}
             </h1>
-            {/* <button onClick={fetchDataById}>start exam</button> */}
-            <div className="">{quizTimer}</div>
             <Toaster />
             {/* quiz component */}
             <div className="mt-20">
@@ -261,14 +209,26 @@ const Quiz = () => {
                     key={index}
                     className="outline p-4 outline-1 rounded-md  mt-5 w-full	h-full outline-blue-300 shadow-gray-200 "
                   >
-                    <h1 className="text-xl mb-4 font-semibold bangfont text-gray-700 max-sm:text-md ">
-                      Q-<span> </span>
-                      {index + 1} <span>:</span> {quiz.question}
+                    <h1 className=" mb-4 font-semibold bangfont text-gray-700 max-sm:text-md ">
+                      <span> </span>
+                      {index + 1} <span>. </span> {quiz.question}
                     </h1>
+                    <div className="grid grid-cols-2 gap-4 mb-2">
+                      {quiz.options.map((option, optionindex) => (
+                        <div key={optionindex} className=" gap-10">
+                          <div className="flex">
+                            <span className="uppercase font-bold text-gray-700">
+                              {String.fromCharCode(97 + optionindex)}
+                            </span>
+                            ) <span className="bangfont ml-2">{option}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
 
                     {quiz.options.map((option, optionindex) => (
-                      <div key={optionindex} className="flex gap-10">
-                        <label className="bg-gray-200 py-4 mt-2 w-full text-left px-2 rounded-md font-semibold text-gray-800 hover:outline-1 hover:outline outline-green-500 flex  gap-6">
+                      <div key={optionindex} className="flex gap-10 mt-1">
+                        <label className="bg-gray-100 py-4 mt-2 w-full text-left px-2 rounded-md font-semibold text-gray-800 hover:outline-1 hover:outline outline-green-500 flex  gap-6">
                           <input
                             value={option}
                             type="radio"
@@ -277,7 +237,9 @@ const Quiz = () => {
                             checked={selectedAnswers[index] === option}
                             onChange={() => handleAnswerClick(index, option)}
                           />
-                          {option}
+                          <span className="uppercase">
+                            {String.fromCharCode(97 + optionindex)}
+                          </span>
                         </label>
                       </div>
                     ))}
