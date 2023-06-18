@@ -5,23 +5,23 @@ import Image from "next/image";
 export default function footer() {
   return (
     <React.Fragment>
-      <footer className="bg-white rounded-lg shadow dark:bg-gray-900 mt-10">
+      <footer className=" bg-gray-200 rounded-lg shadow  mt-10 outline outline-1 outline-gray-300">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-          <div className="sm:flex sm:items-center sm:justify-between">
+          <div className="sm:flex sm:items-center sm:justify-between text-gray-9000">
             <a
               href="https://flowbite.com/"
               className="flex items-center mb-4 sm:mb-0"
             >
               <Image src={Zip} alt="zipbox" width={50} />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap ">
                 ZIPBOX
               </span>
               <br />
             </a>
-            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-800 sm:mb-0 ">
               <li>
                 <a
-                  href="https://www.facebook.com/zipboxs"
+                  href="https://www.facebook.com/imtinayeem"
                   target="blank"
                   className="mr-4 hover:underline md:mr-6 "
                 >
@@ -51,12 +51,12 @@ export default function footer() {
             </ul>
           </div>
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-          <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span className="block text-sm text-gray-900 sm:text-center ">
             © 2023{" "}
             <a href="/" className="hover:underline">
               Eduthriller™
             </a>
-            . All Rights Reserved.
+            . All Rights Reserved. <a href="https://www.facebook.com/zipboxs" target="blank" className="text-blue-800 font-bold hover:text-green-500 duration-100">Developed by ZIPBOX</a>
           </span>
         </div>
       </footer>

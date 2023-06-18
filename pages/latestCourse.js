@@ -1,13 +1,16 @@
-import React from "react";
-import Navbar from "./Navbar";
+import React, { useRef, useState, useEffect } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
 import Image from "next/image";
 import Smp from "../public/smp.webp";
 import Api from "./api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-export default function AllCourse() {
+export default function LatestCourse() {
   const [courses, setCourses] = useState([]);
   const router = useRouter();
 
@@ -27,14 +30,22 @@ export default function AllCourse() {
   return (
     <React.Fragment>
       <Toaster />
-      <Navbar />
-      <div className="mt-20 ">
-        <h1 className="text-xl bangfont  capitalize font-semibold ">
+      <div className="mt-20">
+        <h1 className="bangfont text-4xl uppercase font-semibold  text-center">
           আমাদের সকল কোর্স{" "}
         </h1>
-        
-        {courses.map((course, index) => (
-           
+      </div>
+      <div className="mt-10 ">
+        <Swiper
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+        >
+          {courses.map((course, index) => (
+            <SwiperSlide className="py-20 px-3">
              
               <div key={index}>
                 {/* course div  */}
@@ -71,9 +82,10 @@ export default function AllCourse() {
                   </div>
                 </div>
               </div>
+            </SwiperSlide>
           ))}
-        </div>
-     
+        </Swiper>
+      </div>
     </React.Fragment>
   );
 }
