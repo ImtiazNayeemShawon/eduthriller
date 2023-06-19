@@ -9,6 +9,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
 import Smp from "./img/smp.webp";
 import Api from "../api/apiCaller";
+import Footer from "../footer";
 
 export default function Course() {
   const router = useRouter();
@@ -160,7 +161,7 @@ export default function Course() {
           <div className="outline-1 outline outline-slate-300 p-4 md:hidden">
             <div className="w-full h-fit  max-sm:h-30 bg-gray-100  p-2 rounded-md duration-300 ">
               <Image
-                src={Smp}
+                src={Data.thumbnail}
                 alt="def"
                 className=" rounded-md m-auto block"
                 width={400}
@@ -267,7 +268,7 @@ export default function Course() {
             <div className="outline-1 outline outline-slate-300 p-4 max-sm:hidden h-fit">
               <div className="w-full h-fit  max-sm:h-30 bg-gray-100  p-2 rounded-md duration-300 ">
                 <Image
-                  src={Smp}
+                  src={Data.thumbnail}
                   alt="def"
                   className="w-66 rounded-md m-auto block"
                   width={400}
@@ -298,6 +299,7 @@ export default function Course() {
           </div>
         </div>
       )}
+      <Footer/>
     </React.Fragment>
   );
 }

@@ -49,7 +49,7 @@ export default function medicaladmission() {
             >
               <div>
                 <Image
-                  src={Smp}
+                  src={course.thumbnail}
                   width={500}
                   height={400}
                   alt="def"

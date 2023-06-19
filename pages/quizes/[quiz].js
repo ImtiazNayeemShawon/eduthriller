@@ -100,7 +100,7 @@ const Quiz = () => {
   async function handleUploadQuiz(ev) {
     try {
       const response = await Api.post("/crud/submitQuiz", {
-        score,
+        finalScore,
       });
       toast.success(response.data.message);
       setDone(true);
@@ -109,11 +109,29 @@ const Quiz = () => {
     }
   }
 
+  const [finalScore, setFinalscore] = useState(0);
+
+  const ansSize = selectedAnswers?.length; //total selected ans suppose 5
+  console.log(ansSize);
+  useEffect(() => {
+    if (score > 0) {
+      if (ansSize !== score) {
+        const minuseScore = (ansSize - score) * 0.25;
+        const total = score - minuseScore;
+        setFinalscore(total);
+      } else {
+        setFinalscore(score);
+      }
+    } else {
+      setFinalscore(score);
+    }
+  });
+
   const ResultComponent = (
     <div>
       <div className="mt-20">
         <h1 className="bg-green-700 text-xl py-3 px-5 text-white font-bold uppercase rounded-md w-fit">
-          Your total score : {score}
+          Your total score : {finalScore}
         </h1>
         <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2">
           {Data.quiz?.map((quiz, index) => (
@@ -175,11 +193,11 @@ const Quiz = () => {
                       Explain:
                     </Typography>
                   </AccordionSummary>
-                    <AccordionDetails key={index}>
-                      <Typography className="max-sm:text-sm">
+                  <AccordionDetails key={index}>
+                    <Typography className="max-sm:text-sm">
                       {quiz.explain}
-                      </Typography>
-                    </AccordionDetails>
+                    </Typography>
+                  </AccordionDetails>
                 </Accordion>
               </div>
             </div>

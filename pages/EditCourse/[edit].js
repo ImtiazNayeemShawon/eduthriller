@@ -12,7 +12,7 @@ export default function EditCourse() {
 
   const { loggedIn } = useContext(MyContext);
   if (!loggedIn) {
-    // useRouter().push("/AdminLogin");
+    router.push("/AdminLogin");
   }
 
   // ..............................................................................................
@@ -201,7 +201,10 @@ export default function EditCourse() {
       </div>
     </div>
   );
-
+  const [thumbnail, setThumbnail] = useState(null);
+  const handleFileUpload = (e) => {
+    setThumbnail(e.target.value);
+  };
   // ..............................................................................................
   // GET data from backend server
   const { edit } = router.query;
@@ -220,6 +223,7 @@ export default function EditCourse() {
         setMicro(Data.micros);
         setPrivateGroup(Data.groupLink);
         setRoutine(Data.routine);
+        setThumbnail(Data.thumbnail)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -252,6 +256,7 @@ export default function EditCourse() {
         questions,
         privateGroup,
         routine,
+        thumbnail
       });
       setTimeout(() => {
         router.push("/adminAllCourse");
@@ -435,6 +440,16 @@ export default function EditCourse() {
 
             {/* image and price side */}
             <div className="">
+            <div className="flex items-center justify-center w-full">
+              <input
+                type="text"
+                name="thumbnail"
+                value={thumbnail}
+                placeholder="past your thumbnail link here"
+                className="w-full  text-whitebg-gray-200 p-2 rounded-md outline-dashed outline-1"
+                onChange={handleFileUpload}
+              />
+            </div>
               {/* thumbnail uploader */}
              <p> Class routine </p>
                 <input 

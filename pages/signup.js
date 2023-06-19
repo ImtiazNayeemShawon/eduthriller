@@ -40,6 +40,9 @@ export default function Singup() {
       toast.error(error.message);
     }
   }
+
+ 
+
   return (
     <React.Fragment>
       <Toaster />

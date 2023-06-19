@@ -7,6 +7,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Footer from "../footer";
+
 export default function dashboard() {
   const router = useRouter();
   const { dashboard } = router.query;
@@ -30,8 +32,6 @@ export default function dashboard() {
       clearTimeout(timeoutId);
     };
   }, [dashboard]);
-
-  console.log(Data.groupLink);
 
   return (
     <React.Fragment>
@@ -140,6 +140,9 @@ export default function dashboard() {
           <div></div>
         </div>
       </div>
+    <div className="mt-80">
+<Footer/>
+    </div>
     </React.Fragment>
   );
 }

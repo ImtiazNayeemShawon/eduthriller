@@ -6,6 +6,7 @@ import Api from "./api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Footer from "./footer";
 
 export default function AllCourse() {
   const [courses, setCourses] = useState([]);
@@ -42,7 +43,7 @@ export default function AllCourse() {
             >
               <div>
                 <Image
-                  src={Smp}
+                  src={course.thumbnail}
                   width={500}
                   height={400}
                   alt="def"
@@ -72,6 +73,7 @@ export default function AllCourse() {
           </div>
         ))}
       </div>
+      <Footer/>
     </React.Fragment>
   );
 }

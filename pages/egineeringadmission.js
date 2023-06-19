@@ -5,6 +5,7 @@ import Smp from "../public/smp.webp";
 import Api from "./api/apiCaller";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Footer from "./footer";
 
 export default function medicaladmission() {
   const [courses, setCourses] = useState([]);
@@ -49,7 +50,7 @@ export default function medicaladmission() {
             >
               <div>
                 <Image
-                  src={Smp}
+                  src={course.thumbnail}
                   width={500}
                   height={400}
                   alt="def"
@@ -80,6 +81,7 @@ export default function medicaladmission() {
         ))}
         </div>
       </div>
+      <Footer/>
     </React.Fragment>
   );
 }

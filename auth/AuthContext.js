@@ -5,9 +5,12 @@ const MyContext = createContext();
 
 const MyContextProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(null);
+  const [UserloggedIn, setUserLoggedIn] = useState(null);
+  const [UserName, setUserName] = useState("");
 
   useEffect(() => {
     checkLoggedIn();
+    checkUserLoggedIn();
   }, []);
 
   const checkLoggedIn = async () => {
@@ -23,9 +26,30 @@ const MyContextProvider = ({ children }) => {
   const contextValue = {
     loggedIn,
   };
+  // check user login
+  const checkUserLoggedIn = async () => {
+    try {
+      const response = await Api.get("user/checkLoggedIn");
+      const { loggedIn } = response.data;
+      const user  = response.data.user;
+      setUserLoggedIn(loggedIn);
+      setUserName(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const userLogin = {
+    UserloggedIn,
+  };
+  const userdata = {
+    UserName,
+  };
 
   return (
-    <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>
+    <MyContext.Provider value={{ ...contextValue, ...userLogin, ...userdata }}>
+      {children}
+    </MyContext.Provider>
   );
 };
 

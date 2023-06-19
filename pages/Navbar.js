@@ -1,7 +1,8 @@
 import Link from "next/link";
-import React from "react";
-import { useEffect, useState } from "react";
-import Api from "./api/apiCaller";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useContext } from "react";
+import { MyContext } from "/auth/AuthContext";
 
 export default function Navbar() {
   const [IsloggedIn, setIsLoggedin] = useState(false);
@@ -11,21 +12,14 @@ export default function Navbar() {
     setShow(!Show);
   };
 
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
+  const { UserloggedIn } = useContext(MyContext);
+  const userdata = useContext(MyContext);
 
-  const checkLoggedIn = async () => {
-    try {
-      const response = await Api.get("/user/checkLoggedIn");
-      const { loggedIn } = response.data;
-      const name = response.data.user;
-      setIsLoggedin(loggedIn);
-      setUserName(name);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  useEffect(() => {
+    setIsLoggedin(UserloggedIn);
+    setUserName(userdata.UserName.name);
+  });
+
   return (
     <React.Fragment>
       <div className="fixed">
@@ -77,7 +71,7 @@ export default function Navbar() {
                 {IsloggedIn ? (
                   <Link
                     href="/profile"
-                    className="flex items-center text-slate-800 hover:text-green-500 bg-green-200 font-medium rounded-lg text-sm px-10 py-3 text-center duration-300 justify-between capitalize"
+                    className="flex items-center text-slate-800 hover:text-green-500 bg-white font-medium rounded-lg text-sm px-10 py-3 text-center duration-300 justify-between capitalize"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +87,7 @@ export default function Navbar() {
                         d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    {username.name && username.name.split(" ")[0]}
+                    {username && username.split(" ")[0]}
                   </Link>
                 ) : (
                   <Link
@@ -138,7 +132,7 @@ export default function Navbar() {
               </div>
               <div className="hover:bg-blue-500 py-2 px-3 rounded-md bg-gray-700 mt-2">
                 <Link
-                   href="/egineeringadmission"
+                  href="/egineeringadmission"
                   className=" text-gray-100  font-bold rounded-lg text-sm   duration-300 text-center"
                 >
                   ইঞ্জিনিয়ারিং ভর্তি
