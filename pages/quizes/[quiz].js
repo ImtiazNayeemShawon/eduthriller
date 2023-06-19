@@ -237,7 +237,7 @@ const Quiz = () => {
                             <span className="uppercase font-bold text-gray-700">
                               {String.fromCharCode(97 + optionindex)}
                             </span>
-                            ) <span className="bangfont ml-2">{option}</span>
+                            ) <span className="bangfont ml-2 max-sm:text-sm gap-2">{option}</span>
                           </div>
                         </div>
                       ))}
