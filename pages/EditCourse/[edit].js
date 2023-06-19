@@ -223,7 +223,7 @@ export default function EditCourse() {
         setMicro(Data.micros);
         setPrivateGroup(Data.groupLink);
         setRoutine(Data.routine);
-        setThumbnail(Data.thumbnail)
+        setThumbnail(Data.thumbnail) 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
