@@ -13,9 +13,11 @@ export default function AddCourse() {
   const { loggedIn } = useContext(MyContext);
   const router = useRouter();
 
-  // if (!loggedIn) {
-  //   Router.push("/AdminLogin");
-  // }
+  if (typeof window !== 'undefined') {
+    if (!loggedIn) {
+      Router.push("/AdminLogin");
+    }
+  }
 
   // ..............................................................................................
   // Course title handling function
