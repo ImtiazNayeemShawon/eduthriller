@@ -31,7 +31,7 @@ const Quiz = () => {
     };
     const timeoutId = setTimeout(() => {
       fetchDataById();
-    }, 100);
+    }, 0);
 
     return () => {
       clearTimeout(timeoutId);
@@ -112,7 +112,6 @@ const Quiz = () => {
   const [finalScore, setFinalscore] = useState(0);
 
   const ansSize = selectedAnswers?.length; //total selected ans suppose 5
-  console.log(ansSize);
   useEffect(() => {
     if (score > 0) {
       if (ansSize !== score) {
