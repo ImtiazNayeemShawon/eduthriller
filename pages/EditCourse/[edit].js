@@ -6,13 +6,18 @@ import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { MyContext } from "../../auth/AuthContext";
+import Router from "next/router";
+
 
 export default function EditCourse() {
   const router = useRouter();
 
   const { loggedIn } = useContext(MyContext);
-  if (!loggedIn) {
-    router.push("/AdminLogin");
+  
+  if (typeof window !== 'undefined') {
+    if (!loggedIn) {
+      Router.push("/AdminLogin");
+    }
   }
 
   // ..............................................................................................
