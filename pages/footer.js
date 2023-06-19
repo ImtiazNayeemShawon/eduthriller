@@ -39,7 +39,7 @@ export default function footer() {
                 </a>
               </li>
               <li>
-                <a href="/AdminPage" className="mr-4 hover:underline md:mr-6 ">
+                <a href="/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf" className="mr-4 hover:underline md:mr-6 ">
                   Admin pannel
                 </a>
               </li>

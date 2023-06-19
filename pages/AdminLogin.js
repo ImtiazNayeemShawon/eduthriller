@@ -27,7 +27,7 @@ export default function Login() {
       toast.success(response.data.message);
       const token = response.data.accessToken;
       Cookies.set("token", token);
-      router.push("/AdminPage");
+      router.push("/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf");
     } catch (error) {
       toast.error("Please Try again");
     }
