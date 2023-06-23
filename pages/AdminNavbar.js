@@ -19,7 +19,7 @@ export default function AdminNavbar() {
                   Home
                 </Link>
                 <Link
-                  href="/AdminPage"
+                  href="/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf"
                   className=" text-gray hover:text-white hover:bg-green-500 font-bold rounded-lg text-sm px-5 py-3 text-center duration-300"
                 >
                   Control pannel
@@ -35,6 +35,12 @@ export default function AdminNavbar() {
                   className=" text-gray hover:text-white hover:bg-green-500 font-bold rounded-lg text-sm px-5 py-3 text-center duration-300"
                 >
                   All course
+                </Link>
+                <Link
+                  href="/payments"
+                  className=" text-gray hover:text-white hover:bg-green-500 font-bold rounded-lg text-sm px-5 py-3 text-center duration-300"
+                >
+                  Approve course
                 </Link>
                 
               </ul>

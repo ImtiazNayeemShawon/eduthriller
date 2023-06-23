@@ -92,10 +92,19 @@ const Quiz = () => {
     return setScore(score);
   };
 
+  const [date] = useState(
+    new Date().toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+    })
+  );
   async function handleUploadQuiz(ev) {
     try {
       const response = await Api.post("/crud/submitQuiz", {
-        finalScore,
+        score: finalScore,
+        quiz,
+        date,
       });
       toast.success(response.data.message);
       setDone(true);
@@ -120,13 +129,22 @@ const Quiz = () => {
       setFinalscore(score);
     }
   });
-
   const ResultComponent = (
     <div>
       <div className="mt-20">
-        <h1 className="bg-green-700 text-xl py-3 px-5 text-white font-bold uppercase rounded-md w-fit">
-          Your total score : {finalScore}
-        </h1>
+        <div className="flex">
+          <button
+            type="button"
+            onClick={() => router.push(`/meritList/${Data.quiz[0]._id}`)}
+            className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-2 px-3 text-white font-semibold bangfont rounded-md"
+          >
+            মেধা তালিকা
+          </button>
+          <h1 className="bg-green-700 text-xl py-3 px-5 text-white font-bold uppercase rounded-md w-fit">
+            total score : {finalScore}
+          </h1>
+        </div>
+
         <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2">
           {Data.quiz?.map((quiz, index) => (
             <div
@@ -209,6 +227,7 @@ const Quiz = () => {
         ) : (
           <div>
             <div className=" bg-gray-200">{quizTimer}</div>
+
             <h1 className="text-gray-800 text-center text-4xl mainfont font-bold capitalize max-sm:text-2xl my-5">
               {title}
             </h1>

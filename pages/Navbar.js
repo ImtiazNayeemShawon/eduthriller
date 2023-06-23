@@ -92,7 +92,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href="/login"
-                    className=" text-slate-100 hover:text-white bg-green-500 font-medium rounded-lg text-sm px-10 py-3 text-center duration-300"
+                    className=" text-slate-900 bg-gray-200 hover:text-gray-900  font-medium rounded-lg text-sm px-10 py-3 text-center duration-300"
                   >
                     Login
                   </Link>

@@ -147,8 +147,8 @@ export default function Course() {
     };
   }, [course]);
 
-  const Coursedashboard = () => {
-    router.push(`/coursedashboard/${Data._id}`);
+  const payment = () => {
+    router.push(`/payment/${Data._id}`);
   };
 
   return (
@@ -172,7 +172,7 @@ export default function Course() {
                 ৳ {Data.price} BDT
               </p>
               <button
-                onClick={Coursedashboard}
+                onClick={payment}
                 className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
               >
                 কোর্সটি কিনুন{" "}
@@ -194,7 +194,6 @@ export default function Course() {
                         />
                       </svg>
                       <span>{micro.number}</span>
-                      <span> টি</span>
                       <span>{micro.title}</span>
                     </li>
                   </ul>
@@ -292,7 +291,7 @@ export default function Course() {
                   ৳ {Data.price} BDT
                 </p>
                 <button
-                  onClick={Coursedashboard}
+                  onClick={payment}
                   className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
                 >
                   কোর্সটি কিনুন{" "}
@@ -314,7 +313,6 @@ export default function Course() {
                           />
                         </svg>
                         <span>{micro.number}</span>
-                        <span> টি</span>
                         <span>{micro.title}</span>
                       </li>
                     </ul>

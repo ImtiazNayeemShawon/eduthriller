@@ -39,24 +39,32 @@ export default function dashboard() {
 
       <div className="mt-0 ">
         <div className="mt-20 pt-20 p-10 h-60 bg-gray-900 rounded-lg">
-          <h1 className="text-3xl font-bold bangfont max-sm:text-2xl max-sm:text-center text-white ">
-            {Data.title}
-          </h1>
+          {Data ? (
+            <h1 className="text-3xl font-bold bangfont max-sm:text-2xl max-sm:text-center text-white ">
+              {Data.title}
+            </h1>
+          ) : (
+            <div>
+              <h1 className="text-white text-2xl mainfont font-semibold text-center capitalize">
+                Wait for admin approval to acces this course{" "}
+              </h1>
+            </div>
+          )}
         </div>
         <div className="grid grid-cols-8">
           <div></div>
           <div className="col-span-6 max-sm:col-span-8 max-sm:mx-5 bg-gray-100 rounded-md min-h-60 mt-2 shadow-lg ">
             <div className="flex justify-between mt-5 max-sm:block">
               <a
+                download
                 href={Data.routine}
                 className="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2 max-sm:w-full max-sm:text-center"
-                download
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="w-6 h-6"
+                  className="w-6 h-6 "
                 >
                   <path
                     fillRule="evenodd"
@@ -107,29 +115,41 @@ export default function dashboard() {
                 {Data.quizes?.map((q, index) => (
                   <AccordionDetails key={index}>
                     <Typography className="max-sm:text-sm">
-                      <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200">
+                      <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 ">
                         <h1 className="max-sm:m-auto my-auto"> {q.title}</h1>
 
-                        <button
-                          type="button"
-                          onClick={() => router.push(`/quizes/${q?._id}`)}
-                          className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
+                        <div className="flex mr-0">
+                          {/* <button className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-yellow-500 py-2 px-3 text-white font-semibold bangfont rounded-md">
+                            Biology
+                          </button> */}
+                          <button
+                            type="button"
+                            onClick={() => router.push(`/meritList/${q?._id}`)}
+                            className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-2 px-3 text-white font-semibold bangfont rounded-md"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
-                            />
-                          </svg>
-                        </button>
+                            মেধা তালিকা
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => router.push(`/quizes/${q?._id}`)}
+                            className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="w-8 h-8 text-green-600"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
+                              />
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </Typography>
                   </AccordionDetails>
@@ -140,9 +160,9 @@ export default function dashboard() {
           <div></div>
         </div>
       </div>
-    <div className="mt-80">
-<Footer/>
-    </div>
+      <div className="mt-80">
+        <Footer />
+      </div>
     </React.Fragment>
   );
 }

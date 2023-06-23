@@ -55,10 +55,15 @@ export default function Profile() {
       ) : (
         <div>
           <div className="m-5 bg-gray-200  shadow-md h rounded-xl flex py-4">
-            <button className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300">
+            <button 
+            className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300">
               প্রোফাইল{" "}
             </button>
-            <button className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300">
+            <button
+            onClick={() => {
+              router.push("/myCourse");
+            }}
+            className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300">
               আমার কোর্স{" "}
             </button>
             <button
