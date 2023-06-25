@@ -122,7 +122,7 @@ export default function LatestCourse() {
           className="mySwiper"
         >
           {courses.map((course, index) => (
-            <SwiperSlide className="py-20 px-3">
+            <SwiperSlide className=" px-3">
               <div
                 key={index}
                 className="grid grid-cols-3 mt-5 max-sm:grid-cols-1"
@@ -137,7 +137,7 @@ export default function LatestCourse() {
                     width={600}
                     height={600}
                     alt="def"
-                    className="  m-auto block "
+                    className="rounded-lg    m-auto block "
                   />
 
                   <div className="px-4 mt-2">
@@ -167,7 +167,7 @@ export default function LatestCourse() {
                     <button className="px-6 py-2 font-semibold rounded-lg flex text-gray-900 text-xl mainfont">
                       ৳ {course.price}
                     </button>
-                    <button className="px-6 py-2 hover:bg-gray-300 font-semibold rounded-lg flex justify-around bg-gray-200">
+                    <button className="px-6  hover:bg-gray-300 font-semibold rounded-lg flex justify-around bg-gray-200">
                       বিস্তারিত দেখি{" "}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

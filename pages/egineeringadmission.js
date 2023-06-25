@@ -55,7 +55,7 @@ export default function medicaladmission() {
                   width={600}
                   height={600}
                   alt="def"
-                  className="  m-auto block "
+                  className="  m-auto block rounded-t-lg"
                 />
 
                 <div className="px-4 mt-2">

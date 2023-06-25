@@ -36,7 +36,7 @@ export default function AllCourse() {
         </h1>
         <div className="grid grid-cols-3 gap-5 max-sm:grid-cols-1">
           {courses.map((course, index) => (
-            <div key={index} className="grid  mt-5 h-96">
+            <div key={index} className="grid  mt-5 h-80">
               {/* course div  */}
               <div
                 onClick={() => router.push(`/courses/${course._id}`)}
@@ -47,7 +47,8 @@ export default function AllCourse() {
                   width={600}
                   height={600}
                   alt="def"
-                  className="  m-auto block "
+                  className="rounded-t-lg
+                  m-auto block "
                 />
 
                 <div className="px-4 mt-2">
