@@ -10,7 +10,7 @@ export default function coursedetails() {
   const router = useRouter();
   return (
     <React.Fragment>
-      <div className="mt-20 max-sm:mx-2">
+      <div className="mt-20 max-sm:mx-1">
         {/* header text  */}
         <h1 className="text-5xl mainfont text-gray-800 font-semibold text-center max-sm:text-2xl">
           নিজের শেখা নিজেই গুছিয়ে নেয়ার যাত্রা শুরু হোক
