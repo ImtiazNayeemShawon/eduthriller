@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function footer() {
   return (
     <React.Fragment>
-      <footer className=" bg-gray-200 rounded-lg shadow  mt-10 outline outline-1 outline-gray-300">
+      <footer className=" mt-40 bg-gray-200 rounded-lg shadow   outline outline-1 outline-gray-300">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between text-gray-9000">
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-800 sm:mb-0 ">

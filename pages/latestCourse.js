@@ -30,7 +30,7 @@ export default function LatestCourse() {
   return (
     <React.Fragment>
       <Toaster />
-      <div className="mt-20">
+      <div className="mt-20 mb-5">
         <h1 className="bangfont text-4xl uppercase font-semibold  text-center">
           আমাদের সকল কোর্স{" "}
         </h1>
