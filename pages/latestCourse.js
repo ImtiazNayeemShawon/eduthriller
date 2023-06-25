@@ -112,7 +112,7 @@ export default function LatestCourse() {
           ))}
         </Swiper>
       </div>
-      <div className="mt-10 hidden max-sm:block">
+      <div className="mt-10 py-5 hidden max-sm:block">
         <Swiper
           spaceBetween={30}
           pagination={{
@@ -122,7 +122,7 @@ export default function LatestCourse() {
           className="mySwiper"
         >
           {courses.map((course, index) => (
-            <SwiperSlide className="h-96 px-3">
+            <SwiperSlide className=" px-3">
               <div
                 key={index}
                 className="grid grid-cols-3 mt-5 max-sm:grid-cols-1"
