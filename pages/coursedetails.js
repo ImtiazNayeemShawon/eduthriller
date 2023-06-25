@@ -28,11 +28,11 @@ export default function coursedetails() {
             <div className="col-span-2">
               <Image src={SSC} width={70} height={70} className="max-sm:w-14" />
             </div>
-            <div className="col-span-5">
+            <div className="col-span-5 max-sm:h-10">
               <p className="text-3xl   font-bold text-gray-800 max-sm:text-lg">
                 একাডেমিক প্রস্তুতি{" "}
               </p>
-              <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
                 SSC ও HSC{" "}
               </p>
             </div>
@@ -66,11 +66,11 @@ export default function coursedetails() {
                 className="max-sm:w-14"
               />
             </div>
-            <div className="col-span-5">
+            <div className="col-span-5 max-sm:h-10">
               <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 মেডিকেল এডমিশন{" "}
               </p>
-              <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
                 মেডিকেল,ডেন্টাল ও AFMC{" "}
               </p>
             </div>
@@ -104,11 +104,11 @@ export default function coursedetails() {
                 className="max-sm:w-14"
               />
             </div>
-            <div className="col-span-5">
+            <div className="col-span-5 max-sm:h-10">
               <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 ভার্সিটি এডমিশন{" "}
               </p>
-              <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
                 সকল ভার্সিটি ও গুচ্ছ{" "}
               </p>
             </div>
@@ -137,11 +137,11 @@ export default function coursedetails() {
             <div className="col-span-2">
               <Image src={Arc} width={70} height={70} className="max-sm:w-14" />
             </div>
-            <div className="col-span-5">
+            <div className="col-span-5 max-sm:h-10">
               <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 ইঞ্জিনিয়ারিং এডমিশন{" "}
               </p>
-              <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
                 BUET,CKRUET,MIST ও IUT{" "}
               </p>
             </div>

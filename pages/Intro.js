@@ -13,7 +13,7 @@ export default function Intro() {
             শুধুমাত্র মেধাবীই নয় অদম্য পরিশ্রমীও হও
           </h1>
           <br />
-          <p className="bangfont text-sm text-gray-700   	uppercase max-sm:text-lg leading-7 text-justify">
+          <p className="bangfont text-sm text-gray-700   	uppercase max-sm:text-sm max-sm:leading-5 leading-7 text-justify">
             অনলাইনে একাডেমিক ও ভর্তি প্রস্তুতির দেশসেরা প্ল্যাটফর্ম{" "}
             <span className="font-bold text-green-600">এডুথ্রিলার।</span>
             শুধুমাত্র আমাদের কাছে পড়ে অসংখ্য শিক্ষার্থী একাডেমিক ও ভর্তি
