@@ -32,7 +32,7 @@ export default function coursedetails() {
               <p className="text-3xl   font-bold text-gray-800 max-sm:text-lg">
                 একাডেমিক প্রস্তুতি{" "}
               </p>
-              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 max-sm:mt-0 text-gray-700 font-medium max-sm:text-sm">
                 SSC ও HSC{" "}
               </p>
             </div>
@@ -70,7 +70,7 @@ export default function coursedetails() {
               <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 মেডিকেল এডমিশন{" "}
               </p>
-              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 max-sm:mt-0 text-gray-700 font-medium max-sm:text-sm">
                 মেডিকেল,ডেন্টাল ও AFMC{" "}
               </p>
             </div>
@@ -108,7 +108,7 @@ export default function coursedetails() {
               <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 ভার্সিটি এডমিশন{" "}
               </p>
-              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 max-sm:mt-0 text-gray-700 font-medium max-sm:text-sm">
                 সকল ভার্সিটি ও গুচ্ছ{" "}
               </p>
             </div>
@@ -141,7 +141,7 @@ export default function coursedetails() {
               <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 ইঞ্জিনিয়ারিং এডমিশন{" "}
               </p>
-              <p className=" mt-2 text-gray-700 font-medium max-sm:text-sm">
+              <p className=" mt-2 max-sm:mt-0 text-gray-700 font-medium max-sm:text-sm">
                 BUET,CKRUET,MIST ও IUT{" "}
               </p>
             </div>
