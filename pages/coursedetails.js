@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import SSC from "../public/academic.png";
-import Medical from "../public/doctor .png";
+import Medical from "../public/doctor.png";
 import Versity from "../public/versity.png";
 import Arc from "../public/architect.png";
 import { useRouter } from "next/router";
