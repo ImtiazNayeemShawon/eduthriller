@@ -122,7 +122,7 @@ export default function LatestCourse() {
           className="mySwiper"
         >
           {courses.map((course, index) => (
-            <SwiperSlide className=" px-3">
+            <SwiperSlide className="h-96 px-3">
               <div
                 key={index}
                 className="grid grid-cols-3 mt-5 max-sm:grid-cols-1"
