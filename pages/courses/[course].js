@@ -219,11 +219,11 @@ export default function Course() {
                     <p className="text-xl font-semibold mainfont">
                       {teacher.name}
                     </p>
-                    <span className="text-sm m-0 leading-3 text-gray-700">
+                    <span className="text-sm font-thin m-0 leading-3 text-gray-700">
                       {teacher.institute}
                     </span>
                     <br />
-                    <span className="text-sm m-0 leading-3 text-gray-700">
+                    <span className="text-sm m-0 font-thin leading-3 text-gray-700">
                       {teacher.level}
                     </span>
                   </div>
@@ -261,7 +261,7 @@ export default function Course() {
                 <span className="text-gray-900 max-sm:text-sm">
                   {" "}
                   কোর্সটির নিচে দেয়া <b>”কোর্সটি কিনুন” </b>বাটনটিতে ক্লিক করলে
-                  আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে। 
+                  আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে।
                 </span>
               </div>
               <div>
