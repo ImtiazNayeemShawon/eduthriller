@@ -31,7 +31,7 @@ const MyContextProvider = ({ children }) => {
     try {
       const response = await Api.get("user/checkLoggedIn");
       const { loggedIn } = response.data;
-      const user  = response.data.user;
+      const user = response.data.user;
       setUserLoggedIn(loggedIn);
       setUserName(user);
     } catch (error) {

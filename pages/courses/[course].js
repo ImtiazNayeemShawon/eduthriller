@@ -7,11 +7,25 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
-import Smp from "./img/smp.webp";
 import Api from "../api/apiCaller";
 import Footer from "../footer";
 
 export default function Course() {
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    checkUserLoggedIn();
+  }, []);
+
+  const checkUserLoggedIn = async () => {
+    try {
+      const response = await Api.get("user/checkLoggedIn");
+      const user = response.data.user;
+      setUserId(user._id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const router = useRouter();
   const book = (
     <svg
@@ -148,9 +162,14 @@ export default function Course() {
   }, [course]);
 
   const payment = () => {
-    router.push(`/payment/${Data._id}`);
+    if (userId) {
+      router.push(`/payment/${Data._id}`);
+    } else router.push(`/login`);
   };
-
+  const dashbord = () => {
+    router.push(`/coursedashboard/${Data._id}`);
+  };
+  
   return (
     <React.Fragment>
       <Navbar />
@@ -289,12 +308,22 @@ export default function Course() {
                 <p className="text-gray-900 text-3xl font-bold">
                   ৳ {Data.price} BDT
                 </p>
-                <button
-                  onClick={payment}
-                  className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
-                >
-                  কোর্সটি কিনুন{" "}
-                </button>
+                {Data?.enrolledUsers?.includes(userId) ? (
+                  <button
+                    onClick={dashbord}
+                    className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
+                  >
+                    শুরু করুন {" "}
+                  </button>
+                ) : (
+                  <button
+                    onClick={payment}
+                    className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
+                  >
+                    কোর্সটি কিনুন{" "}
+                  </button>
+                )}
+
                 <div>
                   {Data.micros.map((micro, index) => (
                     <ul key={index} className="mt-4">

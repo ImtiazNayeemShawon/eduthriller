@@ -1,25 +1,32 @@
+"use-client";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useContext } from "react";
-import { MyContext } from "/auth/AuthContext";
+import Api from "./api/apiCaller";
 
 export default function Navbar() {
   const [IsloggedIn, setIsLoggedin] = useState(false);
-  const [username, setUserName] = useState("");
+  const [username, setUserName] = useState("Hello");
   const [Show, setShow] = useState(false);
   const handleSidenav = () => {
     setShow(!Show);
   };
 
-  const { UserloggedIn } = useContext(MyContext);
-  const userdata = useContext(MyContext);
-
   useEffect(() => {
-    setIsLoggedin(UserloggedIn);
-    setUserName(userdata.UserName.name);
-  });
+    checkUserLoggedIn();
+  }, []);
 
+  const checkUserLoggedIn = async () => {
+    try {
+      const response = await Api.get("user/checkLoggedIn");
+      const { loggedIn } = response.data;
+      const user = response.data.user;
+      setIsLoggedin(loggedIn);
+      setUserName(user.name);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <React.Fragment>
       <div className="fixed">
@@ -62,7 +69,7 @@ export default function Navbar() {
                 >
                   About us
                 </Link>
-                
+
                 {IsloggedIn ? (
                   <Link
                     href="/profile"
@@ -82,7 +89,7 @@ export default function Navbar() {
                         d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    {username && username.split(" ")[0]}
+                    {typeof username === "string" && username.split(" ")[0]}
                   </Link>
                 ) : (
                   <Link
