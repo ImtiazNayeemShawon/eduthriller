@@ -29,7 +29,7 @@ export default function coursedetails() {
               <Image src={SSC} width={70} height={70} className="max-sm:w-14" />
             </div>
             <div className="col-span-5">
-              <p className="text-3xl  font-bold text-gray-800 max-sm:text-xl">
+              <p className="text-3xl   font-bold text-gray-800 max-sm:text-lg">
                 একাডেমিক প্রস্তুতি{" "}
               </p>
               <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
@@ -67,7 +67,7 @@ export default function coursedetails() {
               />
             </div>
             <div className="col-span-5">
-              <p className="text-3xl  font-bold text-gray-800 max-sm:text-xl">
+              <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 মেডিকেল এডমিশন{" "}
               </p>
               <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
@@ -105,7 +105,7 @@ export default function coursedetails() {
               />
             </div>
             <div className="col-span-5">
-              <p className="text-3xl  font-bold text-gray-800 max-sm:text-xl">
+              <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 ভার্সিটি এডমিশন{" "}
               </p>
               <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
@@ -138,7 +138,7 @@ export default function coursedetails() {
               <Image src={Arc} width={70} height={70} className="max-sm:w-14" />
             </div>
             <div className="col-span-5">
-              <p className="text-3xl  font-bold text-gray-800 max-sm:text-xl">
+              <p className="text-3xl  font-bold text-gray-800 max-sm:text-lg">
                 ইঞ্জিনিয়ারিং এডমিশন{" "}
               </p>
               <p className="text-md mt-2 text-gray-700 font-medium max-sm:text-sm">
