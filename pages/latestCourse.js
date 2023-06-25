@@ -167,7 +167,7 @@ export default function LatestCourse() {
                     <button className="px-6 py-2 font-semibold rounded-lg flex text-gray-900 text-xl mainfont">
                       ৳ {course.price}
                     </button>
-                    <button className="px-6 py-2 hover:bg-gray-300 font-semibold rounded-lg flex justify-around bg-gray-500 my-auto max-sm:px-3">
+                    <button className="px-6 py-2 hover:bg-gray-300 font-semibold rounded-lg flex justify-around bg-gray-100 my-auto max-sm:px-3">
                       বিস্তারিত দেখি{" "}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
