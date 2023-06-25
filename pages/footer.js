@@ -10,10 +10,10 @@ export default function footer() {
           <div className="sm:flex sm:items-center sm:justify-between text-gray-9000">
             <a
               href="https://thezipbox.com/"
-              className="flex items-center mb-4 sm:mb-0"
+              className="flex items-center mb-4 sm:mb-0 uppercase text-2xl font-bold"
             >
-              <Image src={Zip} alt="zipbox" width={200} />
-
+              <Image src={Zip} alt="zipbox" width={90} />
+              zipbox
               <br />
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-800 sm:mb-0 ">
@@ -37,7 +37,10 @@ export default function footer() {
                 </a>
               </li>
               <li>
-                <a href="/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf" className="mr-4 hover:underline md:mr-6 ">
+                <a
+                  href="/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf"
+                  className="mr-4 hover:underline md:mr-6 "
+                >
                   Admin pannel
                 </a>
               </li>
@@ -54,7 +57,14 @@ export default function footer() {
             <a href="/" className="hover:underline">
               Eduthriller™
             </a>
-            . All Rights Reserved. <a href="https://www.facebook.com/zipboxs" target="blank" className="text-blue-800 font-bold hover:text-green-500 duration-100">Developed by ZIPBOX</a>
+            . All Rights Reserved.{" "}
+            <a
+              href="https://www.facebook.com/zipboxs"
+              target="blank"
+              className="text-blue-800 font-bold hover:text-green-500 duration-100"
+            >
+              Developed by ZIPBOX
+            </a>
           </span>
         </div>
       </footer>

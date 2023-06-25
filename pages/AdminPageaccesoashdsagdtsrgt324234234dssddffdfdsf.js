@@ -2,6 +2,7 @@ import AdminNavbar from "./AdminNavbar";
 import React from "react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import AddPaymentDetails from "./addPaymentDetails";
 
 const AdminPage = () => {
   const [loggedIn, setLoggedIn] = useState(null);
@@ -31,7 +32,9 @@ const AdminPage = () => {
     <React.Fragment>
       <div className="">
         <AdminNavbar />
-        <div className="mt-20 grid grid-cols-4 gap-10"></div>
+        <div className="mt-20 ">
+        <AddPaymentDetails/>
+        </div>
       </div>
     </React.Fragment>
   );

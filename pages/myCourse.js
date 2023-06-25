@@ -93,8 +93,11 @@ export default function myCourse() {
               >
                 <Image
                   src={course.thumbnail}
-                  className="w-60 m-auto rounded-lg"
+                  className=" m-auto rounded-lg"
                   alt="def"
+                  width={300}
+                  height={100}
+                
                 />
 
                 <p className="mt-2 text-xl font-bold bangfont text-center">

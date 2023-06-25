@@ -2,10 +2,20 @@ import React, { useState, useEffect } from "react";
 import Api from "./api/apiCaller";
 import { toast, Toaster } from "react-hot-toast";
 import AdminNavbar from "./AdminNavbar";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { MyContext } from "../auth/AuthContext";
 
 export default function Payments() {
   const [payments, setPayments] = useState([]);
+  const { loggedIn } = useContext(MyContext);
+  const router = useRouter();
 
+  if (typeof window !== "undefined") {
+    if (!loggedIn) {
+      router.push("/AdminLogin");
+    }
+  }
   useEffect(() => {
     handleGet();
   }, []);
@@ -37,11 +47,13 @@ export default function Payments() {
       <AdminNavbar />
       <Toaster />
       <h1 className=" mt-20 mainfont text-2xl font-semibold text-gray-700 capitalize text-center">
-        Payments forms 
+        Payments forms
       </h1>
       <div className="mt-20">
         {filteredData.length === 0 ? (
-          <div className="text-3xl mainfont font-semibold text-center capitalize">No request found may all request are approved</div>
+          <div className="text-3xl mainfont font-semibold text-center capitalize">
+            No request found may all request are approved
+          </div>
         ) : (
           <div>
             {filteredData.map((data, i) => (

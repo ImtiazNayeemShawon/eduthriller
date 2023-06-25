@@ -211,7 +211,7 @@ export default function Course() {
               </p>
               {/* teachers  */}
               <h1 className="mt-20 text-2xl bangfont font-semibold max-sm:mt-10 max-sm:text-xl">
-                কোর্স মেন্টরস{" "}
+                কোর্স মেন্টরস :{" "}
               </h1>
               <div className="grid grid-cols-2 bg-slate-10 outline outline-1 outline-gray-300 mt-5 rounded-md max-sm:grid-cols-1">
                 {Data.teachers.map((teacher) => (
@@ -255,19 +255,18 @@ export default function Course() {
                 ))}
               </div>
               <h1 className="mt-20 text-2xl bangfont font-semibold max-sm:text-xl max-sm:mt-10">
-                যেভাবে পেমেন্ট করবেন
+                যেভাবে পেমেন্ট করবেন :
               </h1>
               <div className="mt-4 p-3 outline outline-1 outline-green-400 rounded-md">
                 <span className="text-gray-900 max-sm:text-sm">
                   {" "}
                   কোর্সটির নিচে দেয়া <b>”কোর্সটি কিনুন” </b>বাটনটিতে ক্লিক করলে
-                  আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে। পেমেন্ট সম্পর্কে
-                  বিস্তারিত জানতে এই ভিডিওটি দেখুন এই ভিডিওটি দেখুন
+                  আপনার পেমেন্ট প্রক্রিয়া শুরু হয়ে যাবে। 
                 </span>
               </div>
               <div>
                 <h1 className="mt-20 text-2xl bangfont font-semibold max-sm:text-xl max-sm:mt-10">
-                  কোর্সটি করতে যেগুলো প্রয়োজন
+                  কোর্সটি করতে যেগুলো প্রয়োজন :
                 </h1>
                 <div className="mt-4 p-3 outline outline-1 outline-green-400 rounded-md max-sm:text-sm">
                   <li>ইন্টারনেট সংযোগ (ওয়াইফাই বা মোবাইল ইন্টারনেট)</li>

@@ -40,44 +40,71 @@ export default function medicaladmission() {
           আমাদের সকল কোর্স{" "}
         </h1>
         <div className=" gap-3 mt-10 place-items-center ">
-        {filteredData.map((course, index) => (
-          <div key={index}>
-            {/* course div  */}
-            <div
-              onClick={() => router.push(`/courses/${course._id}`)}
-              className="w-full h-full mt-4 max-sm:h-30 bg-gray-100 hover:outline outline-1  outline-green-400 p-2 rounded-md duration-300 cursor-pointer grid grid-cols-2 pt-10 px-10 max-sm:grid-cols-1 outline pb-0 max-sm:px-0 max-sm:pt-0 "
-            >
-              <div>
+        <div className="grid grid-cols-3 gap-5 max-sm:grid-cols-1">
+          {filteredData.map((course, index) => (
+            <div key={index} className="grid  mt-5 h-96">
+              {/* course div  */}
+              <div
+                onClick={() => router.push(`/courses/${course._id}`)}
+                className=" bg-white outline outline-1  rounded-lg outline-gray-300"
+              >
                 <Image
                   src={course.thumbnail}
-                  width={500}
-                  height={400}
+                  width={600}
+                  height={600}
                   alt="def"
-                  className=" rounded-md m-auto block "
+                  className="  m-auto block "
                 />
-                <br />{" "}
-              </div>
-              <div>
-                <h1 className="text-gray-900 text-3xl bangfont font-bold mx-2">
-                  {course.title}
-                </h1>
-                <p className="text-gray-900 text-sm bangfont  text-ellipsis overflow-hidden  h-20 mx-3">
-                  {course.description}....
-                </p>
-                <br />
-                <div className="flex justify-between mt-20 max-sm:mt-3 bg-green-200 px-2 py-2 rounded-sm w-full">
-                  <p className="text-green-600 text-xl max-sm:text-sm  max-sm:ml-3 my-auto  mt-2 font-semibold">
-                    <span className="text-gray-900"> মাত্র ৳ </span>
-                    {course.price}BDT
+
+                <div className="px-4 mt-2">
+                  <p className="font-semibold mx-2 text-sm flex mb-2 mt-0 bg-gray-200 w-fit py-1 px-2 rounded-lg">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                      />
+                    </svg>
+                    ভর্তি হয়েছে {course.enrolledUsers.length} জন{" "}
                   </p>
-                  <button className="py-3 bangfont px-4 rounded-xl outline outline-1 outline-green-600 text-green-700 font-bold text-xl hover:bg-green-500 hover:text-white duration-200 max-sm:text-sm">
-                    বিস্তারিত দেখো{" "}
+                  <hr />
+                  <h1 className="text-gray-900 text-2xl bangfont font-bold mx-2 mt-2">
+                    {course.title}
+                  </h1>
+                </div>
+                <div className="flex justify-between p-3 bg-gray-100 mt-3">
+                  <button className="px-6 py-2 font-semibold rounded-lg flex text-gray-900 text-xl mainfont">
+                    ৳ {course.price}
+                  </button>
+                  <button className="px-6 py-2 hover:bg-gray-300 font-semibold rounded-lg flex justify-around bg-gray-200">
+                    বিস্তারিত দেখি{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                      />
+                    </svg>
                   </button>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         </div>
       </div>
     </React.Fragment>

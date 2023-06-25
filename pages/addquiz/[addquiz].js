@@ -12,7 +12,7 @@ export default function quiz() {
   const [quiz, setQuiz] = useState([
     {
       question: "",
-      options: ["", "", "", "", ""],
+      options: ["", "", "", "", ],
       answer: "",
       explain: "",
     },
@@ -42,7 +42,7 @@ export default function quiz() {
       ...quiz,
       {
         question: "",
-        options: ["", "", "", "", ""],
+        options: ["", "", "", "", ],
         answer: "",
         explain: "",
       },

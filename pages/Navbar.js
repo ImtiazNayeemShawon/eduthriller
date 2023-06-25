@@ -62,12 +62,7 @@ export default function Navbar() {
                 >
                   About us
                 </Link>
-                <Link
-                  href="/contactus"
-                  className=" text-gray hover:text-white hover:bg-green-500 font-medium rounded-lg text-sm px-5 py-3 text-center duration-300"
-                >
-                  Contact
-                </Link>
+                
                 {IsloggedIn ? (
                   <Link
                     href="/profile"
