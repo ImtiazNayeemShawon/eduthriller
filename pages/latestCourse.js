@@ -137,7 +137,7 @@ export default function LatestCourse() {
                     width={600}
                     height={600}
                     alt="def"
-                    className="rounded-lg    m-auto block "
+                    className="rounded-t-lg    m-auto block "
                   />
 
                   <div className="px-4 mt-2">

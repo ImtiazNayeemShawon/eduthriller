@@ -34,6 +34,16 @@ export default function dashboard() {
       clearTimeout(timeoutId);
     };
   }, [dashboard]);
+  const handleDownloadRoutine = () => {
+    if (Data) {
+      const link = document.createElement("a");
+      link.href = Data.routine;
+      link.download = "routine.jpg";
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.click();
+    }
+  };
 
   return (
     <React.Fragment>
@@ -57,9 +67,8 @@ export default function dashboard() {
           <div></div>
           <div className="col-span-6 max-sm:col-span-8 max-sm:mx-5 bg-gray-100 rounded-md min-h-60 mt-2 shadow-lg ">
             <div className="flex justify-between mt-5 max-sm:block">
-              <a
-                href={Data.routine}
-                download={true}
+              <button
+                onClick={() => handleDownloadRoutine(imageUrl, imageName)}
                 className="text-white bg-[#050708] cursor-pointer hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2 max-sm:w-full max-sm:text-center"
               >
                 <svg
@@ -75,7 +84,8 @@ export default function dashboard() {
                   />
                 </svg>
                 Download Routine
-              </a>
+              </button>
+
               <a href={Data?.groupLink} target="blank">
                 <button
                   type="button"
