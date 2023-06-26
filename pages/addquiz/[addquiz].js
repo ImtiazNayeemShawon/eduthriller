@@ -12,7 +12,7 @@ export default function quiz() {
   const [quiz, setQuiz] = useState([
     {
       question: "",
-      options: ["", "", "", "", ],
+      options: ["", "", "", ""],
       answer: "",
       explain: "",
     },
@@ -42,7 +42,7 @@ export default function quiz() {
       ...quiz,
       {
         question: "",
-        options: ["", "", "", "", ],
+        options: ["", "", "", ""],
         answer: "",
         explain: "",
       },
@@ -139,15 +139,25 @@ export default function quiz() {
                   onChange={(e) => handlequiz(e, index)}
                 />
               ))}
-              <p className="mt-2">Add Right option</p>
-              <input
+
+              <p className="mt-2">Select Right option</p>
+              <select
                 className="p-2 w-full bg-gray-300 outline-dashed outline-1 mt-2"
-                placeholder="Add the Right option"
-                type="text"
                 name="answer"
                 value={quizItem.answer}
                 onChange={(e) => handlequiz(e, index)}
-              />
+              >
+                <option value="">Select right answer</option>
+                {quizItem.options.map((option, optionIndex) => (
+                  <option
+                    key={optionIndex}
+                    value={option}
+                    className="text-gray-900"
+                  >
+                    {option}
+                  </option>
+                ))}
+              </select>
 
               <p className="mt-2">explaination</p>
               <textarea

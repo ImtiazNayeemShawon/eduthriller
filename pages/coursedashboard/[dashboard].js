@@ -136,14 +136,14 @@ export default function dashboard() {
                           </button> */}
                           <button
                             type="button"
-                            onClick={() => router.push(`/meritList/${q?._id}`)}
+                            onClick={() => router.push(`/meritList/${q?.quiz}`)}
                             className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-2 px-3 text-white font-semibold bangfont rounded-md"
                           >
                             মেধা তালিকা
                           </button>
                           <button
                             type="button"
-                            onClick={() => router.push(`/quizes/${q?._id}`)}
+                            onClick={() => router.push(`/quizes/${q?.quiz}`)}
                             className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
                           >
                             {/* <svg

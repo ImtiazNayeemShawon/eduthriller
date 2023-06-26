@@ -4,21 +4,9 @@ import { useState, useEffect } from "react";
 import Api from "../api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { MyContext } from "../../auth/AuthContext";
-import Router from "next/router";
-
 
 export default function EditCourse() {
   const router = useRouter();
-
-  const { loggedIn } = useContext(MyContext);
-  
-  if (typeof window !== 'undefined') {
-    if (!loggedIn) {
-      Router.push("/AdminLogin");
-    }
-  }
 
   // ..............................................................................................
   // Course title handling function
@@ -210,6 +198,7 @@ export default function EditCourse() {
   const handleFileUpload = (e) => {
     setThumbnail(e.target.value);
   };
+  const [quizes, setQuizes] = useState([]);
   // ..............................................................................................
   // GET data from backend server
   const { edit } = router.query;
@@ -228,7 +217,8 @@ export default function EditCourse() {
         setMicro(Data.micros);
         setPrivateGroup(Data.groupLink);
         setRoutine(Data.routine);
-        setThumbnail(Data.thumbnail) 
+        setThumbnail(Data.thumbnail);
+        setQuizes(Data?.quizes);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -242,6 +232,7 @@ export default function EditCourse() {
       clearTimeout(timeoutId);
     };
   }, [edit]);
+
   const [privateGroup, setPrivateGroup] = useState("");
   const handlePrivateGroup = (e) => {
     setPrivateGroup(e.target.value);
@@ -261,7 +252,7 @@ export default function EditCourse() {
         questions,
         privateGroup,
         routine,
-        thumbnail
+        thumbnail,
       });
       setTimeout(() => {
         router.push("/adminAllCourse");
@@ -291,12 +282,15 @@ export default function EditCourse() {
           <div className="grid grid-cols-3 gap-8">
             <div className="col-span-2 mt-12">
               {/* course title  */}
-              <button
-                onClick={quizHandler}
-                className="text-xl bg-green-500 py-3 px-5 rounded-md text-white font-semibold "
-              >
-                Add new quiz
-              </button>
+              <div className="flex justify-between">
+                <button
+                  onClick={quizHandler}
+                  className="text-xl bg-green-500 py-3 px-5 rounded-md text-white font-semibold "
+                >
+                  Add new quiz
+                </button>
+              </div>
+
               <div>
                 <input
                   onChange={handlePrivateGroup}
@@ -445,24 +439,24 @@ export default function EditCourse() {
 
             {/* image and price side */}
             <div className="">
-            <div className="flex items-center justify-center w-full">
-              <input
-                type="text"
-                name="thumbnail"
-                value={thumbnail}
-                placeholder="past your thumbnail link here"
-                className="w-full  text-whitebg-gray-200 p-2 rounded-md outline-dashed outline-1"
-                onChange={handleFileUpload}
-              />
-            </div>
+              <div className="flex items-center justify-center w-full">
+                <input
+                  type="text"
+                  name="thumbnail"
+                  value={thumbnail}
+                  placeholder="past your thumbnail link here"
+                  className="w-full  text-whitebg-gray-200 p-2 rounded-md outline-dashed outline-1"
+                  onChange={handleFileUpload}
+                />
+              </div>
               {/* thumbnail uploader */}
-             <p> Class routine </p>
-                <input 
+              <p> Class routine </p>
+              <input
                 type="text"
                 value={routine}
                 onChange={handleRoutine}
                 className="bg-gray-200 p-2 rounded-md outline-dashed outline-1"
-                />
+              />
               {/* price input  */}
               <p className="text-left mt-2 mainfont font-semibold ">
                 Course price
@@ -540,6 +534,26 @@ export default function EditCourse() {
           </button>
         </div>
       )}
+      <div>
+        <h1 className="text-xl text-center font-semibold mt-10">
+          Quiz Section
+        </h1>
+        {quizes?.map((quizItem, index) => (
+          <div key={index}>
+            <div className="py-2 px-4 bg-gray-200 rounded-lg mt-2 flex justify-between">
+              <h1 className="py-2 px-6font-bold uppercase rounded-lg w-80">
+                Quiz: {quizItem.title}
+              </h1>
+              <button
+                onClick={() => router.push(`/EditQuiz/${quizItem.quiz}`)}
+                className="py-2 px-6 bg-blue-700 text-white font-bold uppercase rounded-lg"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </React.Fragment>
   );
 }

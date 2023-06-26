@@ -24,6 +24,7 @@ const Quiz = () => {
       try {
         const response = await Api.get(`/crud/quizes/${quiz}`);
         setData(response.data.result);
+        console.log(response.data);
         setMinute(response.data.result.time);
         setTitle(response.data.result.title);
       } catch (error) {
@@ -51,9 +52,7 @@ const Quiz = () => {
       <nav className="bg-white shadow-lg mb-20 rounded-lg mt-10 max-sm:mt-5 px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0">
         <div className="container flex  items-center justify-between mx-auto ">
           <div className="mt-5 ">
-            <button className="bg-green-100 shadow-sm outline outline-1 outline-gray- text-gray-900 font-bold px-20 py-3 round পরিশ্রমীও হও
-
-অনলাইনে একাডেমিক ও ভর্তি প্রস্তুতির দেশসেরা প্ল্যাটফর্ম এডুথ্রিলার।শুধুমাত্র আমাদের কাছে পড়ে অসংখ্য শিক্ষার্থী একাডেমিক ও ভর্তি প্রস্তুতিতে দেশসেরা সাফল্য অর্জন করেছে ভবিষ্যতেও সাফল্যের ধারা অব্যাহত থাকবে ইনশাআল্লাহ । মূল বই ভিত্তিক ও প্রশ্ন প্যার্টানের উপর গুরুত্ব দিয়ে প্রতিটি ক্লাস ও এক্সাম সাজানো হয় যাতে একজন শিক্ষার্থী'র তার লক্ষ্যে সবচেয়ে এগিয়ে থাকে। এডুথ্রিলারের প্রতিটা ক্লাস ও এক্সামের প্রশ্নপত্রed-md text-xl max-sm:px-6">
+            <button className="bg-green-100 shadow-sm outline outline-1 outline-gray- text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6">
               {minute}M: {seconds}S
             </button>
           </div>
@@ -116,22 +115,23 @@ const Quiz = () => {
     }
   }
 
-  const [finalScore, setFinalscore] = useState(0);
+  const [finalScore, setFinalScore] = useState(0);
 
-  const ansSize = selectedAnswers?.length; //total selected ans suppose 5
+  const ansSize = selectedAnswers?.length; // total selected answers, suppose 5
   useEffect(() => {
     if (score > 0) {
       if (ansSize !== score) {
-        const minuseScore = (ansSize - score) * 0.25;
-        const total = score - minuseScore;
-        setFinalscore(total);
+        const minusScore = (ansSize - score) * 0.25;
+        const total = score - minusScore;
+        setFinalScore(total >= 0 ? total : 0);
       } else {
-        setFinalscore(score);
+        setFinalScore(score);
       }
     } else {
-      setFinalscore(score);
+      setFinalScore(score >= 0 ? score : 0);
     }
-  });
+  }, [ansSize, score]);
+
   const ResultComponent = (
     <div>
       <Navbar />
@@ -176,16 +176,19 @@ const Quiz = () => {
                 <div key={optionindex} className="flex gap-10 mt-4">
                   <label
                     className={`bg-gray-200 py-4 mt-2 w-full text-left px-2 rounded-md font-semibold ${
-                      selectedAnswers[index] === option &&
-                      selectedAnswers[index] !== quiz.answer
-                        ? " outline-red-500 outline"
+                      selectedAnswers[index] === option
+                        ? selectedAnswers[index] === quiz.answer
+                          ? "bg-green-500 text-white"
+                          : "bg-red-500 text-white"
+                        : option === quiz.answer
+                        ? "bg-green-500 text-white"
                         : "text-gray-800"
-                    } hover:outline-1 hover:outline outline-green-500 flex gap-6`}
+                    }  flex gap-6`}
                   >
                     <input
                       value={option}
-                      type="radio"
-                      className="ml-1"
+                      type="checkbox"
+                      className="ml-1 "
                       name={`option${index}`}
                       checked={selectedAnswers[index] === option}
                       onChange={() => handleAnswerClick(index, option)}
@@ -196,14 +199,7 @@ const Quiz = () => {
                   </label>
                 </div>
               ))}
-              <div className="mt-5">
-                <p className="font-bold mainfont text-xl  text-gray-900 ">
-                  Right answer:
-                </p>
-                <label className="bg-gray-200 py-4 mt-2 w-full text-left px-2 rounded-md font-semibold text-gray-800 outline-1 outline outline-green-500 flex  gap-6">
-                  {quiz.answer}
-                </label>
-              </div>
+
               <div className="mt-3">
                 <Accordion className="shadow-sm ">
                   <AccordionSummary
