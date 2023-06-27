@@ -11,17 +11,19 @@ export default function Navbar() {
   const handleSidenav = () => {
     setShow(!Show);
   };
-  
+
   const [username, setUsername] = useState();
   const [IsloggedIn, setIsloggedIn] = useState(false);
 
   const token = Cookies.get("token");
   useEffect(() => {
-    const decodedToken = jwtDecode(token);
-    const username = decodedToken.username;
-    setUsername(username);
-    const IsloggedIn = decodedToken.loggedIn;
-    setIsloggedIn(IsloggedIn);
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const username = decodedToken.username;
+      setUsername(username);
+      const IsloggedIn = decodedToken.loggedIn;
+      setIsloggedIn(IsloggedIn);
+    }
   }, [token]);
 
   return (

@@ -15,14 +15,16 @@ import Cookies from "js-cookie";
 export default function Course() {
   const [userId, setUserId] = useState(null);
   const [IsloggedIn, setIsloggedIn] = useState(false);
+  const token = Cookies.get("token");
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    const decodedToken = jwtDecode(token);
-    const userId = decodedToken.userId;
-    setUserId(userId);
-    const IsloggedIn = decodedToken.loggedIn;
-    setIsloggedIn(IsloggedIn);
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const userId = decodedToken.userId;
+      setUserId(userId);
+      const IsloggedIn = decodedToken.loggedIn;
+      setIsloggedIn(IsloggedIn);
+    }
   }, []);
 
   const router = useRouter();
