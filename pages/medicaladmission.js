@@ -27,7 +27,6 @@ export default function medicaladmission() {
 
   return (
     <React.Fragment>
-      <Navbar />
       <div className="mt-20 w-full h-fit bg-green-100 px-10 rounded-md shadow-md py-10  max-sm:p-4">
         <h1 className="text-3xl bangfont font-semibold max-sm:text-md max-sm:font-semibold">
           মেডিকেল এঁর সকল সমাধান এখন{" "}

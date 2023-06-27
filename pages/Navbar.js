@@ -1,32 +1,29 @@
-"use-client";
+"use client";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Api from "./api/apiCaller";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
-  const [IsloggedIn, setIsLoggedin] = useState(false);
-  const [username, setUserName] = useState("Hello");
   const [Show, setShow] = useState(false);
   const handleSidenav = () => {
     setShow(!Show);
   };
+  
+  const [username, setUsername] = useState();
+  const [IsloggedIn, setIsloggedIn] = useState(false);
 
+  const token = Cookies.get("token");
   useEffect(() => {
-    checkUserLoggedIn();
-  }, []);
+    const decodedToken = jwtDecode(token);
+    const username = decodedToken.username;
+    setUsername(username);
+    const IsloggedIn = decodedToken.loggedIn;
+    setIsloggedIn(IsloggedIn);
+  }, [token]);
 
-  const checkUserLoggedIn = async () => {
-    try {
-      const response = await Api.get("user/checkLoggedIn");
-      const { loggedIn } = response.data;
-      const user = response.data.user;
-      setIsLoggedin(loggedIn);
-      setUserName(user.name);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <React.Fragment>
       <div className="fixed">

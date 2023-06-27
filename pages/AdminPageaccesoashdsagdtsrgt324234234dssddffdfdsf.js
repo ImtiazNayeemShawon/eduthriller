@@ -33,7 +33,7 @@ const AdminPage = () => {
       <div className="">
         <AdminNavbar />
         <div className="mt-20 ">
-        <AddPaymentDetails/>
+          <AddPaymentDetails />
         </div>
       </div>
     </React.Fragment>

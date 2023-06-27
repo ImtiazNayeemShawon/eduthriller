@@ -49,7 +49,7 @@ const Quiz = () => {
 
   const quizTimer = (
     <div className="fixed">
-      <nav className="bg-white shadow-lg mb-20 rounded-lg mt-10 max-sm:mt-5 px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0">
+      <nav className="bg-white shadow-lg mb-20 rounded-lg mt-5 max-sm:mt-5 px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0">
         <div className="container flex  items-center justify-between mx-auto ">
           <div className="mt-5 ">
             <button className="bg-green-100 shadow-sm outline outline-1 outline-gray- text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6">

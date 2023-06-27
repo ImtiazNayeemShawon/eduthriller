@@ -8,7 +8,6 @@ import LatestCourse from "./latestCourse";
 export default function Home() {
   return (
     <React.Fragment>
-      <Navbar />
       <main>
         <Intro />
         <Coursedetails />

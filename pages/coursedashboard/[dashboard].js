@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Footer from "../footer";
 import Exam from "/public/exam.png";
 import Image from "next/image";
+import { saveAs } from "file-saver";
 
 export default function dashboard() {
   const router = useRouter();
@@ -34,20 +35,12 @@ export default function dashboard() {
       clearTimeout(timeoutId);
     };
   }, [dashboard]);
-  const handleDownloadRoutine = () => {
-    if (Data) {
-      const link = document.createElement("a");
-      link.href = Data.routine;
-      link.download = "routine.jpg";
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.click();
-    }
-  };
 
+  const downloadImage = () => {
+    saveAs(Data?.routine, "Routine.jpg"); // Put your image url here.
+  };
   return (
     <React.Fragment>
-      <Navbar />
 
       <div className="mt-0 ">
         <div className="mt-20 pt-20 p-10 h-60 bg-gray-900 rounded-lg">
@@ -68,8 +61,8 @@ export default function dashboard() {
           <div className="col-span-6 max-sm:col-span-8 max-sm:mx-5 bg-gray-100 rounded-md min-h-60 mt-2 shadow-lg ">
             <div className="flex justify-between mt-5 max-sm:block">
               <button
-                onClick={() => handleDownloadRoutine(imageUrl, imageName)}
-                className="text-white bg-[#050708] cursor-pointer hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2 max-sm:w-full max-sm:text-center"
+                onClick={downloadImage}
+                className="text-white bg-[#050708] cursor-pointer hover:bg-[#050708]/90  focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2 max-sm:w-full max-sm:text-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

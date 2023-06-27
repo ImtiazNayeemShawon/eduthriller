@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import AdminNavbar from "../Navbar";
 import Api from "../api/apiCaller";
 import { useRouter } from "next/router";
 import { useContext } from "react";
@@ -45,7 +44,6 @@ export default function Merit() {
 
   return (
     <React.Fragment>
-      <AdminNavbar />
       <div className="mt-20">
         {results.length > 0 ? (
           results.map((item, index) => (

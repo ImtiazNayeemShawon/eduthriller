@@ -9,23 +9,22 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
 import Api from "../api/apiCaller";
 import Footer from "../footer";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
 export default function Course() {
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(null);
+  const [IsloggedIn, setIsloggedIn] = useState(false);
 
   useEffect(() => {
-    checkUserLoggedIn();
+    const token = Cookies.get("token");
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+    setUserId(userId);
+    const IsloggedIn = decodedToken.loggedIn;
+    setIsloggedIn(IsloggedIn);
   }, []);
 
-  const checkUserLoggedIn = async () => {
-    try {
-      const response = await Api.get("user/checkLoggedIn");
-      const user = response.data.user;
-      setUserId(user._id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const router = useRouter();
   const book = (
     <svg
@@ -162,17 +161,16 @@ export default function Course() {
   }, [course]);
 
   const payment = () => {
-    if (userId) {
+    if (IsloggedIn) {
       router.push(`/payment/${Data._id}`);
     } else router.push(`/login`);
   };
   const dashbord = () => {
     router.push(`/coursedashboard/${Data._id}`);
   };
-  
+
   return (
     <React.Fragment>
-      <Navbar />
       {Loading ? (
         <div className="h-screen">{LazyLoading}</div>
       ) : (
@@ -190,12 +188,21 @@ export default function Course() {
               <p className="text-gray-900 text-3xl font-bold">
                 ৳ {Data.price} BDT
               </p>
-              <button
-                onClick={payment}
-                className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
-              >
-                কোর্সটি কিনুন{" "}
-              </button>
+              {Data?.enrolledUsers?.includes(userId) ? (
+                <button
+                  onClick={dashbord}
+                  className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
+                >
+                  শুরু করুন{" "}
+                </button>
+              ) : (
+                <button
+                  onClick={payment}
+                  className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
+                >
+                  কোর্সটি কিনুন{" "}
+                </button>
+              )}
               <div>
                 {Data.micros.map((micro, index) => (
                   <ul key={index} className="mt-2">
@@ -313,7 +320,7 @@ export default function Course() {
                     onClick={dashbord}
                     className="m-auto block bg-green-500 text-white w-full py-2 rounded-md font-bold bangfont mt-3"
                   >
-                    শুরু করুন {" "}
+                    শুরু করুন{" "}
                   </button>
                 ) : (
                   <button

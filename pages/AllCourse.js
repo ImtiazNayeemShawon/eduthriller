@@ -29,7 +29,6 @@ export default function AllCourse() {
   return (
     <React.Fragment>
       <Toaster />
-      <Navbar />
       <div className="mt-20 max-sm:mx-5 mb-20 mx-20">
         <h1 className="text-xl bangfont  capitalize font-semibold ">
           আমাদের সকল কোর্স{" "}
