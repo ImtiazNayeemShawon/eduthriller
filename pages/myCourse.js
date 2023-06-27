@@ -59,7 +59,7 @@ export default function myCourse() {
   return (
     <React.Fragment>
       <Toaster />
-      <div className="m-5 bg-gray-200 shadow-md h rounded-xl flex py-4 ">
+      <div className="m-5 bg-gray-200 shadow-md h rounded-xl mt-10 flex py-4 ">
         <button
           onClick={() => {
             router.push("/profile");
