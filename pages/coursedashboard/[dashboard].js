@@ -41,7 +41,6 @@ export default function dashboard() {
   };
   return (
     <React.Fragment>
-
       <div className="mt-0 ">
         <div className="mt-20 pt-20 p-10 h-60 bg-gray-900 rounded-lg">
           {Data ? (
@@ -105,8 +104,8 @@ export default function dashboard() {
               </a>
             </div>
             {/* quiz data  */}
-
-            <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
+            
+            {/* <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
               <Accordion className="shadow-sm ">
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -120,13 +119,9 @@ export default function dashboard() {
                 {Data.quizes?.map((q, index) => (
                   <AccordionDetails key={index}>
                     <Typography className="max-sm:text-sm">
-                      <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 ">
+                      <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 max-sm:block ">
                         <h1 className="max-sm:m-auto my-auto"> {q.title}</h1>
-
                         <div className="flex mr-0">
-                          {/* <button className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-yellow-500 py-2 px-3 text-white font-semibold bangfont rounded-md">
-                            Biology
-                          </button> */}
                           <button
                             type="button"
                             onClick={() => router.push(`/meritList/${q?.quiz}`)}
@@ -139,20 +134,6 @@ export default function dashboard() {
                             onClick={() => router.push(`/quizes/${q?.quiz}`)}
                             className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
                           >
-                            {/* <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="w-8 h-8 text-green-600"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
-                              />
-                            </svg> */}
                             <Image src={Exam} width={40} />
                           </button>
                         </div>
@@ -161,7 +142,56 @@ export default function dashboard() {
                   </AccordionDetails>
                 ))}
               </Accordion>
+            </div> */}
+           <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
+  {Data.quizes?.reduce((acc, q) => {
+    const moduleIndex = acc.findIndex((group) => group[0]?.module === q.module);
+    if (moduleIndex === -1) {
+      acc.push([q]);
+    } else {
+      acc[moduleIndex].push(q);
+    }
+    return acc;
+  }, []).map((group, groupIndex) => (
+    <Accordion className="shadow-sm" key={groupIndex}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls={`panel${groupIndex + 1}-content`}
+        id={`panel${groupIndex + 1}-header`}
+      >
+        <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
+          {group[0]?.module}
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        {group.map((q, index) => (
+          <Typography key={index} className="max-sm:text-sm">
+            <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 max-sm:block">
+              <h1 className="max-sm:m-auto my-auto">{q.title}</h1>
+              <div className="flex mr-0">
+                <button
+                  type="button"
+                  onClick={() => router.push(`/meritList/${q?.quiz}`)}
+                  className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-2 px-3 text-white font-semibold bangfont rounded-md"
+                >
+                  মেধা তালিকা
+                </button>
+                <button
+                  type="button"
+                  onClick={() => router.push(`/quizes/${q?.quiz}`)}
+                  className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
+                >
+                  <Image src={Exam} width={40} />
+                </button>
+              </div>
             </div>
+          </Typography>
+        ))}
+      </AccordionDetails>
+    </Accordion>
+  ))}
+</div>
+
           </div>
           <div></div>
         </div>

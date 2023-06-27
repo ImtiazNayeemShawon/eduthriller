@@ -19,6 +19,8 @@ export default function quiz() {
   ]);
   const [time, setTime] = useState("");
   const [title, setTitle] = useState("");
+  const [module, setModule] = useState("");
+
   const [date, setDate] = useState("");
 
   useEffect(() => {
@@ -64,6 +66,9 @@ export default function quiz() {
   const DateHandler = (e) => {
     setDate(e.target.value);
   };
+  const moduleHandler = (e) => {
+    setModule(e.target.value);
+  };
 
   async function handleUploadCourse(ev) {
     ev.preventDefault();
@@ -74,6 +79,7 @@ export default function quiz() {
         courseID,
         title,
         date,
+        module
       });
       toast.success(response.data.message);
       router.push("/adminAllCourse");
@@ -91,6 +97,13 @@ export default function quiz() {
           <h1 className="text-4xl mainfont capitalize font-semibold text-center">
             Add quiz
           </h1>
+          <p>Module name </p>
+          <input
+            type="text"
+            className="bg-gray-200 p-2 rounded-md outline-dotted outline-1 w-full"
+            value={module}
+            onChange={moduleHandler}
+          />
           <p>Add exam title </p>
           <input
             type="text"
