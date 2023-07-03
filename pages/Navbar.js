@@ -2,9 +2,10 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Api from "./api/apiCaller";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import Image from "next/image";
+import Logo from "../public/edu.png";
 
 export default function Navbar() {
   const [Show, setShow] = useState(false);
@@ -35,7 +36,13 @@ export default function Navbar() {
               href="/"
               className="uppercase font-bold text-lg py-3  p-2 rounded-lg"
             >
-              Logo{" "}
+              <Image
+                src={Logo}
+                alt="Logo"
+                width={200}
+                height={200}
+                className="max-sm:w-20"
+              />
             </Link>
 
             <div

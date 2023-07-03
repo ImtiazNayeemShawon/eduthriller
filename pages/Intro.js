@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import Img from "../public/side.png";
-import Link from "next/link";
+import Aside from "../public/aside.svg";
 
 export default function Intro() {
   return (
@@ -27,6 +26,9 @@ export default function Intro() {
             স্টুডেন্টকে অন্যদের তুলনায় একধাপ এগিয়ে রাখে।
           </p>
           <br />
+        </div>
+        <div>
+          <Image src={Aside} className="mt-40 max-sm:mt-2" />
         </div>
       </div>
     </React.Fragment>

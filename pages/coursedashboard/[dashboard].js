@@ -104,7 +104,7 @@ export default function dashboard() {
               </a>
             </div>
             {/* quiz data  */}
-            
+
             {/* <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
               <Accordion className="shadow-sm ">
                 <AccordionSummary
@@ -143,55 +143,62 @@ export default function dashboard() {
                 ))}
               </Accordion>
             </div> */}
-           <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
-  {Data.quizes?.reduce((acc, q) => {
-    const moduleIndex = acc.findIndex((group) => group[0]?.module === q.module);
-    if (moduleIndex === -1) {
-      acc.push([q]);
-    } else {
-      acc[moduleIndex].push(q);
-    }
-    return acc;
-  }, []).map((group, groupIndex) => (
-    <Accordion className="shadow-sm" key={groupIndex}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls={`panel${groupIndex + 1}-content`}
-        id={`panel${groupIndex + 1}-header`}
-      >
-        <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
-          {group[0]?.module}
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        {group.map((q, index) => (
-          <Typography key={index} className="max-sm:text-sm">
-            <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 max-sm:block">
-              <h1 className="max-sm:m-auto my-auto">{q.title}</h1>
-              <div className="flex mr-0">
-                <button
-                  type="button"
-                  onClick={() => router.push(`/meritList/${q?.quiz}`)}
-                  className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-2 px-3 text-white font-semibold bangfont rounded-md"
-                >
-                  মেধা তালিকা
-                </button>
-                <button
-                  type="button"
-                  onClick={() => router.push(`/quizes/${q?.quiz}`)}
-                  className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
-                >
-                  <Image src={Exam} width={40} />
-                </button>
-              </div>
+            <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
+              {Data.quizes
+                ?.reduce((acc, q) => {
+                  const moduleIndex = acc.findIndex(
+                    (group) => group[0]?.module === q.module
+                  );
+                  if (moduleIndex === -1) {
+                    acc.push([q]);
+                  } else {
+                    acc[moduleIndex].push(q);
+                  }
+                  return acc;
+                }, [])
+                .map((group, groupIndex) => (
+                  <Accordion className="shadow-sm" key={groupIndex}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls={`panel${groupIndex + 1}-content`}
+                      id={`panel${groupIndex + 1}-header`}
+                    >
+                      <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
+                        {group[0]?.module}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      {group.map((q, index) => (
+                        <Typography key={index} className="max-sm:text-sm">
+                          <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 max-sm:block">
+                            <h1 className="max-sm:m-auto my-auto">{q.title}</h1>
+                            <div className="flex mr-0">
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  router.push(`/meritList/${q?.quiz}`)
+                                }
+                                className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-1 px-3 text-white font-semibold bangfont rounded-md"
+                              >
+                                মেধা তালিকা
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  router.push(`/quizes/${q?.quiz}`)
+                                }
+                                className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
+                              >
+                                <Image src={Exam} width={30} />
+                              </button>
+                            </div>
+                          </div>
+                        </Typography>
+                      ))}
+                    </AccordionDetails>
+                  </Accordion>
+                ))}
             </div>
-          </Typography>
-        ))}
-      </AccordionDetails>
-    </Accordion>
-  ))}
-</div>
-
           </div>
           <div></div>
         </div>

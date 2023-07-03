@@ -18,6 +18,7 @@ const Quiz = () => {
   const [seconds, setSeconds] = useState(0);
   const [title, setTitle] = useState("");
   const [Done, setDone] = useState(false);
+  const [showExplain, setShowExplain] = useState(false);
 
   useEffect(() => {
     const fetchDataById = async () => {
@@ -52,16 +53,44 @@ const Quiz = () => {
       <nav className="bg-white shadow-lg mb-20 rounded-lg mt-5 max-sm:mt-5 px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-0">
         <div className="container flex  items-center justify-between mx-auto ">
           <div className="mt-5 ">
-            <button className="bg-green-100 shadow-sm outline outline-1 outline-gray- text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6">
+            <button className="bg-green-100 shadow-sm outline outline-1 outline-gray- text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6 flex justify-around">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 block m-auto mr-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
               {minute}M: {seconds}S
             </button>
           </div>
           <div className="mt-5">
             <button
               onClick={handleUploadQuiz}
-              className="bg-green-100 shadow-sm outline outline-1 outline-gray- text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6"
+              className="bg-green-100 shadow-sm outline outline-1 outline-gray- text-gray-900 font-bold px-20 py-3 rounded-md text-xl max-sm:px-6 flex m-auto"
             >
-              Submit
+              Submit{" "}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 block m-auto"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
             </button>
           </div>
         </div>
@@ -135,27 +164,29 @@ const Quiz = () => {
   const ResultComponent = (
     <div>
       <Navbar />
-      <div className="mt-20">
-        <div className="flex">
+      <div className="mt-20 py-5">
+        <div className="flex justify-around">
           <button
             type="button"
             onClick={() => router.push(`/meritList/${quiz}`)}
-            className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-2 px-3 text-white font-semibold bangfont rounded-md"
+            className="bg-green-500 text-xl py-3 px-5 text-white font-bold uppercase rounded-md w-fit flex justify-between"
           >
-            মেধা তালিকা
+            <span>মেধা তালিকা </span>
           </button>
-          <h1 className="bg-green-700 text-xl py-3 px-5 text-white font-bold uppercase rounded-md w-fit">
+          <h1 className="bg-blue-700 text-xl py-3 px-5 text-white font-bold uppercase rounded-md w-fit">
             total score : {finalScore}
           </h1>
         </div>
 
-        <div className="grid grid-cols-2 place-items-center mt-20	gap-10 max-sm:grid-cols-1 max-sm:gap-2">
+        <div className="grid grid-cols-2 place-items-center mt-20	gap-10 max-sm:grid-cols-1 max-sm:gap-2 max-sm:mx-3 ">
           {Data.quiz?.map((quiz, index) => (
             <div
               key={index}
-              className=" p-4 outline-1 rounded-md  mt-5 w-full	h-full outline-blue-300 shadow-gray-200 shadow-md"
+              className=" p-4 outline-1 rounded-md  mt-5 w-full	h-full outline-blue-300 shadow-gray-400 shadow-2xl
+
+              "
             >
-              <h1 className="text-xl mb-4 font-semibold bangfont text-gray-700 max-sm:text-md ">
+              <h1 className="text-xl mb-4 font-semibold mainfont text-gray-700 max-sm:text-md ">
                 <span> </span>
                 {index + 1} <span>.</span> {quiz.question}
               </h1>
@@ -166,7 +197,7 @@ const Quiz = () => {
                       <span className="uppercase font-bold text-gray-700">
                         {String.fromCharCode(97 + optionindex)}
                       </span>
-                      ) <span className="bangfont ml-2">{option}</span>
+                      ) <span className="mainfont ml-2">{option}</span>
                     </div>
                   </div>
                 ))}
@@ -201,22 +232,22 @@ const Quiz = () => {
               ))}
 
               <div className="mt-3">
-                <Accordion className="shadow-sm ">
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
+                <div>
+                  <button
+                    className="font-semibold bg-blue-700 py-1 px-3 rounded-lg text-white capitalize block m-auto "
+                    onClick={() => setShowExplain(!showExplain)}
                   >
-                    <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm text-center">
-                      Explain:
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails key={index}>
-                    <Typography className="max-sm:text-sm">
-                      {quiz.explain}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
+                    Hide answer description
+                  </button>
+                  {showExplain ? (
+                    <div className=" border-2 border-gray-800 mt-2 rounded-2xl p-4">
+                      <p className="text-center text-lg mainfont capitalize">
+                        answer description
+                      </p>
+                      <p className="text-center">{quiz.explain}</p>
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           ))}
@@ -246,7 +277,7 @@ const Quiz = () => {
                     key={index}
                     className=" p-4  rounded-md  mt-5 w-full	h-full  shadow-gray-300 shadow-md"
                   >
-                    <h1 className=" mb-4 font-semibold bangfont text-gray-700 max-sm:text-md ">
+                    <h1 className=" mb-4 font-semibold mainfont text-gray-700 max-sm:text-md ">
                       <span> </span>
                       {index + 1} <span>. </span> {quiz.question}
                     </h1>
@@ -258,7 +289,7 @@ const Quiz = () => {
                               {String.fromCharCode(97 + optionindex)}
                             </span>
                             ){" "}
-                            <span className="bangfont ml-1 max-sm:text-sm gap-2">
+                            <span className="mainfont ml-1 max-sm:text-sm gap-2">
                               {option}
                             </span>
                           </div>
