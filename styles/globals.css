@@ -81,3 +81,13 @@ body{
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000; 
 }
+.textteacher{
+  font-size: 12px;
+}
+.accordion{
+  font-weight: 900;
+  font-size: 12px;
+}
+.teach{
+  border-radius: 50%;
+}

@@ -28,6 +28,7 @@ export default function EditCourse() {
       name: "",
       institute: "",
       level: "",
+      image:""
     },
   ]);
   const handleChange = (e, index) => {
@@ -37,7 +38,7 @@ export default function EditCourse() {
     setTeachers(updatedTeachers);
   };
   const handleAddTeacher = () => {
-    setTeachers([...teachers, { name: "", institute: "", level: "" }]);
+    setTeachers([...teachers, { name: "", institute: "", level: "",image:"" }]);
   };
   const handleDeleteTeacher = (index) => {
     const updatedTeachers = [...teachers];
@@ -387,6 +388,17 @@ export default function EditCourse() {
                         />
                       </label>
                       <br />
+                      <label className="text-sm mainfont ">
+                        Profile
+                        <input
+                          className="p-2 w-full outline-0 bg-gray-100"
+                          placeholder="photo link here"
+                          type="text"
+                          name="image"
+                          value={teacher.image}
+                          onChange={(e) => handleChange(e, index)}
+                        />
+                      </label>
                     </div>
                   ))}
                 </div>

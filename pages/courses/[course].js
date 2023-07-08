@@ -234,24 +234,41 @@ export default function Course() {
               <h1 className="text-3xl font-bold bangfont max-sm:text-2xl ">
                 {Data.title}
               </h1>
-              <div className="bangfont text-gray-800 max-sm:text-sm" dangerouslySetInnerHTML={{ __html: Data.description }} />
+              <div
+                className="bangfont text-gray-800 max-sm:text-sm"
+                dangerouslySetInnerHTML={{ __html: Data.description }}
+              />
               {/* teachers  */}
               <h1 className="mt-20 text-2xl bangfont font-semibold max-sm:mt-10 max-sm:text-xl">
                 কোর্স মেন্টরস :{" "}
               </h1>
               <div className="grid grid-cols-2 bg-slate-10 outline outline-1 outline-gray-300 mt-5 rounded-md max-sm:grid-cols-1">
                 {Data.teachers.map((teacher) => (
-                  <div className="px-3 py-2">
-                    <p className="text-xl font-semibold mainfont">
-                      {teacher.name}
-                    </p>
-                    <span className="text-sm  m-0 leading-3 text-gray-700">
-                      {teacher.institute}
-                    </span>
-                    <br />
-                    <span className="text-sm m-0  leading-3 text-gray-700">
-                      {teacher.level}
-                    </span>
+                  <div>
+                    <div className="grid grid-cols-4 place-items-center mb-7">
+                      <div className="">
+                        <Image
+                          src={teacher.image}
+                          width={60}
+                          height={60}
+                          className="rounded-7xl teach m-auto block my-auto
+                       max-sm:ml-8
+                       ml-20
+                        "
+                        />
+                      </div>
+                      <div className="px-1 py-1 col-span-3 ">
+                        <span className="text-lg mainfont ">
+                          {teacher.name}
+                        </span>
+                        <p className="textteacher   leading-0 text-gray-800">
+                          {teacher.institute}
+                        </p>
+                        <span className="inline-block bg-[#e2e4e7] p-1 text-xs uppercase text-[#4B5563] mt-2 ">
+                          {teacher.level}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -268,14 +285,15 @@ export default function Course() {
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
-                      <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
-                        {aboutItem.title}
-                      </Typography>
+                      <h3 className="bangfont text-lg font-bold text-gray-700 max-sm:text-sm ">
+                        {/* {aboutItem.title} */}
+                        যেভাবে পেমেন্ট করবেন
+                      </h3>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography className="max-sm:text-sm">
+                      <p className="max-sm:text-sm bangfont ">
                         {aboutItem.description}
-                      </Typography>
+                      </p>
                     </AccordionDetails>
                   </Accordion>
                 ))}

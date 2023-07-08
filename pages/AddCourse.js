@@ -49,6 +49,7 @@ export default function AddCourse() {
       name: "",
       institute: "",
       level: "",
+      image:""
     },
   ]);
   const handleChange = (e, index) => {
@@ -58,7 +59,7 @@ export default function AddCourse() {
     setTeachers(updatedTeachers);
   };
   const handleAddTeacher = () => {
-    setTeachers([...teachers, { name: "", institute: "", level: "" }]);
+    setTeachers([...teachers, { name: "", institute: "", level: "",image:"" }]);
   };
   const handleDeleteTeacher = (index) => {
     const updatedTeachers = [...teachers];
@@ -283,6 +284,17 @@ export default function AddCourse() {
                       type="text"
                       name="level"
                       value={teacher.level}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </label>
+                  <label className="text-sm mainfont ">
+                    Profile
+                    <input
+                      className="p-2 w-full outline-0 bg-gray-100"
+                      placeholder="image link here "
+                      type="text"
+                      name="image"
+                      value={teacher.image}
                       onChange={(e) => handleChange(e, index)}
                     />
                   </label>
