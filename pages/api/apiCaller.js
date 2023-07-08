@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const apiCaller = axios.create({
     // baseURL: "http://localhost:8000",
-   baseURL: "http://www.api.eduthriller.com/",
+   baseURL: "https://www.api.eduthriller.com/",
 });
 
 const token = Cookies.get("token");
