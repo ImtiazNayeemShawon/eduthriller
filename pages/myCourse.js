@@ -14,21 +14,34 @@ export default function myCourse() {
     handleGet();
   }, []);
 
-  async function handleGet() {
-    try {
-      const response = await Api.get("/crud/courses/enrolled");
-      const coursesData = response.data;
-      setCourses(coursesData);
-    } catch (error) {
-      toast.error(error.message);
-    }
+  function handleGet() {
+    Api.get("/crud/courses/enrolled")
+      .then((response) => {
+        const coursesData = response.data;
+        setCourses(coursesData);
+        toast.error(response.data.message)
+      })
+      .catch((error) => {
+        if (error.response) {
+          const errorMessage = error.response.data.message;
+          toast(errorMessage, {
+            icon: '🙆',
+          });
+        } else if (error.request) {
+          // The request was made but no response was received
+          toast.error("No response received from the server.");
+        } else {
+          // An error occurred during the request setup
+          toast.error("Failed to send the request.");
+        }
+      });
   }
 
   const notFound = (
     <section className="bg-white m-auto h-screen">
       <div className="m-auto block">
         <h1 className="text-3xl mainfont uppercase font-bold text-center ">
-          404 Course not found{" "}
+           Course not found{" "}
         </h1>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +49,7 @@ export default function myCourse() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-40 h-40 text-red-600 m-auto"
+          className="w-40 h-40 text-gray-600 m-auto"
         >
           <path
             strokeLinecap="round"
@@ -86,49 +99,48 @@ export default function myCourse() {
           {courses.length === 0 ? (
             <div className="col-span-4">{notFound}</div>
           ) : (
-            courses.map((course,index) => (
+            courses.map((course, index) => (
               <div key={index} className="grid  mt-5 h-80">
-              {/* course div  */}
-              <div
-                onClick={() => router.push(`/coursedashboard/${course._id}`)}
-                className=" bg-white outline outline-1  rounded-lg outline-gray-300"
-              >
-                <Image
-                  src={course.thumbnail}
-                  width={600}
-                  height={600}
-                  alt="def"
-                  className="rounded-t-lg
+                {/* course div  */}
+                <div
+                  onClick={() => router.push(`/coursedashboard/${course._id}`)}
+                  className=" bg-white outline outline-1  rounded-lg outline-gray-300"
+                >
+                  <Image
+                    src={course.thumbnail}
+                    width={600}
+                    height={600}
+                    alt="def"
+                    className="rounded-t-lg
                   m-auto block "
-                />
+                  />
 
-                <div className="px-4 mt-2">
-                  <p className="font-semibold mx-2 text-sm flex mb-2 mt-0 bg-gray-200 w-fit py-1 px-2 rounded-lg">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                      />
-                    </svg>
-                    ভর্তি হয়েছে {course.enrolledUsers.length} জন{" "}
-                  </p>
-                  <hr />
-                  <h1 className="text-gray-900 text-2xl bangfont font-bold mx-2 mt-2">
-                    {course.title}
-                  </h1>
-                </div>
-                <div className="flex justify-between p-3 bg-gray-100 mt-3">
-                 
-                  <button className="w-full py-2 hover:bg-gray-300 font-semibold rounded-lg flex justify-around bg-gray-200 my-auto max-sm:px-3">
-                  শুরু করি {" "}
+                  <div className="px-4 mt-2">
+                    <p className="font-semibold mx-2 text-sm flex mb-2 mt-0 bg-gray-200 w-fit py-1 px-2 rounded-lg">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                        />
+                      </svg>
+                      ভর্তি হয়েছে {course.enrolledUsers.length} জন{" "}
+                    </p>
+                    <hr />
+                    <h1 className="text-gray-900 text-2xl bangfont font-bold mx-2 mt-2">
+                      {course.title}
+                    </h1>
+                  </div>
+                  <div className="flex justify-between p-3 bg-gray-100 mt-3">
+                    <button className="w-full py-2 hover:bg-gray-300 font-semibold rounded-lg flex justify-around bg-gray-200 my-auto max-sm:px-3">
+                      শুরু করি{" "}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -144,9 +156,9 @@ export default function myCourse() {
                         />
                       </svg>
                     </button>
+                  </div>
                 </div>
               </div>
-            </div>
             ))
           )}
         </div>

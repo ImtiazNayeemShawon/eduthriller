@@ -18,7 +18,9 @@ const Quiz = () => {
   const [seconds, setSeconds] = useState(0);
   const [title, setTitle] = useState("");
   const [Done, setDone] = useState(false);
-  const [showExplain, setShowExplain] = useState(false);
+  const [explanationState, setExplanationState] = useState(
+    Array(Data.quiz?.length).fill(false)
+  );
 
   useEffect(() => {
     const fetchDataById = async () => {
@@ -160,6 +162,11 @@ const Quiz = () => {
       setFinalScore(score >= 0 ? score : 0);
     }
   }, [ansSize, score]);
+  const toggleExplanation = (index) => {
+    const newExplanationState = [...explanationState];
+    newExplanationState[index] = !newExplanationState[index];
+    setExplanationState(newExplanationState);
+  };
 
   const ResultComponent = (
     <div>
@@ -232,22 +239,25 @@ const Quiz = () => {
               ))}
 
               <div className="mt-3">
-                <div>
-                  <button
-                    className="font-semibold bg-blue-700 py-1 px-3 rounded-lg text-white capitalize block m-auto "
-                    onClick={() => setShowExplain(!showExplain)}
-                  >
-                    Hide answer description
-                  </button>
-                  {showExplain ? (
-                    <div className=" border-2 border-gray-800 mt-2 rounded-2xl p-4">
-                      <p className="text-center text-lg mainfont capitalize">
-                        answer description
-                      </p>
-                      <p className="text-center">{quiz.explain}</p>
-                    </div>
-                  ) : null}
-                </div>
+                <button
+                  className="font-semibold bg-blue-700 py-1 px-3 rounded-lg text-white capitalize block m-auto "
+                  onClick={() => toggleExplanation(index)}
+                >
+                  {explanationState[index]
+                    ? "Hide answer description"
+                    : "Show answer description"}
+                </button>
+                {explanationState[index] && (
+                  <div className="border-2 border-gray-800 mt-2 rounded-2xl p-4">
+                    <p className="text-center text-lg mainfont capitalize">
+                      answer description
+                    </p>
+                    <div
+                      className=" text-gray-800 max-sm:text-sm"
+                      dangerouslySetInnerHTML={{ __html: quiz.explain }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -271,19 +281,19 @@ const Quiz = () => {
             <Toaster />
             {/* quiz component */}
             <div className="mt-20">
-              <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2">
+              <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2 max-sm:mx-3 ">
                 {Data.quiz?.map((quiz, index) => (
                   <div
                     key={index}
-                    className=" p-4  rounded-md  mt-5 w-full	h-full  shadow-gray-300 shadow-md"
+                    className=" p-4  rounded-md  mt-5  w-full	h-full shadow-lg shadow-gray-400  max-sm:mx-5"
                   >
-                    <h1 className=" mb-4 font-semibold mainfont text-gray-700 max-sm:text-md ">
-                      <span> </span>
-                      {index + 1} <span>. </span> {quiz.question}
-                    </h1>
-                    <div className="grid grid-cols-2  gap-3 mb-2">
+                    <div
+                      className="bangfont text-gray-800 max-sm:text-sm"
+                      dangerouslySetInnerHTML={{ __html: quiz.question }}
+                    />
+                    <div className="grid grid-cols-2  gap-3 mb-2 ">
                       {quiz.options.map((option, optionindex) => (
-                        <div key={optionindex} className=" gap-10">
+                        <div key={optionindex} className=" gap-10 ">
                           <div className="flex">
                             <span className="uppercase font-bold text-gray-700">
                               {String.fromCharCode(97 + optionindex)}

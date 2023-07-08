@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Api from "../api/apiCaller";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { MyContext } from "/auth/AuthContext";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
 export default function Merit() {
   const [results, setResults] = useState([]);
   const router = useRouter();
+  const [username, setUsername] = useState();
 
-  const { UserloggedIn, user } = useContext(MyContext);
-  const userdata = useContext(MyContext);
-  const [username, setUserName] = useState("");
-
+  const token = Cookies.get("token");
   useEffect(() => {
-    setUserName(userdata.UserName.name);
-  });
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const username = decodedToken.username;
+      setUsername(username);
+    }
+  }, [token]);
 
   const { merit } = router.query;
 
@@ -50,7 +52,7 @@ export default function Merit() {
             <div
               key={item._id}
               className={`flex gap-20  max-sm:gap-3 bg-white shadow-md outline outline-1 outline-gray-200 py-4 px-2 rounded-sm mt-2 ${
-                item.user?.name === username ? "bg-green-100" : ""
+                item.user?.name === username ? "bg-green-400" : "bg-gray-800"
               }`}
             >
               <p className="text-lg mainfont font-semibold text-gray-800 max-sm:my-auto ml-3">

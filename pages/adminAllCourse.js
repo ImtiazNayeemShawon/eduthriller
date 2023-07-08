@@ -5,19 +5,35 @@ import Api from "./api/apiCaller";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Router from "next/router";
-import React, { useContext } from "react";
-import { MyContext } from "../auth/AuthContext";
+import React from "react"
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
+
 
 export default function AllCourse() {
-  const { loggedIn } = useContext(MyContext);
   const router = useRouter();
-  
-  if (typeof window !== 'undefined') {
-    if (!loggedIn) {
-      Router.push("/AdminLogin");
-    }
-  }
 
+  const [loggedIn, setIsLoggedIn] = useState(null); // Use null as the initial value
+  const token = Cookies.get("token");
+
+  useEffect(() => {
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const isLoggedIn = decodedToken.admin;
+      setIsLoggedIn(isLoggedIn);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (loggedIn === null) {
+      return;
+    }
+    if (!loggedIn) {
+      router.push("AdminLogin");
+    }
+  }, [loggedIn, router]);
 
   const [courses, setCourses] = useState([]);
   const edit = (

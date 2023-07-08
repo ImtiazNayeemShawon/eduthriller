@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Api from "../api/apiCaller";
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 
 export default function EditCourse() {
   const router = useRouter();
@@ -17,10 +19,7 @@ export default function EditCourse() {
 
   // ..............................................................................................
   // Course description handling function
-  const [description, setDescription] = useState("");
-  const handleDescription = (e) => {
-    setDescription(e.target.value);
-  };
+  
 
   // ..............................................................................................
   // multiple teacher adding function for course
@@ -210,7 +209,7 @@ export default function EditCourse() {
         setLoading(false);
         const Data = response.data.courseData;
         setTitle(Data.title);
-        setDescription(Data.description);
+        setContent(Data.description);
         setPrice(Data.price);
         setTeachers(Data.teachers);
         setQuestions(Data.about);
@@ -245,7 +244,7 @@ export default function EditCourse() {
     try {
       await Api.put(`/crud/course/${edit}`, {
         title,
-        description,
+        description:content,
         price,
         teachers,
         micros,
@@ -266,7 +265,21 @@ export default function EditCourse() {
   const quizHandler = () => {
     router.push(`/addquiz/${edit}`);
   };
-
+  const JoditEditor = dynamic(() => import("jodit-react"), {
+    ssr: false,
+  });
+  const editor = useRef(null);
+  const [content, setContent] = useState("");
+  const config = {
+     buttons: [ "bold", "italic", "underline", "strikethrough", "|", "ul", "ol", "|", "center", "left", "right", "justify", "|", "link", "image"],
+     uploader: { insertImageAsBase64URI: true },
+     removeButtons: ["brush", "file"],
+     showXPathInStatusbar: false,
+    askBeforePasteHTML: false,
+     showCharsCounter: false,
+     showWordsCounter: false,
+     toolbarAdaptive: false
+   };
   return (
     <React.Fragment>
       <Toaster />
@@ -311,15 +324,19 @@ export default function EditCourse() {
 
                 {/* course description  */}
                 <div>
-                  <textarea
-                    value={description}
-                    onChange={handleDescription}
-                    id="message"
-                    rows={4}
-                    className="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 outline-dashed outline-1 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-10"
-                    placeholder="Course description here..."
-                  />
-                </div>
+              <p className="mt-5 text-2xl uppercase font-semibold">
+                description:
+              </p>
+              <div>
+                
+                  <JoditEditor
+                  value={content}
+                  ref={editor}
+                  config={config}
+                  onBlur={content => setContent(content)}
+                />
+              </div>
+            </div>
               </div>
 
               {/* teachers section */}

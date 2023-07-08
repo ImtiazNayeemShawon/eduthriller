@@ -2,31 +2,33 @@ import AdminNavbar from "./AdminNavbar";
 import React from "react";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 import AddPaymentDetails from "./addPaymentDetails";
 
 const AdminPage = () => {
-  const [loggedIn, setLoggedIn] = useState(null);
   const router = useRouter();
+  const [loggedIn, setIsLoggedIn] = useState(null); // Use null as the initial value
+  const token = Cookies.get("token");
 
   useEffect(() => {
-    checkLoggedIn();
-  }, []);
-
-  const checkLoggedIn = async () => {
-    try {
-      const response = await Api.get("admin/checkAdmin");
-      const { loggedIn } = response.data;
-      setLoggedIn(loggedIn);
-
-      if (!loggedIn) {
-        setTimeout(() => {
-          router.push("/AdminLogin");
-        }, 1000);
-      }
-    } catch (error) {
-      //  router.push("/AdminLogin");
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const isLoggedIn = decodedToken.admin;
+      setIsLoggedIn(isLoggedIn);
+    } else {
+      setIsLoggedIn(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    if (loggedIn === null) {
+      return;
+    }
+    if (!loggedIn) {
+      router.push("AdminLogin");
+    }
+  }, [loggedIn, router]);
 
   return (
     <React.Fragment>

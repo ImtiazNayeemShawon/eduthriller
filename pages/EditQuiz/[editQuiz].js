@@ -19,6 +19,7 @@ export default function EditQuiz() {
   const [time, setTime] = useState("");
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -30,6 +31,7 @@ export default function EditQuiz() {
         setTime(quizData.time);
         setTitle(quizData.title);
         setDate(quizData.date);
+        setStatus(quizData.status);
       } catch (error) {
         toast.error(error.message);
       }
@@ -109,6 +111,10 @@ export default function EditQuiz() {
   const handleDateChange = (e) => {
     setDate(e.target.value);
   };
+  const handleStatus = (e) => {
+    setStatus(e.target.value);
+  };
+
   const deleteQuiz = (index) => {
     setQuiz((prevQuiz) => {
       const updatedQuiz = [...prevQuiz];
@@ -128,6 +134,7 @@ export default function EditQuiz() {
         courseID,
         title,
         date,
+        status
       });
       toast.success(response.data.message);
       router.push("/adminAllCourse");
@@ -162,6 +169,18 @@ export default function EditQuiz() {
           >
             Delete this quiz
           </button>
+          <button className="text-white bg-blue-600  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">{status}</button>
+          <select
+            onChange={handleStatus}
+            className="text-white bg-blue-600  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+          >
+            <option selected className="font-bold">
+              {" "}
+              Select status{" "}
+            </option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
           <p>Add exam title:</p>
           <input
             type="text"

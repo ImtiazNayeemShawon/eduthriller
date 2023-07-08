@@ -5,10 +5,10 @@ import Image from "next/image";
 export default function footer() {
   return (
     <React.Fragment>
-      <footer className=" mt-40 bg-gray-200 rounded-lg shadow   outline outline-1 outline-gray-300">
+      <footer className=" mt-40 bg-green-200 rounded-lg shadow   outline outline-1 outline-gray-200">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between text-gray-9000">
-            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-800 sm:mb-0 ">
+            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-700 sm:mb-0 ">
               <li>
                 <a
                   href="https://www.facebook.com/imtinayeem"
@@ -28,14 +28,14 @@ export default function footer() {
                   Privacy Policy
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a
                   href="/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf"
                   className="mr-4 hover:underline md:mr-6 "
                 >
                   Admin pannel
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a href="#" className="hover:underline">
                   Contact

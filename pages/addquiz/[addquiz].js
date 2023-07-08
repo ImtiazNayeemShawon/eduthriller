@@ -4,6 +4,10 @@ import { useRouter } from "next/router";
 import AdminNavbar from "../AdminNavbar";
 import Api from "../api/apiCaller";
 import { toast, Toaster } from "react-hot-toast";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
+import { useRef } from "react";
+import dynamic from "next/dynamic";
 
 export default function quiz() {
   const router = useRouter();
@@ -79,7 +83,7 @@ export default function quiz() {
         courseID,
         title,
         date,
-        module
+        module,
       });
       toast.success(response.data.message);
       router.push("/adminAllCourse");
@@ -87,6 +91,49 @@ export default function quiz() {
       toast.error(error.message);
     }
   }
+
+  const [loggedIn, setIsLoggedIn] = useState(null); // Use null as the initial value
+  const token = Cookies.get("token");
+
+  useEffect(() => {
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const isLoggedIn = decodedToken.admin;
+      setIsLoggedIn(isLoggedIn);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (loggedIn === null) {
+      return;
+    }
+    if (!loggedIn) {
+      router.push("AdminLogin");
+    }
+  }, [loggedIn, router]);
+  const JoditEditor = dynamic(() => import("jodit-react"), {
+    ssr: false,
+  });
+  const editor = useRef(null);
+  const [content, setContent] = useState("");
+  const config = {
+    readonly: false, // Set to true to make the editor read-only
+    toolbar: true, // Show the toolbar
+    spellcheck: false, // Enable spellchecking
+    showCharsCounter:false, // Show a character counter
+    showWordsCounter:false, // Show a word counter
+    showXPathInStatusbar: false, // Hide the XPath information in the status bar
+    askBeforePasteHTML: false, // Disable the confirmation dialog when pasting HTML
+    width: '500px', // Set the height of the editor
+
+    defaultMode: '1', // Set the default mode (0 - WYSIWYG, 1 - SOURCE)
+    buttons: 'bold,italic,underline,|,align,ul,ol,|,image,video,table', // Specify the buttons to display in the toolbar
+    uploader: {
+      insertImageAsBase64URI: true // Insert uploaded images as base64 URIs instead of URLs
+    },
+  };
 
   return (
     <React.Fragment>
@@ -112,20 +159,40 @@ export default function quiz() {
             onChange={titleHandler}
           />
         </div>
-        <p>Add time as minute </p>
-        <input
-          type="number"
-          className="bg-gray-200 p-2 rounded-md outline-dotted outline-1"
-          value={time}
-          onChange={timeHandler}
-        />
-        <p>Add exam date </p>
-        <input
-          type="text"
-          className="bg-gray-200 p-2 rounded-md outline-dotted outline-1"
-          value={date}
-          onChange={DateHandler}
-        />
+        <div className="flex justify-between">
+          <div >
+            <p>Add time as minute </p>
+            <input
+              type="number"
+              className="bg-gray-200 p-2 rounded-md outline-dotted outline-1"
+              value={time}
+              onChange={timeHandler}
+            />
+            <p>Add exam date </p>
+            <input
+              type="text"
+              className="bg-gray-200 p-2 rounded-md outline-dotted outline-1"
+              value={date}
+              onChange={DateHandler}
+            />
+          </div>
+          <div>
+            <p className="mt-2">explaination:</p>
+            <div>
+              <JoditEditor
+                value={content}
+                ref={editor}
+                config={config}
+                onBlur={(content) => setContent(content)}
+              />
+            </div>
+            <p>Output</p>
+            <textarea
+              className="p-2 w-full bg-gray-300 outline-dashed outline-1 mt-2"
+              value={content}
+            />
+          </div>
+        </div>
 
         <div className="mt-5 grid grid-cols-2 gap-5">
           {quiz.map((quizItem, index) => (
@@ -172,10 +239,9 @@ export default function quiz() {
                 ))}
               </select>
 
-              <p className="mt-2">explaination</p>
               <textarea
                 className="p-2 w-full bg-gray-300 outline-dashed outline-1 mt-2"
-                placeholder="Add the Right option"
+                placeholder="past the explaination here"
                 type="text"
                 name="explain"
                 value={quizItem.explain}

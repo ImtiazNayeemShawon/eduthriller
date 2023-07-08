@@ -7,7 +7,7 @@ export default function AdminSuccess() {
   const router = useRouter();
 
   const Next = () => {
-    router.push("/AdminPage");
+    router.push("/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf");
   };
   return (
     <React.Fragment>

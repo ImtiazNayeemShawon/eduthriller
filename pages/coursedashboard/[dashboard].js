@@ -39,6 +39,22 @@ export default function dashboard() {
   const downloadImage = () => {
     saveAs(Data?.routine, "Routine.jpg"); // Put your image url here.
   };
+  const lock = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+      />
+    </svg>
+  );
   return (
     <React.Fragment>
       <div className="mt-0 ">
@@ -105,44 +121,6 @@ export default function dashboard() {
             </div>
             {/* quiz data  */}
 
-            {/* <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
-              <Accordion className="shadow-sm ">
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
-                    এক্সাম সমূহ
-                  </Typography>
-                </AccordionSummary>
-                {Data.quizes?.map((q, index) => (
-                  <AccordionDetails key={index}>
-                    <Typography className="max-sm:text-sm">
-                      <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 max-sm:block ">
-                        <h1 className="max-sm:m-auto my-auto"> {q.title}</h1>
-                        <div className="flex mr-0">
-                          <button
-                            type="button"
-                            onClick={() => router.push(`/meritList/${q?.quiz}`)}
-                            className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-2 px-3 text-white font-semibold bangfont rounded-md"
-                          >
-                            মেধা তালিকা
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => router.push(`/quizes/${q?.quiz}`)}
-                            className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
-                          >
-                            <Image src={Exam} width={40} />
-                          </button>
-                        </div>
-                      </div>
-                    </Typography>
-                  </AccordionDetails>
-                ))}
-              </Accordion>
-            </div> */}
             <div className="mt-5 bg-slate-10 outline outline-1 outline-gray-300 rounded-md">
               {Data.quizes
                 ?.reduce((acc, q) => {
@@ -163,34 +141,47 @@ export default function dashboard() {
                       aria-controls={`panel${groupIndex + 1}-content`}
                       id={`panel${groupIndex + 1}-header`}
                     >
-                      <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
-                        {group[0]?.module}
-                      </Typography>
+                      {group.some((q) => q.status === "active") ? (
+                        <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
+                          {group[0]?.module}
+                        </Typography>
+                      ) : (
+                        <div className="flex justify-between flex-wrap">
+                          <button>Coming Soon</button>
+                          <button> {lock}</button>
+                        </div>
+                      )}
                     </AccordionSummary>
                     <AccordionDetails>
                       {group.map((q, index) => (
                         <Typography key={index} className="max-sm:text-sm">
-                          <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 max-sm:block">
-                            <h1 className="max-sm:m-auto my-auto">{q.title}</h1>
+                          <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 flex-wrap">
+                            <h1 className="max-sm: my-auto">{q.title}</h1>
                             <div className="flex mr-0">
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  router.push(`/meritList/${q?.quiz}`)
-                                }
-                                className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-1 px-3 text-white font-semibold bangfont rounded-md"
-                              >
-                                মেধা তালিকা
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  router.push(`/quizes/${q?.quiz}`)
-                                }
-                                className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
-                              >
-                                <Image src={Exam} width={30} />
-                              </button>
+                              {q.status === "active" ? ( // Only show the buttons for active quizzes
+                                <>
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      router.push(`/meritList/${q?.quiz}`)
+                                    }
+                                    className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2 bg-green-500 py-1 px-3 text-white font-semibold bangfont rounded-md"
+                                  >
+                                    মেধা তালিকা
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      router.push(`/quizes/${q?.quiz}`)
+                                    }
+                                    className="focus:outline-none focus:ring-blue-300 text-center mr-2 max-sm:text-sm max-sm:mt-2"
+                                  >
+                                    <Image src={Exam} width={30} />
+                                  </button>
+                                </>
+                              ) : (
+                                <p>{lock}</p>
+                              )}
                             </div>
                           </div>
                         </Typography>

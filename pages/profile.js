@@ -24,9 +24,11 @@ export default function Profile() {
       setUserData(responseData);
       setLoading(false);
     } catch (error) {
-      toast.error("Please referesh the page");
+      const errorMessage = error.response.data.error || "Failed to fetch user data. Please try again later.";
+      toast.error(errorMessage);
     }
   };
+  
   return (
     <React.Fragment>
       <Toaster />

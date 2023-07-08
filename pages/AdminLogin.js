@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Api from "./api/apiCaller";
-import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
+import Router from "next/router";
 
 export default function Login() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   const PhoneHandler = (event) => {
     setPhone(event.target.value);
@@ -27,7 +26,7 @@ export default function Login() {
       toast.success(response.data.message);
       const token = response.data.accessToken;
       Cookies.set("token", token);
-      router.push("/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf");
+      Router.push("./MicroComponents/AdminSuccess");
     } catch (error) {
       toast.error("Please Try again");
     }

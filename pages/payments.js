@@ -3,38 +3,68 @@ import Api from "./api/apiCaller";
 import { toast, Toaster } from "react-hot-toast";
 import AdminNavbar from "./AdminNavbar";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import { MyContext } from "../auth/AuthContext";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
 export default function Payments() {
   const [payments, setPayments] = useState([]);
-  const { loggedIn } = useContext(MyContext);
   const router = useRouter();
+  const [loggedIn, setIsLoggedIn] = useState(null); // Use null as the initial value
+  const token = Cookies.get("token");
 
-  if (typeof window !== "undefined") {
-    if (!loggedIn) {
-      router.push("/AdminLogin");
+  useEffect(() => {
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const isLoggedIn = decodedToken.admin;
+      setIsLoggedIn(isLoggedIn);
+    } else {
+      setIsLoggedIn(false);
     }
-  }
+  }, [token]); 
+
+  useEffect(() => {
+    if (loggedIn === null) {
+      return;
+    }
+    if (!loggedIn) {
+      router.push("AdminLogin");
+    }
+  }, [loggedIn, router]);
+
   useEffect(() => {
     handleGet();
   }, []);
 
-  async function handleGet() {
-    try {
-      const response = await Api.get("crud/payment");
-      const paymentsData = response.data.result;
-      setPayments(paymentsData);
-    } catch (error) {
-      toast.error(error.message);
-    }
+  function handleGet() {
+    Api.get("crud/payment")
+      .then((response) => {
+        const paymentsData = response.data.result;
+        setPayments(paymentsData);
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Failed to fetch payment data. Please try again later.");
+      });
   }
+  
+  const declineEnrollment = (id) => {
+    Api.delete(`/crud/payment/${id}`)
+      .then((response) => {
+        toast.success(response.data.message);
+        handleGet();
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Failed to decline enrollment. Please try again later.");
+      });
+  };
+  
 
   const approveEnrollment = (enrollmentId, courseId) => {
     Api.put(`/crud/enrollments/${enrollmentId}/approve`, { courseId })
       .then((response) => {
         toast.success(response.data.message);
-        handleGet(); // Fetch updated payments after approval
+        handleGet();
       })
       .catch((error) => {
         console.error(error);
@@ -90,6 +120,12 @@ export default function Payments() {
                     className="bg-blue-700 py-2 px-4 text-lg uppercase font-bold mainfont rounded-md text-gray-100"
                   >
                     Approve
+                  </button>
+                  <button
+                    onClick={() => declineEnrollment(data._id, data.courseId)}
+                    className="bg-red-600 py-2 px-4 text-lg uppercase font-bold mainfont rounded-md text-gray-100"
+                  >
+                    Decline
                   </button>
                 </div>
               </div>

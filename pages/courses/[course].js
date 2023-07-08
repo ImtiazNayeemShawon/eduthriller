@@ -231,12 +231,10 @@ export default function Course() {
           </div>
           <div className="grid grid-cols-3 gap-5 max-sm:grid-cols-1 max-sm:mt-20">
             <div className="col-span-2">
-              <h1 className="text-3xl font-bold bangfont max-sm:text-2xl max-sm:text-center">
+              <h1 className="text-3xl font-bold bangfont max-sm:text-2xl ">
                 {Data.title}
               </h1>
-              <p className="text-gray-800 bangfont  leading-7 mt-6 course-text text-justify max-sm:text-sm max-sm:mx-3 ">
-                {Data.description}
-              </p>
+              <div className="bangfont text-gray-800 max-sm:text-sm" dangerouslySetInnerHTML={{ __html: Data.description }} />
               {/* teachers  */}
               <h1 className="mt-20 text-2xl bangfont font-semibold max-sm:mt-10 max-sm:text-xl">
                 কোর্স মেন্টরস :{" "}
@@ -247,11 +245,11 @@ export default function Course() {
                     <p className="text-xl font-semibold mainfont">
                       {teacher.name}
                     </p>
-                    <span className="text-sm font-thin m-0 leading-3 text-gray-700">
+                    <span className="text-sm  m-0 leading-3 text-gray-700">
                       {teacher.institute}
                     </span>
                     <br />
-                    <span className="text-sm m-0 font-thin leading-3 text-gray-700">
+                    <span className="text-sm m-0  leading-3 text-gray-700">
                       {teacher.level}
                     </span>
                   </div>

@@ -95,9 +95,10 @@ export default function payment() {
             </p>
             <p className="mt-4 text-xl">{paymentDetails[0]?.step1}</p>
             <ul className="list-disc ml-10">
-              <li className="mainfont  text-gray-800 font-semibold">
-                {paymentDetails[0]?.number}
-              </li>
+              <div
+                className="mainfont font-semibold text-gray-800 max-sm:text-sm"
+                dangerouslySetInnerHTML={{ __html: paymentDetails[0]?.number }}
+              />
             </ul>
             <p className="font-bold underline underline-offset-4 text-xl mt-5">
               ধাপ-০২ঃ

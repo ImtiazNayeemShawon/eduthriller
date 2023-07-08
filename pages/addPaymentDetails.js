@@ -2,11 +2,12 @@ import React from "react";
 import { useState } from "react";
 import Api from "./api/apiCaller";
 import { toast, Toaster } from "react-hot-toast";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 
 export default function addPaymentDetails() {
   const [step1, setStep1] = useState("");
   const [step2, setStep2] = useState("");
-  const [number, setNumber] = useState("");
 
   async function handlePayment(ev) {
     ev.preventDefault();
@@ -14,7 +15,7 @@ export default function addPaymentDetails() {
       const response = await Api.post("/crud/paymentDetails", {
         step1,
         step2,
-        number,
+        number: content,
       });
       toast.success(response.data.message);
     } catch (error) {
@@ -27,13 +28,46 @@ export default function addPaymentDetails() {
       const response = await Api.put("/crud/paymentDetails", {
         step1,
         step2,
-        number,
+        number:content,
       });
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.message);
     }
   }
+
+  const JoditEditor = dynamic(() => import("jodit-react"), {
+    ssr: false,
+  });
+  const editor = useRef(null);
+  const [content, setContent] = useState("");
+  const config = {
+    buttons: [
+      "bold",
+      "italic",
+      "underline",
+      "strikethrough",
+      "|",
+      "ul",
+      "ol",
+      "|",
+      "center",
+      "left",
+      "right",
+      "justify",
+      "|",
+      "link",
+      "image",
+    ],
+    uploader: { insertImageAsBase64URI: true },
+    removeButtons: ["brush", "file"],
+    showXPathInStatusbar: false,
+    askBeforePasteHTML: false,
+    showCharsCounter: false,
+    showWordsCounter: false,
+    toolbarAdaptive: false,
+  };
+
   return (
     <div className="">
       <Toaster />
@@ -53,12 +87,19 @@ export default function addPaymentDetails() {
           />
 
           <ul className="list-disc ">
-            <p>Bkash number for payment</p>
-            <input
-              onChange={(e) => setNumber(e.target.value)}
-              value={number}
-              className="outline outline-1 p-2 outline-gray-400 rounded-lg mt-2"
-            />
+            <div>
+              <p className="mt-5 text-2xl uppercase font-semibold">
+                Bkash number for payment
+              </p>
+              <div>
+                <JoditEditor
+                  value={content}
+                  ref={editor}
+                  config={config}
+                  onBlur={(content) => setContent(content)}
+                />
+              </div>
+            </div>
           </ul>
           <p className="font-bold underline underline-offset-4 text-xl mt-5">
             ধাপ-০২ঃ

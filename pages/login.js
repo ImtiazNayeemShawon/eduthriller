@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
+import validator from "validator";
 
 export default function Login() {
   const [phone, setPhone] = useState("");
@@ -20,6 +21,12 @@ export default function Login() {
 
   async function handleSubmit(ev) {
     ev.preventDefault();
+  
+    if (!validator.isNumeric(phone) || phone.length !== 11) {
+      toast.error("Phone number should be  11 digits");
+      return;
+    }
+  
     try {
       const response = await Api.post("user/login", {
         phone,
@@ -32,9 +39,14 @@ export default function Login() {
       const token = response.data.accessToken;
       Cookies.set("token", token);
     } catch (error) {
-      toast.error(error.message);
+      if (error.response) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
     }
   }
+  
 
   return (
     <React.Fragment>
@@ -57,6 +69,7 @@ export default function Login() {
               className="bg-slate-300 w-full p-3 rounded-md outline-1 "
               placeholder="Enter your phone number"
               onChange={PhoneHandler}
+              type="number"
               value={phone}
             />
             <p className="mt-5 text-lg text-gray-600  mainfont font-semibold">
@@ -69,7 +82,7 @@ export default function Login() {
               onChange={PasswordHandler}
               value={password}
             />{" "}
-            <Link href="reset" className="text-blue-700 hover:underline">
+            <Link href="forget" className="text-blue-700 hover:underline">
               Forgot password?
             </Link>
             <br />

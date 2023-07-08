@@ -1,7 +1,20 @@
 import Link from "next/link";
 import React from "react";
+import { useState, useEffect } from "react";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
 export default function AdminNavbar() {
+  const [username, setUsername] = useState("");
+  const token = Cookies.get("token");
+  useEffect(() => {
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setUsername(decodedToken.phone);
+    }
+  }, [token]);
+  console.log(username);
+
   return (
     <React.Fragment>
       <div className="fixed">
@@ -42,7 +55,12 @@ export default function AdminNavbar() {
                 >
                   Approve course
                 </Link>
-                
+                <Link
+                  href="/payments"
+                  className=" text-gray hover:text-white hover:bg-blue-500 font-bold rounded-lg text-sm px-5 py-3 text-center duration-300"
+                >
+                  Logged in as: {username}
+                </Link>
               </ul>
             </div>
           </div>
