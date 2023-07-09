@@ -150,6 +150,7 @@ export default function Navbar() {
             <div className=" fixed p-10  bg-gray-800 w-full rounded hidden max-sm:block transition duration-800 mt-0">
               <button
                 onClick={() => router.push("/AllCourse")}
+               
                 className="hover:bg-blue-500 py-2 w-full px-3 rounded-md bg-gray-700"
               >
                 <Link
@@ -188,7 +189,7 @@ export default function Navbar() {
                 >
                   <Link
                     href="/myCourse"
-                    className=" text-gray hover:text-white hover:bg-green-500 font-bold  rounded-lg text-sm px-5 py-3 text-center duration-300"
+                    className=" text-gray-100 font-bold  rounded-lg text-sm px-5 py-3 text-center duration-300"
                   >
                     আমার কোর্স
                   </Link>

@@ -142,11 +142,11 @@ export default function dashboard() {
                       id={`panel${groupIndex + 1}-header`}
                     >
                       {group.some((q) => q.status === "active") ? (
-                        <Typography className="bangfont font-bold text-gray-700 max-sm:text-sm">
+                        <p className=" text-lg text-gray-700 max-sm:text-sm">
                           {group[0]?.module}
-                        </Typography>
+                        </p>
                       ) : (
-                        <div className="flex justify-between flex-wrap">
+                        <div className="flex justify-between flex-wrap ">
                           <button>Coming Soon</button>
                           <button> {lock}</button>
                         </div>
@@ -154,9 +154,9 @@ export default function dashboard() {
                     </AccordionSummary>
                     <AccordionDetails>
                       {group.map((q, index) => (
-                        <Typography key={index} className="max-sm:text-sm">
+                        <h2 key={index} className="max-sm:text-sm">
                           <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 flex-wrap">
-                            <h1 className="max-sm: my-auto">{q.title}</h1>
+                            <h1 className="max-sm: text-sm my-auto">{q.title}</h1>
                             <div className="flex mr-0">
                               {q.status === "active" ? ( // Only show the buttons for active quizzes
                                 <>
@@ -184,7 +184,7 @@ export default function dashboard() {
                               )}
                             </div>
                           </div>
-                        </Typography>
+                        </h2>
                       ))}
                     </AccordionDetails>
                   </Accordion>

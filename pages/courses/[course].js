@@ -252,8 +252,7 @@ export default function Course() {
                           width={60}
                           height={60}
                           className="rounded-7xl teach m-auto block my-auto
-                       max-sm:ml-8
-                       ml-20
+                       
                         "
                         />
                       </div>

@@ -19,13 +19,12 @@ export default function myCourse() {
       .then((response) => {
         const coursesData = response.data;
         setCourses(coursesData);
-        toast.error(response.data.message)
       })
       .catch((error) => {
         if (error.response) {
           const errorMessage = error.response.data.message;
           toast(errorMessage, {
-            icon: '🙆',
+            icon: "🙆",
           });
         } else if (error.request) {
           // The request was made but no response was received
@@ -41,7 +40,7 @@ export default function myCourse() {
     <section className="bg-white m-auto h-screen">
       <div className="m-auto block">
         <h1 className="text-3xl mainfont uppercase font-bold text-center ">
-           Course not found{" "}
+          Course not found{" "}
         </h1>
         <svg
           xmlns="http://www.w3.org/2000/svg"
