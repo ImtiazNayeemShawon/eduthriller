@@ -245,19 +245,18 @@ export default function Course() {
               <div className="grid grid-cols-2 bg-slate-10 outline outline-1 outline-gray-300 mt-5 rounded-md max-sm:grid-cols-1">
                 {Data.teachers.map((teacher) => (
                   <div>
-                    <div className="grid grid-cols-4 place-items-center mb-7">
+                    <div className="flex gap-10 m-2 max-sm:gap-4 place-items-center mb-7">
                       <div className="">
                         <Image
                           src={teacher.image}
                           width={60}
                           height={60}
                           className="rounded-7xl teach m-auto block my-auto
-                       
                         "
                         />
                       </div>
-                      <div className="px-1 py-1 col-span-3 ">
-                        <span className="text-lg mainfont ">
+                      <div className="px-1 py-1  text-left">
+                        <span className="text-lg mainfont text-left">
                           {teacher.name}
                         </span>
                         <p className="textteacher   leading-0 text-gray-800">
