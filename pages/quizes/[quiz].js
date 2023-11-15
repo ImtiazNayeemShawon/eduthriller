@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 import Api from "../api/apiCaller";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Navbar from "../Navbar";
 
 const Quiz = () => {
@@ -14,7 +9,7 @@ const Quiz = () => {
   const router = useRouter();
   const { quiz } = router.query;
 
-  const [minute, setMinute] = useState(1);
+  const [minute, setMinute] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [title, setTitle] = useState("");
   const [Done, setDone] = useState(false);
@@ -27,9 +22,11 @@ const Quiz = () => {
       try {
         const response = await Api.get(`/crud/quizes/${quiz}`);
         setData(response.data.result);
-        console.log(response.data);
         setMinute(response.data.result.time);
+        // setMinute(1);
+
         setTitle(response.data.result.title);
+        upload();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -39,7 +36,8 @@ const Quiz = () => {
   }, [quiz]);
 
   useEffect(() => {
-    if (seconds > 0 && minute > 0) {
+    if (minute === 0) {
+    } else if (seconds > 0 && minute > 0) {
       const timer = setTimeout(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
@@ -141,9 +139,7 @@ const Quiz = () => {
       });
       toast.success(response.data.message);
       setDone(true);
-    } catch (error) {
-      toast.error(error.message);
-    }
+    } catch (error) {}
   }
 
   const [finalScore, setFinalScore] = useState(0);
@@ -189,14 +185,18 @@ const Quiz = () => {
           {Data.quiz?.map((quiz, index) => (
             <div
               key={index}
-              className=" p-4 outline-1 rounded-md  mt-5 w-full	h-full outline-blue-300 shadow-gray-400 shadow-2xl
+              className=" p-4 outline-1 rounded-md  mt-5 w-full	h-full outline-blue-300 shadow-gray-400 shadow
 
               "
             >
-              <h1 className="text-xl mb-4 font-semibold mainfont text-gray-700 max-sm:text-md ">
-                <span> </span>
-                {index + 1} <span>.</span> {quiz.question}
-              </h1>
+              <div className="flex text-xl gap-2 mb-4 font-semibold mainfont text-gray-700 max-sm:text-md ">
+                {index + 1}.
+                <div
+                  className="text-xl mb-4 font-semibold mainfont text-gray-700 max-sm:text-md "
+                  dangerouslySetInnerHTML={{ __html: quiz.question }}
+                />
+              </div>
+
               <div className="grid grid-cols-2 gap-4 mb-2">
                 {quiz.options.map((option, optionindex) => (
                   <div key={optionindex} className=" gap-10">
@@ -268,7 +268,7 @@ const Quiz = () => {
 
   return (
     <React.Fragment>
-      <div>
+      <div className="">
         {Done ? (
           <div>{ResultComponent}</div>
         ) : (
@@ -281,16 +281,19 @@ const Quiz = () => {
             <Toaster />
             {/* quiz component */}
             <div className="mt-20">
-              <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2 max-sm:mx-3 ">
+              <div className="grid grid-cols-2 place-items-center 	gap-10 max-sm:grid-cols-1 max-sm:gap-2 max-sm:mx-3 max-sm:gap-y-10">
                 {Data.quiz?.map((quiz, index) => (
                   <div
                     key={index}
-                    className=" p-4  rounded-md  mt-5  w-full	h-full shadow-lg shadow-gray-400  max-sm:mx-5"
+                    className=" p-4  rounded-md  mt-5  w-full	h-full shadow shadow-gray-400 outline outline-1 outline-gray-500   max-sm:mx-5"
                   >
-                    <div
-                      className="bangfont text-gray-800 max-sm:text-sm"
-                      dangerouslySetInnerHTML={{ __html: quiz.question }}
-                    />
+                    <div className="flex text-xl gap-2 mb-4 font-semibold mainfont text-gray-700 max-sm:text-md ">
+                      {index + 1}.
+                      <div
+                        className="text-xl mb-4 font-semibold mainfont text-gray-700 max-sm:text-md "
+                        dangerouslySetInnerHTML={{ __html: quiz.question }}
+                      />
+                    </div>
                     <div className="grid grid-cols-2  gap-3 mb-2 ">
                       {quiz.options.map((option, optionindex) => (
                         <div key={optionindex} className=" gap-10 ">
@@ -299,7 +302,7 @@ const Quiz = () => {
                               {String.fromCharCode(97 + optionindex)}
                             </span>
                             ){" "}
-                            <span className="mainfont ml-1 max-sm:text-sm gap-2">
+                            <span className="mainfont ml-1 my-auto block max-sm:text-sm gap-2">
                               {option}
                             </span>
                           </div>
@@ -309,7 +312,7 @@ const Quiz = () => {
 
                     {quiz.options.map((option, optionindex) => (
                       <div key={optionindex} className="flex gap-10 mt-1">
-                        <label className="bg-white outline outline-1 outline-gray-300 py-4 mt-1 w-full text-left px-2 rounded-md font-semibold text-gray-800 hover:outline-1 hover:outline  flex  gap-6">
+                        <label className="  outline-gray-300 py-4  w-full text-left px-2 text-gray-800 hover:outline-1 hover:outline  flex  gap-6 bg-gray-200  mt-4  rounded-md font-semibold">
                           <input
                             value={option}
                             type="radio"

@@ -9,13 +9,15 @@ export default function Profile() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const token = Cookies.get("token");
+
   const Next = () => {
     router.push("/userUpdate");
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [token]);
 
   const fetchData = async () => {
     try {
@@ -24,11 +26,13 @@ export default function Profile() {
       setUserData(responseData);
       setLoading(false);
     } catch (error) {
-      const errorMessage = error.response.data.error || "Failed to fetch user data. Please try again later.";
+      const errorMessage =
+        error.response.data.error ||
+        "Failed to fetch user data. Please try again later.";
       toast.error(errorMessage);
     }
   };
-  
+
   return (
     <React.Fragment>
       <Toaster />
@@ -57,15 +61,15 @@ export default function Profile() {
       ) : (
         <div>
           <div className="m-5 bg-gray-200 mt-20  shadow-md h rounded-xl flex py-4">
-            <button 
-            className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300">
+            <button className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300">
               প্রোফাইল{" "}
             </button>
             <button
-            onClick={() => {
-              router.push("/myCourse");
-            }}
-            className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300">
+              onClick={() => {
+                router.push("/myCourse");
+              }}
+              className="text-center p-2 text-md font-bold uppercase rounded-md text-green bangofnt m-auto block  hover:bg-green-400 hover:text-white w-40 text-black duration-300"
+            >
               আমার কোর্স{" "}
             </button>
             <button

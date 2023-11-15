@@ -284,8 +284,8 @@ export default function Course() {
                       id="panel1a-header"
                     >
                       <h3 className="bangfont text-lg font-bold text-gray-700 max-sm:text-sm ">
-                        {/* {aboutItem.title} */}
-                        যেভাবে পেমেন্ট করবেন
+                         {aboutItem.title} 
+
                       </h3>
                     </AccordionSummary>
                     <AccordionDetails>

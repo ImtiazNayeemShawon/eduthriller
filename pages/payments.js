@@ -86,32 +86,32 @@ export default function Payments() {
           </div>
         ) : (
           <div>
-            {filteredData.map((data, i) => (
+            {filteredData?.map((data, i) => (
               <div
                 className="bg-teal-100 shadow-sm shadow-neutral-300 px-10 py-10 mt-10 rounded-lg"
                 key={i}
               >
                 <div className="grid grid-cols-2 gap-4">
                   <p className="px-2 py-3 bg-white rounded-lg text-lg text-gray-800 mainfont capitalize">
-                    name: {data.user.name}
+                    name: {data?.user?.name}
                   </p>
                   <p className="px-2 py-3 bg-white rounded-lg text-lg text-gray-800 mainfont capitalize">
-                    phone: {data.user.phone}
+                    phone: {data?.user?.phone}
                   </p>
                   <p className="px-2 py-3 bg-white rounded-lg text-lg text-gray-800 mainfont capitalize">
-                    sender number: {data.sender}
+                    sender number: {data?.sender}
                   </p>
                   <p className="px-2 py-3 bg-white rounded-lg text-lg text-gray-800 mainfont capitalize">
-                    reciver number: {data.reciver}
+                    reciver number: {data?.reciver}
                   </p>
                   <p className="px-2 py-3 bg-white rounded-lg text-lg text-gray-800 mainfont capitalize">
-                    payment method: {data.method}
+                    payment method: {data?.method}
                   </p>
                   <p className="px-2 py-3 bg-white rounded-lg text-lg text-gray-800 mainfont capitalize">
-                    transaction ID: {data.transaction}
+                    transaction ID: {data?.transaction}
                   </p>
                   <p className="px-2 py-3 bg-white rounded-lg text-lg text-gray-800 mainfont capitalize">
-                    Course ID: {data.courseId}
+                    Course ID: {data?.courseId}
                   </p>
                 </div>
                 <div className="mt-4 flex justify-between">

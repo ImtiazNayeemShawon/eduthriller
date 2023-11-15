@@ -7,8 +7,13 @@ export default function Success() {
   const router = useRouter();
 
   const Next = () => {
-    router.push("/");
-  };
+   
+      window.location.reload();
+      window.location.href = "/";
+    
+  }
+  
+
   return (
     <React.Fragment>
       <div class="grid place-items-center h-screen">

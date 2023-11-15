@@ -2,8 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const apiCaller = axios.create({
-      //  baseURL: "http://localhost:8000",
-   baseURL: "https://www.api.eduthriller.com/",
+  // baseURL: "http://localhost:8000",
+  baseURL: "https://myapp-4vz5.onrender.com/",
 });
 
 const token = Cookies.get("token");

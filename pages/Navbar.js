@@ -22,6 +22,7 @@ export default function Navbar() {
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
+      console.log(token)
       const username = decodedToken.username;
       setUsername(username);
       const IsloggedIn = decodedToken.loggedIn;

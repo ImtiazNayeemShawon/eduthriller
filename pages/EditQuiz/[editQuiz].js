@@ -26,14 +26,15 @@ export default function EditQuiz() {
       try {
         const response = await Api.get(`/crud/Editquizes/${editQuiz}`);
         const quizData = response.data.result;
-        setCourseId(quizData.course);
-        setQuiz(quizData.quiz);
-        setTime(quizData.time);
-        setTitle(quizData.title);
-        setDate(quizData.date);
-        setStatus(quizData.status);
+        setCourseId(quizData?.course);
+        setQuiz(quizData?.quiz);
+        setTime(quizData?.time);
+        setTitle(quizData?.title);
+        setDate(quizData?.date);
+        setStatus(quizData?.status);
       } catch (error) {
         toast.error(error.message);
+        console.log(error)
       }
     };
 

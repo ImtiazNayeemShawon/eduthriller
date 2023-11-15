@@ -1,9 +1,9 @@
 import React from "react";
 import Intro from "./Intro";
 import Coursedetails from "./coursedetails";
-import Navbar from "./Navbar";
 import Footer from "./footer";
 import LatestCourse from "./latestCourse";
+import MessangerPlugin from "./MessangerPlugin";
 
 export default function Home() {
   return (
@@ -11,7 +11,8 @@ export default function Home() {
       <main>
         <Intro />
         <Coursedetails />
-        <LatestCourse/>
+        <MessangerPlugin/>
+        <LatestCourse />
         <Footer />
       </main>
     </React.Fragment>

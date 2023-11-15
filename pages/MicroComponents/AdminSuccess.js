@@ -7,7 +7,9 @@ export default function AdminSuccess() {
   const router = useRouter();
 
   const Next = () => {
-    router.push("/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf");
+    window.location.reload();
+    // router.push("/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf");
+    window.location.href = "/AdminPageaccesoashdsagdtsrgt324234234dssddffdfdsf";
   };
   return (
     <React.Fragment>
@@ -21,10 +23,10 @@ export default function AdminSuccess() {
               alt="succes image"
             />
             <h1 className="text-center  text-3xl font-bold  text-green-600 robofont">
-             Admin Login successful!{" "}
+              Admin Login successful!{" "}
             </h1>
             <p className="text-xl mainfont text-gray-600">
-             Admin Authentication successful
+              Admin Authentication successful
             </p>
             <button
               onClick={Next}

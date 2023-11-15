@@ -65,7 +65,7 @@ export default function dashboard() {
             </h1>
           ) : (
             <div>
-              <h1 className="text-white text-2xl mainfont font-semibold text-center capitalize">
+              <h1 className="text-white text-2xl bangfont font-semibold text-center capitalize">
                 Wait for admin approval to acces this course{" "}
               </h1>
             </div>
@@ -142,8 +142,9 @@ export default function dashboard() {
                       id={`panel${groupIndex + 1}-header`}
                     >
                       {group.some((q) => q.status === "active") ? (
-                        <p className=" text-lg text-gray-700 max-sm:text-sm">
+                        <p className=" text-lg text-gray-700 max-sm:text-sm bangfont font-semibold">
                           {group[0]?.module}
+                          
                         </p>
                       ) : (
                         <div className="flex justify-between flex-wrap ">
@@ -154,9 +155,9 @@ export default function dashboard() {
                     </AccordionSummary>
                     <AccordionDetails>
                       {group.map((q, index) => (
-                        <h2 key={index} className="max-sm:text-sm">
+                        <h2 key={index} className="max-sm:text-sm bangfont">
                           <div className="flex justify-between outline outline-1 p-2 rounded outline-gray-200 flex-wrap">
-                            <h1 className="max-sm: text-sm my-auto">{q.title}</h1>
+                            <h1 className="max-sm: text-sm my-auto bangfont">{q.title}</h1>
                             <div className="flex mr-0">
                               {q.status === "active" ? ( // Only show the buttons for active quizzes
                                 <>
