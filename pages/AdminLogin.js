@@ -46,7 +46,7 @@ export default function Login() {
               Phone number
             </p>
             <input
-              className="bg-slate-300 w-full p-3 rounded-md outline-1 "
+              className="bg-slate-300 w-full md:w-96 p-3 rounded-md outline-1 "
               placeholder="Enter your phone number"
               onChange={PhoneHandler}
               value={phone}
